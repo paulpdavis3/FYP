@@ -1,0 +1,26 @@
+ScreenManager:
+    id: manager
+    Screen:
+        BoxLayout:
+            orientation: 'vertical'
+            GridLayout:
+                cols:1
+                Label:
+                    text: 'Login Page'
+            GridLayout:
+                cols:1
+                Button:
+                    text: 'Patch Line'
+                    on_release: app.patch(JSON.text)
+                Button:
+                    text: 'Post Line'
+                    on_release: app.post(JSON.text)
+                Button:
+                    text: 'Put Line'
+                    on_release: app.put(JSON.text)
+                Button:
+                    text: 'Delete Line'
+                    on_release: app.delete(JSON.text)
+                Button:
+                    text: 'Get & Print Database'
+                    on_release: app.get()
