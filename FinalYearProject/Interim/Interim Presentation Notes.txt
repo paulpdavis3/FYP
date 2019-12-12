@@ -1,0 +1,106 @@
+1 - Intro: 
+Welcome to my interim presentation about my final year project, its called Primary Mathletes.
+
+2 - Project Idea:
+There are three main ideas that I wanted to implement for this
+project: to be able to create an application that could be used by primary school
+teachers and students to help with learning in maths
+to improve retention of information for the students after they finish class,
+and to create an application that students will want to use. This last part in 
+other words means create a good user experience.
+
+3 - Research: 
+Mobile Devices are better than computer - Through reading 
+papers while deciding what to do for this project, I came across a number
+of different sources that all claimed the same thing. All over the world
+people are beginning to choose mobile devices over computers and there are a number
+of reasons: computer rooms are a lot of hassle, from the cost of buying all of the
+equiptment and renovating a room it becomes a nightmare. It also means that computer
+rooms in schools either need to be really big or classes will need to share them.
+Whereas you can get a less expensive mobile device whether its a phone or a tablet
+and it can have just as much processing power as a laptop these days.
+Another paper I read was looking at how younger students were better at retaining
+information that they recieved through Mobile learning or M-learning and that 
+the gamification of learning imrpoves the interest and attention of students when
+studying.
+
+High Quality User Interface - I also found that there was some science behind
+a good, high quality user interface especially with color, studies show that
+people and especially children respond really well to different colors, sounds
+and responsive touch.
+
+4 - Research:
+Poor Quality User Interfaces - while researching I also came across some similar
+apps to the one I am going to be developing for this project. as you can see from
+this one on the screen now its a bit of a UI nightmare. the bright colors may 
+be good for children but the small buttons and big block of text outweigh the good.
+
+
+Outdated Information - As well as having a poor quality user interface the
+information found inside the app is well outdated, the book it is 
+based off was published in 1999 which obviously isnt ideal for something like maths.
+
+5 - Tech used: 
+For the development of the application I decided to use these programs and libraries
+and technologies. I decided to use python after using it for the first time at the 
+start of the year as I found it to be quite easy and powerful to use. After researching
+python I also came across kivy which allows for cross-platform development
+and allows me to create nice, adaptive GUIs which completely gets rid of the need
+to resize aspects of the app for different devices. I am using a firebase 
+because it allows for realtime updating of the database, has built in
+authentication for emails and passwords and it integrates well with python.
+Then for testing I will be using my own iPhone and an old android I have at home.
+
+
+6 - System Design: 
+Here you can see the architecture of my system. its going to be a 3-tier system.
+On the front end the user can either use an android or ios device. These will
+hopefully be easy to distribute using the Kivy library. The code and libraries
+make up the middle tier and this connects the firebase database using firebases
+python library which allows for information to be read and posted instantly.
+
+7 - System Design: 
+This is the trello board I am using to manage this project and so 
+without knowing it I was actually already implementing a version of the Agile
+project management methodology that is called Kanban. In this methodology a kanban
+board is used to keep track of everything and it has 3 sections normally, backlog
+doing and completed, Ive added a testing column here because something may be
+completed but still needs to be tested so I made a seperate board for this.
+
+8 - Project Complexity:
+The project complexity will come from creating a user friendly application that is suitable
+for both students and teachers, one that doesnt favor either but caters to both.
+It will also be complex in the fact that I will be implementing suitable curriculum content
+for second class primary students to aid them in their studies
+and there will also be complexity in keeping the minigames interesting and engaging while also 
+keeping good educational treatment for the students.
+
+9 - Demo:
+In the demo I will show you how the middle tier connects with the back end database
+and some examples of how kivy creates GUI's.
+So you can see here the first page you get brought to when you open the app is the
+title page where you can choose to either log in or register if you dont have an account.
+Ill get up the database as well so you can see how it updates in real time when you register.
+there is some background checks happening here to ensure that no two users can have
+the same user name or the same email address. I found out through some research 
+that theres actually built in authentication for firebase so I am going to 
+probably switch out the check i have created at the moment for that. 
+when you register successfully youre brought to the login page which also has some
+error checking to ensure that your username and password match. when you enter in
+the credentials correctly you get brought to the home screen which is just blank at
+the moment but this will be replaced by the main screen for when the user logs in.
+
+10 - Testing:
+For testing I am going to attempt to contact one of the primary school teachers I know 
+and see if its possible to get a small group of students together to meet and show them the app
+and get their feedback before using this feedback to change some of the features of the app.
+If this is not possible then I will test the app with my younger cousins and siblings to see
+what they think of the app. I will also test the app on some relatives who are not tech-savvy
+and see if they can follow along in the app without much hassle because the app is designed
+to be used by children who may find it hard to navigate.
+
+11 - Future Work:
+show gantt chart
+Dev process:
+= Increase efficincy of authentication
+= Implement minigames
