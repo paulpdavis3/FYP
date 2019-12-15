@@ -1,0 +1,148 @@
+ScreenManagement:
+    TitlePage:
+    LoginPage:
+    RegisterPage:
+    MainPage:
+    ClassroomPage:
+    ProfilePage:
+    ProgressPage:
+    PlayPage:
+
+
+
+<TitlePage>:
+    name: "title"
+    GridLayout:
+        cols:1
+        Label:
+            text: "Primary Mathletes"
+        GridLayout:
+            cols: 1
+            Button:
+                text: "Register"
+                on_release: app.root.current = "register"
+            Button:
+                text: "Login"
+                on_release: app.root.current = "login"
+
+<LoginPage>:
+    name: "login"
+    GridLayout:
+        cols:1
+        Label:
+            text: "Login Page"
+        GridLayout:
+            cols:1
+            Label:
+                text: 'Username'
+            TextInput:
+                id: usernameLogin
+            Label:
+                text: 'Password'
+            TextInput:
+                id: passwordLogin
+                password: True
+            Button:
+                text: "Login"
+                on_release: root.checkLogin(usernameLogin.text, passwordLogin.text)
+            Button:
+                text: "Click here to Register"
+                on_release: app.root.current = "register"
+
+
+<RegisterPage>:
+    name: "register"
+    GridLayout:
+        cols:1
+        Label:
+            text: "Register Page"
+        GridLayout:
+            cols:1
+            Label
+                text: "username"
+            TextInput:
+                id: usernameRegister
+            Label
+                text: "email"
+            TextInput:
+                id: emailRegister
+            Label
+                text: "password"
+            TextInput:
+                id: passwordRegister
+                password: True
+            Button:
+                text: "Register"
+                on_release: root.checkRegister(usernameRegister.text, emailRegister.text, passwordRegister.text)
+            Button:
+                text: "Click here to Login"
+                on_release: app.root.current = "login"
+
+
+<MainPage>:
+    name: 'main'
+    GridLayout:
+        cols: 1
+        Label:
+            text: 'Home Page'
+        GridLayout:
+            cols: 1
+            Button:
+                id: playButton
+                text: "Play"
+                on_release: app.root.current = "play"
+            Button:
+                id: classroomButton
+                text: 'Classroom'
+                on_release: app.root.current = "classroom"
+            Button:
+                id: viewProfileButton
+                text: "View Profile"
+                on_release: app.root.current = "profile"
+            Button:
+                id: ViewProgressButton
+                text: "View Progress"
+                on_release: app.root.current = "progress"
+
+<ProgressPage>:
+    name: "progress"
+    Button:
+	    #text: "Back"
+	    image:
+	        source: ""
+		pos_hint: {"left": 1, 'top':1}
+		size_hint: 0.1, 0.1
+		on_release: app.root.current = "main"
+	Label:
+	    text: "This is where the progress page will be"
+
+<ProfilePage>:
+    name: "profile"
+    Button:
+	    text: "Back"
+		pos_hint: {"left": 1, 'top':1}
+		size_hint: 0.1, 0.1
+		on_release: app.root.current = "main"
+	Label:
+	    text: "This is where the profile will be"
+
+
+<PlayPage>:
+    name: "play"
+    Button:
+	    text: "Back"
+		pos_hint: {"left": 1, 'top':1}
+		size_hint: 0.1, 0.1
+		on_release: app.root.current = "main"
+	Label:
+	    text: "This is where the minigames will be"
+
+<ClassroomPage>:
+    name: "classroom"
+    Button:
+	    text: "Back"
+		pos_hint: {"left": 1, 'top':1}
+		size_hint: 0.1, 0.1
+		on_release: app.root.current = "main"
+	Label:
+	    text: "This is where the classroom page will be"
