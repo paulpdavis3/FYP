@@ -86,9 +86,7 @@ the same user name or the same email address. I found out through some research
 that theres actually built in authentication for firebase so I am going to 
 probably switch out the check i have created at the moment for that. 
 when you register successfully youre brought to the login page which also has some
-error checking to ensure that your username and password match. when you enter in
-the credentials correctly you get brought to the home screen which is just blank at
-the moment but this will be replaced by the main screen for when the user logs in.
+error checking to ensure that your username and password match.
 
 10 - Testing:
 For testing I am going to attempt to contact one of the primary school teachers I know 
@@ -100,7 +98,16 @@ and see if they can follow along in the app without much hassle because the app 
 to be used by children who may find it hard to navigate.
 
 11 - Future Work:
-show gantt chart
-Dev process:
-= Increase efficincy of authentication
-= Implement minigames
+This is my gantt chart and you can see where we are now on the 11th period, which I have
+in as working weeks in college which goes all the way up to the deadline for submitting
+the project. As you can see, starting from next week I am going to begin work on the
+dissertation and enter the development stage of my application.
+
+12 - Future Work:
+During future development of the app I am going to aim to increase the efficiency of 
+data retrieval from the database because already it is quite slow and theres only around 15/20
+items inside.
+Then I will begin implementation of the mini games, these are based off the feedback I recieved
+from teachers that I contacted and also some ideas I have come up with myself. Then
+I will begin creating the content of the profile, classroom and progression pages for teachers
+and students.
