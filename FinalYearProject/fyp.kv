@@ -107,22 +107,28 @@ ScreenManagement:
 <ProgressPage>:
     name: "progress"
     Button:
-	    #text: "Back"
-	    image:
-	        source: ""
-		pos_hint: {"left": 1, 'top':1}
-		size_hint: 0.1, 0.1
 		on_release: app.root.current = "main"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
 	Label:
 	    text: "This is where the progress page will be"
 
 <ProfilePage>:
     name: "profile"
     Button:
-	    text: "Back"
-		pos_hint: {"left": 1, 'top':1}
-		size_hint: 0.1, 0.1
 		on_release: app.root.current = "main"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
 	Label:
 	    text: "This is where the profile will be"
 
@@ -130,19 +136,27 @@ ScreenManagement:
 <PlayPage>:
     name: "play"
     Button:
-	    text: "Back"
-		pos_hint: {"left": 1, 'top':1}
-		size_hint: 0.1, 0.1
 		on_release: app.root.current = "main"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
 	Label:
 	    text: "This is where the minigames will be"
 
 <ClassroomPage>:
     name: "classroom"
     Button:
-	    text: "Back"
-		pos_hint: {"left": 1, 'top':1}
-		size_hint: 0.1, 0.1
 		on_release: app.root.current = "main"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
 	Label:
 	    text: "This is where the classroom page will be"
