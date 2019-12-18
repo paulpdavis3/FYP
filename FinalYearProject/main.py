@@ -6,15 +6,14 @@ from kivy.core.window import Window
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 
-# need to figure out how to get just the userIDs or search for unique identifiers
 # https://www.youtube.com/watch?v=Q3HdZMtBQUw
 # post gives garbage string as parent and then multiple pieces of data go afterwards
 # firebase.post('/users', {'nameOfFirstData': 'actualDataValue', 'nameOfSecondData': 'actualDataValue'})
-firebase.post('/users', {'username': 'testymctestface', 'email': 'test@test.test', 'password': '12345'})
+# firebase.post('/users', {'username': 'testymctestface', 'email': 'test@test.test', 'password': '12345'})
 
 
 class ScreenManagement(ScreenManager):
-    username = "none"
+    pass
 
 
 class TitlePage(Screen):
@@ -78,7 +77,19 @@ class ProfilePage(Screen):
 
 
 class ClassroomPage(Screen):
-    pass
+    def joinClassroom(self):
+        print("joining classroom...")
+
+    # should be pop up
+    # if user doesnt have a classroom already
+    # ask what the classroom ID is
+    # check if the classroom ID exists
+    # if it exists then allow user to join the classroom
+    def createClassroom(self):
+        print("creating classroom...")
+# should be a pop up
+        # if the user doesn't already has a classroom then allow to create one.
+        # assign unique classroom ID to classroom
 
 
 class PlayPage(Screen):

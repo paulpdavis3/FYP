@@ -1,14 +1,12 @@
 ScreenManagement:
     TitlePage:
+    MainPage:
     LoginPage:
     RegisterPage:
-    MainPage:
     ClassroomPage:
     ProfilePage:
     ProgressPage:
     PlayPage:
-
-
 
 <TitlePage>:
     name: "title"
@@ -158,5 +156,41 @@ ScreenManagement:
 	        y: self.parent.y
             x: self.parent.x
             size: self.parent.size
-	Label:
-	    text: "This is where the classroom page will be"
+	GridLayout:
+	    cols: 1
+        GridLayout:
+	        cols: 3
+	        Label:
+	            text: ""
+	        Label:
+	            text: ""
+	        Label:
+	            text: ""
+	    GridLayout:
+	        cols: 3
+	        Label:
+	            text: ""
+	        Button:
+	            text: "Join Classroom"
+	            on_release: root.joinClassroom()
+	        Label:
+	            text: ""
+	    Label:
+	        text: ""
+	    GridLayout:
+	        cols: 3
+	        Label:
+	            text: ""
+	        Button:
+	            text: "Create Classroom"
+	            on_release: root.createClassroom()
+	        Label:
+	            text: ""
+	    GridLayout:
+	        cols: 3
+	        Label:
+	            text: ""
+	        Label:
+	            text: ""
+	        Label:
+	            text: ""
