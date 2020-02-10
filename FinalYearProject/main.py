@@ -2,14 +2,38 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang.builder import Builder
 from firebase import firebase
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.popup import Popup
 from kivy.core.window import Window
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
+
 
 # https://www.youtube.com/watch?v=Q3HdZMtBQUw
 # post gives garbage string as parent and then multiple pieces of data go afterwards
 # firebase.post('/users', {'nameOfFirstData': 'actualDataValue', 'nameOfSecondData': 'actualDataValue'})
 # firebase.post('/users', {'username': 'testymctestface', 'email': 'test@test.test', 'password': '12345'})
+
+class JoinClassroomPopup(FloatLayout):
+    pass
+
+
+class CreateClassroomPopup(FloatLayout):
+    pass
+
+
+def showJoinPopup():
+    show = JoinClassroomPopup()
+    popupWindow = Popup(title="Join Classroom", content=show, size_hint=(None, None), size=(400, 400))
+
+    popupWindow.open()
+
+
+def showCreatePopup():
+    show = CreateClassroomPopup()
+    popupWindow = Popup(title="Create Classroom", content=show, size_hint=(None, None), size=(400, 400))
+
+    popupWindow.open()
 
 
 class ScreenManagement(ScreenManager):
@@ -77,19 +101,22 @@ class ProfilePage(Screen):
 
 
 class ClassroomPage(Screen):
-    def joinClassroom(self):
-        print("joining classroom...")
 
-    # should be pop up
-    # if user doesnt have a classroom already
-    # ask what the classroom ID is
-    # check if the classroom ID exists
-    # if it exists then allow user to join the classroom
+    def joinClassroom(self):
+        # print("joining classroom...")
+
+        # if they are already part of a classroom then show the name and offer to delete it
+        # if they aren't part of a classroom allow them to input the classroom code and verify it exists, then join the classroom
+        showJoinPopup()
+
     def createClassroom(self):
-        print("creating classroom...")
-# should be a pop up
-        # if the user doesn't already has a classroom then allow to create one.
-        # assign unique classroom ID to classroom
+        # print("creating classroom...")
+
+        # 1. should only be for teachers
+        # 2. if they are already the teacher of a classroom then they can create more
+        showCreatePopup()
+
+
 
 
 class PlayPage(Screen):
