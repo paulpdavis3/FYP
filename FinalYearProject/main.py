@@ -10,16 +10,21 @@ from os.path import join
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 
-
 # https://www.youtube.com/watch?v=Q3HdZMtBQUw
 # post gives garbage string as parent and then multiple pieces of data go afterwards
 # firebase.post('/users', {'nameOfFirstData': 'actualDataValue', 'nameOfSecondData': 'actualDataValue'})
-# firebase.post('/users', {'username': 'testymctestface', 'email': 'test@test.test', 'password': '12345', 'teacher': 'no', 'classroom': ''})
+firebase.post('/users',
+              {'username': 'testymctestface', 'email': 'test@test.test', 'password': '12345', 'teacher': 'yes',
+               'classroom': 'test'})
+
 
 class JoinClassroomPopup(FloatLayout):
     joinClassroomPopupText = ''
 
     def joinClassroomButton(self):
+        print("button pressed")
+
+    def deleteClassroomButton(self):
         print("button pressed")
 
 
@@ -39,7 +44,7 @@ def showJoinPopup(classroomName):
 
     show = JoinClassroomPopup()
 
-    popupWindow = Popup(title="Join Classroom", content=show, size_hint=(None, None), size=(400, 400))
+    popupWindow = Popup(title="Join Classroom", content=show, size_hint=(0.7, 0.7))
 
     popupWindow.open()
 
@@ -51,7 +56,7 @@ def showCreatePopup(isTeacher):
     elif isTeacher == "no":
         CreateClassroomPopup.createClassroomPopupText = "this person is not a teacher"
     show = CreateClassroomPopup()
-    popupWindow = Popup(title="Create Classroom", content=show, size_hint=(None, None), size=(400, 400))
+    popupWindow = Popup(title="Create Classroom", content=show, size_hint=(0.7, 0.7))
 
     popupWindow.open()
 
@@ -67,13 +72,13 @@ class TitlePage(Screen):
 
 
 class LoginPage(Screen):
+    # gets the username and password if the person has logged in before
     try:
         ScreenManagement.store.get('credentials')['username']
     except KeyError:
         username = ""
     else:
         username = ScreenManagement.store.get('credentials')['username']
-    print(ScreenManagement.store.get('credentials')['username'])
     try:
         ScreenManagement.store.get('credentials')['password']
     except KeyError:
@@ -85,6 +90,7 @@ class LoginPage(Screen):
         if self.loginLoop(uname, pword) == -1:
             print('this username and password do not match anything in the database')
         else:
+            ScreenManagement.store.put('credentials', username=uname, password=pword)
             print('log in successful')
             self.manager.current = 'main'
 
@@ -117,7 +123,8 @@ class RegisterPage(Screen):
             print('data not added to the DB')
         else:
             firebase.post('/users', {'username': uname, 'email': email, 'password': pword})
-            ScreenManagement.store.put('credentials', username=uname, password=pword, email=email, teacher="no", classroom=0)
+            ScreenManagement.store.put('credentials', username=uname, password=pword, email=email, teacher="no",
+                                       classroom=0)
             print('data added to the db successfully')
             self.manager.current = 'login'
 
@@ -153,13 +160,13 @@ class ClassroomPage(Screen):
     def joinClassroom(self):
         # if they are already part of a classroom then show the name and offer to delete it
         # if they aren't part of a classroom allow them to input the classroom code and verify it exists, then join the classroom
+        try:
+            ScreenManagement.store.get('credentials')['classroom']
+        except KeyError:
+            classroomName = 0
+        else:
+            classroomName = ScreenManagement.store.get('credentials')['classroom']
 
-        # there should already be a global variable that contains the users info so we will know if they have a classroom or not
-        results = firebase.get('/users/', None)
-        for x in results:
-            print(results[x]['username'])
-
-        classroomName = 0
         if classroomName != 0:
             showJoinPopup(classroomName)
         else:
@@ -169,9 +176,12 @@ class ClassroomPage(Screen):
         # 1. should only be for teachers
         # 2. if they are already the teacher of a classroom then they can create more
 
-        # should be global variable that contains the users info to know if they're a teacher or not
-
-        isTeacher = "yes"
+        try:
+            ScreenManagement.store.get('credentials')['teacher']
+        except KeyError:
+            isTeacher = "no"
+        else:
+            isTeacher = ScreenManagement.store.get('credentials')['teacher']
 
         showCreatePopup(isTeacher)
 

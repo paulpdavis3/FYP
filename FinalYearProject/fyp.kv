@@ -203,18 +203,32 @@ ScreenManagement:
         size_hint: 0.6, 0.2
         pos_hint: {"x": 0.2, "top": 1}
 
+    TextInput:
+        id: joinClassroomTextInput
+        size_hint: 0.8, 0.1
+        pos_hint: {"x": 0.1, "top": 0.8}
+
     Button:
-        name: "joinclassroom"
-        text: "Button"
-        on_release: root.joinClassroomButton()
+        name: "deleteClassroomButton"
+        text: "Delete"
+        on_release: root.deleteClassroomButton()
         size_hint: 0.8, 0.2
         pos_hint: {"x": 0.1, "y": 0.1}
+
+    Button:
+        name: "joinClassroomButton"
+        text: "Join"
+        on_release: root.joinClassroomButton()
+        size_hint: 0.8, 0.2
+        pos_hint: {"x": 0.1, "y": 0.4}
 
 <CreateClassroomPopup>:
     Label:
         text: root.createClassroomPopupText
         size_hint: 0.6, 0.2
         pos_hint: {"x": 0.2, "top": 1}
+
+
 
     Button:
         name: "createclassroom"
