@@ -15,15 +15,23 @@ firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 # firebase.post('/users', {'username': 'testymctestface', 'email': 'test@test.test', 'password': '12345'})
 
 class JoinClassroomPopup(FloatLayout):
-    pass
+    def joinClassroomButton(self):
+        print("button pressed")
 
 
 class CreateClassroomPopup(FloatLayout):
-    pass
+    def createClassroomButton(self):
+        # 1. should only be for teachers
+        # 2. if they are already the teacher of a classroom then they can create more
+        print("button pressed")
 
 
-def showJoinPopup():
+def showJoinPopup(hasClassroom):
     show = JoinClassroomPopup()
+    if hasClassroom == "yes":
+        print("hello")
+    else:
+        print("hello but no classroom")
     popupWindow = Popup(title="Join Classroom", content=show, size_hint=(None, None), size=(400, 400))
 
     popupWindow.open()
@@ -65,6 +73,18 @@ class LoginPage(Screen):
 
 
 class RegisterPage(Screen):
+    def checkPassword(self, uname, email, pword):
+        capital = any(x.isupper() for x in pword)
+        lowercase = any(x.islower() for x in pword)
+        number = any(x.isnumeric() for x in pword)
+        length = len(pword)
+
+        if length < 8 or number is False or lowercase is False or capital is False:
+            print(
+                'Make sure that your password is at least 8 characters long and contains 1 uppercase letter and 1 number')
+        else:
+            self.checkRegister(uname, email, pword)
+
     def checkRegister(self, uname, email, pword):
         if self.registerLoop(uname, email) == -1:
             print('data not added to the DB')
@@ -103,21 +123,20 @@ class ProfilePage(Screen):
 class ClassroomPage(Screen):
 
     def joinClassroom(self):
-        # print("joining classroom...")
-
         # if they are already part of a classroom then show the name and offer to delete it
         # if they aren't part of a classroom allow them to input the classroom code and verify it exists, then join the classroom
-        showJoinPopup()
+
+        # there should already be a global variable that contains the users info so we will know if they have a classroom or not
+        results = firebase.get('/users/', None)
+        print(results)
+        classroomName = 0
+        if classroomName != 0:
+            showJoinPopup("yes")
+        else:
+            showJoinPopup("no")
 
     def createClassroom(self):
-        # print("creating classroom...")
-
-        # 1. should only be for teachers
-        # 2. if they are already the teacher of a classroom then they can create more
         showCreatePopup()
-
-
-
 
 class PlayPage(Screen):
     pass

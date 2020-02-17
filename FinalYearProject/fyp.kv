@@ -71,7 +71,7 @@ ScreenManagement:
                 password: True
             Button:
                 text: "Register"
-                on_release: root.checkRegister(usernameRegister.text, emailRegister.text, passwordRegister.text)
+                on_release: root.checkPassword(usernameRegister.text, emailRegister.text, passwordRegister.text)
             Button:
                 text: "Click here to Login"
                 on_release: app.root.current = "login"
@@ -202,19 +202,21 @@ ScreenManagement:
         pos_hint: {"x": 0.2, "top": 1}
 
     Button:
-        name: joinclassroom
+        name: "joinclassroom"
         text: "You pressed the button"
+        on_release: root.joinClassroomButton()
         size_hint: 0.8, 0.2
         pos_hint: {"x": 0.1, "y": 0.1}
 
 <CreateClassroomPopup>:
     Label:
-        text: "You pressed the button"
+        text: "Button"
         size_hint: 0.6, 0.2
         pos_hint: {"x": 0.2, "top": 1}
 
     Button:
-        name: createclassroom
-        text: "You pressed the button"
+        name: "createclassroom"
+        text: "Button"
+        on_release: root.createClassroomButton()
         size_hint: 0.8, 0.2
         pos_hint: {"x": 0.1, "y": 0.1}
