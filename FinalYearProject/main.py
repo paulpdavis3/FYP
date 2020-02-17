@@ -5,6 +5,8 @@ from firebase import firebase
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.popup import Popup
 from kivy.core.window import Window
+from kivy.storage.jsonstore import JsonStore
+from os.path import join
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 
@@ -12,7 +14,7 @@ firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 # https://www.youtube.com/watch?v=Q3HdZMtBQUw
 # post gives garbage string as parent and then multiple pieces of data go afterwards
 # firebase.post('/users', {'nameOfFirstData': 'actualDataValue', 'nameOfSecondData': 'actualDataValue'})
-# firebase.post('/users', {'username': 'testymctestface', 'email': 'test@test.test', 'password': '12345'})
+# firebase.post('/users', {'username': 'testymctestface', 'email': 'test@test.test', 'password': '12345', 'teacher': 'no', 'classroom': ''})
 
 class JoinClassroomPopup(FloatLayout):
     joinClassroomPopupText = ''
@@ -43,6 +45,7 @@ def showJoinPopup(classroomName):
 
 
 def showCreatePopup(isTeacher):
+    # changes text of the popup depending on whether the user is a teacher or not
     if isTeacher == "yes":
         CreateClassroomPopup.createClassroomPopupText = "this person is a teacher"
     elif isTeacher == "no":
@@ -54,7 +57,8 @@ def showCreatePopup(isTeacher):
 
 
 class ScreenManagement(ScreenManager):
-    pass
+    data_dir = App().user_data_dir
+    store = JsonStore(join(data_dir, 'storage.json'))
 
 
 class TitlePage(Screen):
@@ -63,6 +67,20 @@ class TitlePage(Screen):
 
 
 class LoginPage(Screen):
+    try:
+        ScreenManagement.store.get('credentials')['username']
+    except KeyError:
+        username = ""
+    else:
+        username = ScreenManagement.store.get('credentials')['username']
+    print(ScreenManagement.store.get('credentials')['username'])
+    try:
+        ScreenManagement.store.get('credentials')['password']
+    except KeyError:
+        password = ""
+    else:
+        password = ScreenManagement.store.get('credentials')['password']
+
     def checkLogin(self, uname, pword):
         if self.loginLoop(uname, pword) == -1:
             print('this username and password do not match anything in the database')
@@ -99,6 +117,7 @@ class RegisterPage(Screen):
             print('data not added to the DB')
         else:
             firebase.post('/users', {'username': uname, 'email': email, 'password': pword})
+            ScreenManagement.store.put('credentials', username=uname, password=pword, email=email, teacher="no", classroom=0)
             print('data added to the db successfully')
             self.manager.current = 'login'
 
