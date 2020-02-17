@@ -28,11 +28,11 @@ class CreateClassroomPopup(FloatLayout):
         print("button pressed")
 
 
-def showJoinPopup(hasClassroom):
+def showJoinPopup(classroomName):
     # changes text of the popup depending on whether the user belongs to a classroom or not
-    if hasClassroom == "yes":
-        JoinClassroomPopup.joinClassroomPopupText = "has classroom"
-    elif hasClassroom == "no":
+    if classroomName != "no":
+        JoinClassroomPopup.joinClassroomPopupText = "has classroom: " + classroomName
+    else:
         JoinClassroomPopup.joinClassroomPopupText = "has no classroom"
 
     show = JoinClassroomPopup()
@@ -42,7 +42,11 @@ def showJoinPopup(hasClassroom):
     popupWindow.open()
 
 
-def showCreatePopup():
+def showCreatePopup(isTeacher):
+    if isTeacher == "yes":
+        CreateClassroomPopup.createClassroomPopupText = "this person is a teacher"
+    elif isTeacher == "no":
+        CreateClassroomPopup.createClassroomPopupText = "this person is not a teacher"
     show = CreateClassroomPopup()
     popupWindow = Popup(title="Create Classroom", content=show, size_hint=(None, None), size=(400, 400))
 
@@ -138,7 +142,7 @@ class ClassroomPage(Screen):
 
         classroomName = 0
         if classroomName != 0:
-            showJoinPopup("yes")
+            showJoinPopup(classroomName)
         else:
             showJoinPopup("no")
 
@@ -146,7 +150,12 @@ class ClassroomPage(Screen):
         # 1. should only be for teachers
         # 2. if they are already the teacher of a classroom then they can create more
 
-        showCreatePopup()
+        # should be global variable that contains the users info to know if they're a teacher or not
+
+        isTeacher = "yes"
+
+        showCreatePopup(isTeacher)
+
 
 class PlayPage(Screen):
     pass
