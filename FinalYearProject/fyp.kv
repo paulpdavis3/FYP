@@ -207,6 +207,7 @@ ScreenManagement:
         id: joinClassroomTextInput
         size_hint: 0.8, 0.1
         pos_hint: {"x": 0.1, "top": 0.8}
+        disabled: True if root.classroom == "no" else False
 
     Button:
         name: "deleteClassroomButton"
@@ -214,13 +215,15 @@ ScreenManagement:
         on_release: root.deleteClassroomButton()
         size_hint: 0.8, 0.2
         pos_hint: {"x": 0.1, "y": 0.1}
+        disabled: True if root.classroom != "no" else False
 
     Button:
         name: "joinClassroomButton"
         text: "Join"
-        on_release: root.joinClassroomButton()
+        on_release: root.joinClassroomButton(joinClassroomTextInput.text)
         size_hint: 0.8, 0.2
         pos_hint: {"x": 0.1, "y": 0.4}
+        disabled: True if root.classroom == "no" else False
 
 <CreateClassroomPopup>:
     Label:

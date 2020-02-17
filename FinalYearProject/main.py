@@ -13,19 +13,41 @@ firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 # https://www.youtube.com/watch?v=Q3HdZMtBQUw
 # post gives garbage string as parent and then multiple pieces of data go afterwards
 # firebase.post('/users', {'nameOfFirstData': 'actualDataValue', 'nameOfSecondData': 'actualDataValue'})
-firebase.post('/users',
-              {'username': 'testymctestface', 'email': 'test@test.test', 'password': '12345', 'teacher': 'yes',
-               'classroom': 'test'})
+# firebase.post('/users', {'username': 'testymctestface', 'email': 'test@test.test', 'password': '12345', 'teacher': 'yes', 'classroom': 'test'})
+
+
+class ScreenManagement(ScreenManager):
+    data_dir = App().user_data_dir
+    store = JsonStore(join(data_dir, 'storage.json'))
 
 
 class JoinClassroomPopup(FloatLayout):
     joinClassroomPopupText = ''
 
-    def joinClassroomButton(self):
-        print("button pressed")
+    try:
+        ScreenManagement.store.get('credentials')['classroom']
+    except KeyError:
+        classroom = "no"
+    else:
+        classroom = ScreenManagement.store.get('credentials')['classroom']
+
+    def joinClassroomButton(self, joinClassroomInput):
+        # allow the user to join the classroom as long as it exists
+        results = firebase.get('/users/', None)
+        print(results)
+        for index in results:
+            if results[index]['classroom'] == joinClassroomInput:
+                print(joinClassroomInput)
+                # need to put the classroom input as the users classroom in the database but cant do that without the
+                # random string ID used by firebase.
+
+            else:
+                print("that classroom doesn't exists")
 
     def deleteClassroomButton(self):
         print("button pressed")
+        # find the user in the database and remove their classroom / replace it with "no"
+        JoinClassroomPopup.classroom = "no"
 
 
 class CreateClassroomPopup(FloatLayout):
@@ -61,11 +83,6 @@ def showCreatePopup(isTeacher):
     popupWindow.open()
 
 
-class ScreenManagement(ScreenManager):
-    data_dir = App().user_data_dir
-    store = JsonStore(join(data_dir, 'storage.json'))
-
-
 class TitlePage(Screen):
     # Window.clearcolor = (0.5, 0.1, 0.1, 0.1)  # Sets the colour of the background. Tuple is in the format (R, G, B, S) S for saturation.
     pass
@@ -90,13 +107,14 @@ class LoginPage(Screen):
         if self.loginLoop(uname, pword) == -1:
             print('this username and password do not match anything in the database')
         else:
-            ScreenManagement.store.put('credentials', username=uname, password=pword)
+            ScreenManagement.store.put('credentials', username=uname, password=pword, email=ScreenManagement.store.get('credentials')['email'], teacher=ScreenManagement.store.get('credentials')['teacher'], classroom= ScreenManagement.store.get('credentials')['classroom'])
             print('log in successful')
             self.manager.current = 'main'
 
     def loginLoop(self, uname, pword):
         while True:
             results = firebase.get('/users/', None)
+
 
             for index in results:
                 if results[index]['username'] == uname and results[index]['password'] == pword:
@@ -113,8 +131,7 @@ class RegisterPage(Screen):
         length = len(pword)
 
         if length < 8 or number is False or lowercase is False or capital is False:
-            print(
-                'Make sure that your password is at least 8 characters long and contains 1 uppercase letter and 1 number')
+            print('Make sure that your password is at least 8 characters long and contains 1 uppercase letter and 1 number')
         else:
             self.checkRegister(uname, email, pword)
 
@@ -122,7 +139,7 @@ class RegisterPage(Screen):
         if self.registerLoop(uname, email) == -1:
             print('data not added to the DB')
         else:
-            firebase.post('/users', {'username': uname, 'email': email, 'password': pword})
+            firebase.post('/users', {'username': uname, 'email': email, 'password': pword, 'teacher': 'no', 'classroom': 0})
             ScreenManagement.store.put('credentials', username=uname, password=pword, email=email, teacher="no",
                                        classroom=0)
             print('data added to the db successfully')
