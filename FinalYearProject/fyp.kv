@@ -94,7 +94,7 @@ ScreenManagement:
             Button:
                 id: classroomButton
                 text: 'Classroom'
-                on_release: app.root.current = "classroom"
+                on_release: root.goToClassroom()
             Button:
                 id: viewProfileButton
                 text: "View Profile"
@@ -196,46 +196,3 @@ ScreenManagement:
 	            text: ""
 	        Label:
 	            text: ""
-
-<JoinClassroomPopup>:
-    Label:
-        text: root.joinClassroomPopupText
-        size_hint: 0.6, 0.2
-        pos_hint: {"x": 0.2, "top": 1}
-
-    TextInput:
-        id: joinClassroomTextInput
-        size_hint: 0.8, 0.1
-        pos_hint: {"x": 0.1, "top": 0.8}
-        disabled: True if root.classroom == "no" else False
-
-    Button:
-        name: "deleteClassroomButton"
-        text: "Delete"
-        on_release: root.deleteClassroomButton()
-        size_hint: 0.8, 0.2
-        pos_hint: {"x": 0.1, "y": 0.1}
-        disabled: True if root.classroom != "no" else False
-
-    Button:
-        name: "joinClassroomButton"
-        text: "Join"
-        on_release: root.joinClassroomButton(joinClassroomTextInput.text)
-        size_hint: 0.8, 0.2
-        pos_hint: {"x": 0.1, "y": 0.4}
-        disabled: True if root.classroom == "no" else False
-
-<CreateClassroomPopup>:
-    Label:
-        text: root.createClassroomPopupText
-        size_hint: 0.6, 0.2
-        pos_hint: {"x": 0.2, "top": 1}
-
-
-
-    Button:
-        name: "createclassroom"
-        text: "Button"
-        on_release: root.createClassroomButton()
-        size_hint: 0.8, 0.2
-        pos_hint: {"x": 0.1, "y": 0.1}

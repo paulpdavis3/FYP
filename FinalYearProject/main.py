@@ -21,68 +21,6 @@ class ScreenManagement(ScreenManager):
     store = JsonStore(join(data_dir, 'storage.json'))
 
 
-class JoinClassroomPopup(FloatLayout):
-    joinClassroomPopupText = ''
-
-    try:
-        ScreenManagement.store.get('credentials')['classroom']
-    except KeyError:
-        classroom = "no"
-    else:
-        classroom = ScreenManagement.store.get('credentials')['classroom']
-
-    def joinClassroomButton(self, joinClassroomInput):
-        # allow the user to join the classroom as long as it exists
-        results = firebase.get('/users/', None)
-        print(results)
-        for index in results:
-            if results[index]['classroom'] == joinClassroomInput:
-                print(joinClassroomInput)
-                # need to put the classroom input as the users classroom in the database but cant do that without the
-                # random string ID used by firebase.
-
-            else:
-                print("that classroom doesn't exists")
-
-    def deleteClassroomButton(self):
-        print("button pressed")
-        # find the user in the database and remove their classroom / replace it with "no"
-        JoinClassroomPopup.classroom = "no"
-
-
-class CreateClassroomPopup(FloatLayout):
-    createClassroomPopupText = ''
-
-    def createClassroomButton(self):
-        print("button pressed")
-
-
-def showJoinPopup(classroomName):
-    # changes text of the popup depending on whether the user belongs to a classroom or not
-    if classroomName != "no":
-        JoinClassroomPopup.joinClassroomPopupText = "has classroom: " + classroomName
-    else:
-        JoinClassroomPopup.joinClassroomPopupText = "has no classroom"
-
-    show = JoinClassroomPopup()
-
-    popupWindow = Popup(title="Join Classroom", content=show, size_hint=(0.7, 0.7))
-
-    popupWindow.open()
-
-
-def showCreatePopup(isTeacher):
-    # changes text of the popup depending on whether the user is a teacher or not
-    if isTeacher == "yes":
-        CreateClassroomPopup.createClassroomPopupText = "this person is a teacher"
-    elif isTeacher == "no":
-        CreateClassroomPopup.createClassroomPopupText = "this person is not a teacher"
-    show = CreateClassroomPopup()
-    popupWindow = Popup(title="Create Classroom", content=show, size_hint=(0.7, 0.7))
-
-    popupWindow.open()
-
-
 class TitlePage(Screen):
     # Window.clearcolor = (0.5, 0.1, 0.1, 0.1)  # Sets the colour of the background. Tuple is in the format (R, G, B, S) S for saturation.
     pass
@@ -161,7 +99,16 @@ class RegisterPage(Screen):
 
 
 class MainPage(Screen):
-    pass
+    def goToClassroom(self):
+        if ScreenManagement.store.get('credentials')['teacher'] == "no":
+            # go to join classroom
+            print("student")
+            pass
+        else:
+            # go to create classroom
+            pass
+
+
 
 
 class ProgressPage(Screen):
@@ -175,32 +122,10 @@ class ProfilePage(Screen):
 class ClassroomPage(Screen):
 
     def joinClassroom(self):
-        # if they are already part of a classroom then show the name and offer to delete it
-        # if they aren't part of a classroom allow them to input the classroom code and verify it exists, then join the classroom
-        try:
-            ScreenManagement.store.get('credentials')['classroom']
-        except KeyError:
-            classroomName = 0
-        else:
-            classroomName = ScreenManagement.store.get('credentials')['classroom']
-
-        if classroomName != 0:
-            showJoinPopup(classroomName)
-        else:
-            showJoinPopup("no")
+        pass
 
     def createClassroom(self):
-        # 1. should only be for teachers
-        # 2. if they are already the teacher of a classroom then they can create more
-
-        try:
-            ScreenManagement.store.get('credentials')['teacher']
-        except KeyError:
-            isTeacher = "no"
-        else:
-            isTeacher = ScreenManagement.store.get('credentials')['teacher']
-
-        showCreatePopup(isTeacher)
+        pass
 
 
 class PlayPage(Screen):
