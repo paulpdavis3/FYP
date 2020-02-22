@@ -3,7 +3,8 @@ ScreenManagement:
     MainPage:
     LoginPage:
     RegisterPage:
-    ClassroomPage:
+    StudentClassroomPage:
+    TeacherClassroomPage:
     ProfilePage:
     ProgressPage:
     PlayPage:
@@ -147,52 +148,45 @@ ScreenManagement:
 	Label:
 	    text: "This is where the minigames will be"
 
-<ClassroomPage>:
-    name: "classroom"
-    Button:
-		on_release: app.root.current = "main"
-		size_hint: 0.1, 0.1
-	    pos_hint: {"left": 1, 'top':1}
-        Image:
-	        source: "back.png"
-	        y: self.parent.y
-            x: self.parent.x
-            size: self.parent.size
-	GridLayout:
-	    cols: 1
-        GridLayout:
-	        cols: 3
-	        Label:
-	            text: ""
-	        Label:
-	            text: ""
-	        Label:
-	            text: ""
-	    GridLayout:
-	        cols: 3
-	        Label:
-	            text: ""
-	        Button:
-	            text: "Join Classroom"
-	            on_release: root.joinClassroom()
-	        Label:
-	            text: ""
-	    Label:
-	        text: ""
-	    GridLayout:
-	        cols: 3
-	        Label:
-	            text: ""
-	        Button:
-	            text: "Create Classroom"
-	            on_release: root.createClassroom()
-	        Label:
-	            text: ""
-	    GridLayout:
-	        cols: 3
-	        Label:
-	            text: ""
-	        Label:
-	            text: ""
-	        Label:
-	            text: ""
+<StudentClassroomPage>:
+    name: "studentclassroom"
+    GridLayout:
+        cols: 1
+        Label
+            size_hint: 0.8, 0.2
+            font_size: root.width/10
+            text: "Student"
+        Label
+            size_hint: 0.8, 0.2
+            text: root.classroom
+        TextInput:
+            id: classroomInput
+            font_size: classroomInput.height / 1.2
+            size_hint: 0.8, 0.2
+            disabled: False if root.classroom == "no" else True
+        Button:
+            size_hint: 0.8, 0.2
+            text: "Join Classroom"
+            on_release: root.joinClassroom(classroomInput.text)
+            disabled: False if root.classroom == "no" else True
+        Button:
+            size_hint: 0.8, 0.2
+            text: "Delete"
+            on_release: root.deleteClassroom()
+            disabled: True if root.classroom == "no" else False
+
+
+<TeacherClassroomPage>:
+    name: "teacherclassroom"
+
+    Label:
+        pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+        size_hint: 0.2, 0.2
+        font_size: root.width/10
+        text: "Student"
+
+    Label:
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        size_hint: 0.2, 0.2
+        font_size: 20
+        text: "student"

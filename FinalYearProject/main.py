@@ -10,6 +10,9 @@ from os.path import join
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 
+
+# Create a new db for just classrooms to avoid checking all users to save time
+
 # https://www.youtube.com/watch?v=Q3HdZMtBQUw
 # post gives garbage string as parent and then multiple pieces of data go afterwards
 # firebase.post('/users', {'nameOfFirstData': 'actualDataValue', 'nameOfSecondData': 'actualDataValue'})
@@ -26,7 +29,7 @@ class TitlePage(Screen):
     pass
 
 
-class LoginPage(Screen):
+class LoginPage(Screen, main):
     # gets the username and password if the person has logged in before
     try:
         ScreenManagement.store.get('credentials')['username']
@@ -45,14 +48,15 @@ class LoginPage(Screen):
         if self.loginLoop(uname, pword) == -1:
             print('this username and password do not match anything in the database')
         else:
-            ScreenManagement.store.put('credentials', username=uname, password=pword, email=ScreenManagement.store.get('credentials')['email'], teacher=ScreenManagement.store.get('credentials')['teacher'], classroom= ScreenManagement.store.get('credentials')['classroom'])
-            print('log in successful')
+            ScreenManagement.store.put('credentials', username=uname, password=pword,
+                                       email=ScreenManagement.store.get('credentials')['email'],
+                                       teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                       classroom=ScreenManagement.store.get('credentials')['classroom'])
             self.manager.current = 'main'
 
     def loginLoop(self, uname, pword):
         while True:
             results = firebase.get('/users/', None)
-
 
             for index in results:
                 if results[index]['username'] == uname and results[index]['password'] == pword:
@@ -69,7 +73,8 @@ class RegisterPage(Screen):
         length = len(pword)
 
         if length < 8 or number is False or lowercase is False or capital is False:
-            print('Make sure that your password is at least 8 characters long and contains 1 uppercase letter and 1 number')
+            print(
+                'Make sure that your password is at least 8 characters long and contains 1 uppercase letter and 1 number')
         else:
             self.checkRegister(uname, email, pword)
 
@@ -77,7 +82,8 @@ class RegisterPage(Screen):
         if self.registerLoop(uname, email) == -1:
             print('data not added to the DB')
         else:
-            firebase.post('/users', {'username': uname, 'email': email, 'password': pword, 'teacher': 'no', 'classroom': 0})
+            firebase.post('/users',
+                          {'username': uname, 'email': email, 'password': pword, 'teacher': 'no', 'classroom': 0})
             ScreenManagement.store.put('credentials', username=uname, password=pword, email=email, teacher="no",
                                        classroom=0)
             print('data added to the db successfully')
@@ -102,13 +108,10 @@ class MainPage(Screen):
     def goToClassroom(self):
         if ScreenManagement.store.get('credentials')['teacher'] == "no":
             # go to join classroom
-            print("student")
-            pass
+            self.manager.current = "studentclassroom"
         else:
             # go to create classroom
-            pass
-
-
+            self.manager.current = "teacherclassroom"
 
 
 class ProgressPage(Screen):
@@ -119,13 +122,32 @@ class ProfilePage(Screen):
     pass
 
 
-class ClassroomPage(Screen):
+class StudentClassroomPage(Screen):
+
+    classroom = "no"
+
+    try:
+        ScreenManagement.store.get('credentials')['classroom']
+    except KeyError:
+        classroom = "no"
+    else:
+        classroom = ScreenManagement.store.get('credentials')['classroom']
+
+    def deleteClassroom(self):
+        # replace classroom in JSON store with 0
+        # replace classroom in DB with 0
+        pass
 
     def joinClassroom(self):
+        # check the DB to see if the classroom name exists
+        # if it exists, add the classroom name to the students DB and to the JSON store of the device
+        # if it doesn't exist then write to the screen to check if the classroom definitely exists
         pass
 
-    def createClassroom(self):
-        pass
+
+
+class TeacherClassroomPage(Screen):
+    pass
 
 
 class PlayPage(Screen):
