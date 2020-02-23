@@ -1,5 +1,5 @@
 var operation = "add"; // depends on whatever the user chooses
-var startingRange = 7;  // level name will be the starting range
+var startingRange = 4;  // level name will be the starting range
 var difficulty = startingRange;
 var rangeMin;
 var rangeMax;

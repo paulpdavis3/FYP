@@ -145,8 +145,19 @@ ScreenManagement:
 	        y: self.parent.y
             x: self.parent.x
             size: self.parent.size
-	Label:
-	    text: "This is where the minigames will be"
+
+	Button:
+	    on_release: app.root.current = "addition"
+	    text: "Addition"
+	Button:
+	    on_release: app.root.current = "subtraction"
+	    text: "Subtraction"
+	Button:
+	    on_release: app.root.current = "multiplication"
+	    text: "Multiplication"
+	Button:
+	    on_release: app.root.current = "division"
+	    text: "Division"
 
 <StudentClassroomPage>:
     name: "studentclassroom"

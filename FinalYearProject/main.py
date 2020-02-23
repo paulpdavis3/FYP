@@ -7,6 +7,7 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.storage.jsonstore import JsonStore
 from os.path import join
+import algo
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 
@@ -29,7 +30,7 @@ class TitlePage(Screen):
     pass
 
 
-class LoginPage(Screen, main):
+class LoginPage(Screen):
     # gets the username and password if the person has logged in before
     try:
         ScreenManagement.store.get('credentials')['username']
@@ -151,6 +152,7 @@ class TeacherClassroomPage(Screen):
 
 
 class PlayPage(Screen):
+
     pass
 
 
