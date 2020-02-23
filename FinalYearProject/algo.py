@@ -1,3 +1,6 @@
+import random
+
+
 def algo(op, level):
     operation = op
     startingRange = level
@@ -5,7 +8,6 @@ def algo(op, level):
     rangeMin = None
     rangeMax = None
     numOfVariables = None
-    temp = None
     x = None
     y = None
     z = None
@@ -17,8 +19,11 @@ def algo(op, level):
     userAnswer = None
     roundNum = 0
 
+    def randomInRange(min, max):
+        return random.randrange(min, max + 1)
+
     while roundNum < 10:
-        print("round: ", roundNum+1, "\n")
+        print("round: ", roundNum + 1, "\n")
         # difficulty can't go below starting range - 1
         if difficulty < startingRange - 1:
             difficulty = startingRange - 1
@@ -38,5 +43,158 @@ def algo(op, level):
 
             rangeMin = difficulty * 9
             rangeMax = difficulty * 99
+
         elif operation == "subtract":
-            
+            numOfVariables = 3
+
+            rangeMin = difficulty * 5
+            rangeMax = difficulty * 55
+
+        elif operation == "divide":
+            numOfVariables = 3
+
+            rangeMin = 0
+            rangeMax = difficulty * 2
+
+        elif operation == "multiply":
+            numOfVariables = 3
+
+            rangeMin = round(difficulty + (difficulty * 0.6))
+            rangeMax = round(difficulty * 1.2)
+
+        # verify if the numbers will work in the equation
+        possibleAnswer = False
+
+        while not possibleAnswer:
+            if operation == "add":
+                if numOfVariables == 4:
+                    x = randomInRange(rangeMin, rangeMax)
+                    y = randomInRange(rangeMin, rangeMax)
+                    z = randomInRange(rangeMin, rangeMax)
+                    answer = x + y + z
+                else:
+                    x = randomInRange(rangeMin, rangeMax)
+                    y = randomInRange(rangeMin, rangeMax)
+                    answer = x + y
+
+                if answer < 1000:
+                    possibleAnswer = True
+
+            if operation == "subtract":
+                x = randomInRange(rangeMin, rangeMax)
+                y = randomInRange(rangeMin, rangeMax)
+
+                if x >= y:
+                    answer = x - y
+                    possibleAnswer = True
+                else:
+                    temp = x
+                    x = y
+                    y = temp
+                    answer = x - y
+                    possibleAnswer = True
+
+            if operation == "multiply":
+                x = randomInRange(rangeMin, rangeMax)
+                y = randomInRange(rangeMin, rangeMax)
+                answer = x * y
+                possibleAnswer = True
+
+            if operation == "divide":
+                x = randomInRange(rangeMin, rangeMax)
+                y = randomInRange(rangeMin, rangeMax)
+
+                if x >= y == 0:
+                    if x % y == 0:
+                        answer = x / y
+                        possibleAnswer = True
+                else:
+                    temp = x
+                    x = y
+                    y = temp
+
+                    if x % y == 0:
+                        answer = x / y
+                        possibleAnswer = True
+
+
+        # give the users all of the numbers of the equation except one and have them enter the missing number
+        if numOfVariables == 3:
+            blank = randomInRange(0, 2)
+
+            if blank == 0:
+                if operation == "add":
+                    print("? + ", y, " = ", answer)
+                    expectedAnswer = x
+                if operation == "subtract":
+                    print("? - ", y, " = ", answer)
+                    expectedAnswer = x
+                if operation == "multiply":
+                    print("? * ", y, " = ", answer)
+                    expectedAnswer = x
+                if operation == "divide":
+                    print("? / ", y, " = ", answer)
+                    expectedAnswer = x
+            elif blank == 1:
+                if operation == "add":
+                    print(x, " + ? = ", answer)
+                    expectedAnswer = y
+                if operation == "subtract":
+                    print(x, " - ? = ", answer)
+                    expectedAnswer = y
+                if operation == "multiply":
+                    print(x, " * ? = ", answer)
+                    expectedAnswer = y
+                if operation == "divide":
+                    print(x, " / ? = ", answer)
+                    expectedAnswer = y
+            elif blank == 2:
+                if operation == "add":
+                    print(x, " + ", y, " = ?")
+                    expectedAnswer = answer
+                if operation == "subtract":
+                    print(x, " - ", y, " = ?")
+                    expectedAnswer = answer
+                if operation == "multiply":
+                    print(x, " * ", y, " = ?")
+                    expectedAnswer = answer
+                if operation == "divide":
+                    print(x, " / ", y, " = ?")
+                    expectedAnswer = answer
+
+        else:
+            blank = randomInRange(0, 3)
+
+            if blank == 0:
+                if operation == "add":
+                    print("? + ", y, " + ", z, " = ", answer)
+                    expectedAnswer = x
+            elif blank == 1:
+                if operation == "add":
+                    print(x, " + ? + ", z, " = ", answer)
+                    expectedAnswer = y
+            elif blank == 2:
+                if operation == "add":
+                    print(x, " + ", y, " + ? = ", answer)
+                    expectedAnswer = z
+            elif blank == 3:
+                if operation == "add":
+                    print(x, " + ", y, " + ", z, " = ?")
+                    expectedAnswer = answer
+
+        print(expectedAnswer)
+        userAnswer = int(input("what is the answer? \n"))
+        if expectedAnswer == userAnswer:
+            print("You got the answer right")
+            correctAnswer += 1
+            difficulty += 1
+        else:
+            print("You got the answer wrong")
+            incorrectAnswer += 1
+            difficulty -= 1
+
+        roundNum += 1
+
+    print("game over")
+    print("correct: ", correctAnswer)
+    print("incorrect", incorrectAnswer)

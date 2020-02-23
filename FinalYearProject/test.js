@@ -228,7 +228,7 @@ function getEquationNumbers(numOfVariables, operator) {
     if(operator == "multiply") {
 		x = randomInRange(rangeMin, rangeMax);
 		y = randomInRange(rangeMin, rangeMax);
-		answer = x * y
+		answer = x * y;
 		possibleAnswer = true;
 		// console.log("got an answer: ", answer, " = ", x, " * ", y);
     }
