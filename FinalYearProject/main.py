@@ -124,7 +124,6 @@ class ProfilePage(Screen):
 
 
 class StudentClassroomPage(Screen):
-
     classroom = "no"
 
     try:
@@ -146,13 +145,29 @@ class StudentClassroomPage(Screen):
         pass
 
 
-
 class TeacherClassroomPage(Screen):
     pass
 
 
 class PlayPage(Screen):
+    pass
 
+
+class AdditionPage(Screen):
+
+    def playGame(self):
+        algo.algo("add", 1)
+
+
+class SubtractionPage(Screen):
+    pass
+
+
+class MultiplicationPage(Screen):
+    pass
+
+
+class DivisionPage(Screen):
     pass
 
 

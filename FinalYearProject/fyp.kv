@@ -8,6 +8,10 @@ ScreenManagement:
     ProfilePage:
     ProgressPage:
     PlayPage:
+    AdditionPage:
+    SubtractionPage:
+    MultiplicationPage:
+    DivisionPage:
 
 <TitlePage>:
     name: "title"
@@ -146,18 +150,20 @@ ScreenManagement:
             x: self.parent.x
             size: self.parent.size
 
-	Button:
-	    on_release: app.root.current = "addition"
-	    text: "Addition"
-	Button:
-	    on_release: app.root.current = "subtraction"
-	    text: "Subtraction"
-	Button:
-	    on_release: app.root.current = "multiplication"
-	    text: "Multiplication"
-	Button:
-	    on_release: app.root.current = "division"
-	    text: "Division"
+    GridLayout:
+        cols: 1
+        Button:
+            on_release: app.root.current = "addition"
+            text: "Addition"
+        Button:
+            on_release: app.root.current = "subtraction"
+            text: "Subtraction"
+        Button:
+            on_release: app.root.current = "multiplication"
+            text: "Multiplication"
+        Button:
+            on_release: app.root.current = "division"
+            text: "Division"
 
 <StudentClassroomPage>:
     name: "studentclassroom"
@@ -201,3 +207,18 @@ ScreenManagement:
         size_hint: 0.2, 0.2
         font_size: 20
         text: "student"
+
+<AdditionPage>:
+    name: "addition"
+    Button:
+        text: "Level 1"
+        on_release: root.playGame()
+
+<SubtractionPage>:
+    name: "subtraction"
+
+<MultiplicationPage>:
+    name: "multiplication"
+
+<DivisionPage>:
+    name: "division"

@@ -117,7 +117,6 @@ def algo(op, level):
                         answer = x / y
                         possibleAnswer = True
 
-
         # give the users all of the numbers of the equation except one and have them enter the missing number
         if numOfVariables == 3:
             blank = randomInRange(0, 2)
@@ -182,8 +181,15 @@ def algo(op, level):
                     print(x, " + ", y, " + ", z, " = ?")
                     expectedAnswer = answer
 
-        print(expectedAnswer)
-        userAnswer = int(input("what is the answer? \n"))
+        acceptableAnswer = False
+
+        while not acceptableAnswer:
+            try:
+                userAnswer = int(input("What's the answer?\n"))
+                acceptableAnswer = True
+            except ValueError:
+                print("Make sure you enter a valid number\n")
+
         if expectedAnswer == userAnswer:
             print("You got the answer right")
             correctAnswer += 1
