@@ -202,5 +202,4 @@ def algo(op, level):
         roundNum += 1
 
     print("game over")
-    print("correct: ", correctAnswer)
-    print("incorrect", incorrectAnswer)
+    print(correctAnswer, "/", incorrectAnswer, "answers correct")
