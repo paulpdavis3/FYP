@@ -26,7 +26,7 @@ class ScreenManagement(ScreenManager):
 
 
 class TitlePage(Screen):
-    # Window.clearcolor = (0.5, 0.1, 0.1, 0.1)  # Sets the colour of the background. Tuple is in the format (R, G, B, S) S for saturation.
+    # Window.clearcolor = (0.1, 0.1, 0.1, 1)  # Sets the colour of the background. Tuple is in the format (R, G, B, S) S for saturation.
     pass
 
 
@@ -155,8 +155,8 @@ class PlayPage(Screen):
 
 class AdditionPage(Screen):
 
-    def playGame(self):
-        algo.algo("add", 1)
+    def playGame(self, levelNumber):
+        algo.algo("add", levelNumber)
 
 
 class SubtractionPage(Screen):

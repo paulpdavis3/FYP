@@ -167,6 +167,16 @@ ScreenManagement:
 
 <StudentClassroomPage>:
     name: "studentclassroom"
+    Button:
+		on_release: app.root.current = "main"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
+
     GridLayout:
         cols: 1
         Label
@@ -195,6 +205,15 @@ ScreenManagement:
 
 <TeacherClassroomPage>:
     name: "teacherclassroom"
+    Button:
+		on_release: app.root.current = "main"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
 
     Label:
         pos_hint: {'center_x': 0.5, 'center_y': 0.9}
@@ -205,20 +224,255 @@ ScreenManagement:
     Label:
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
         size_hint: 0.2, 0.2
-        font_size: 20
+        font_size: root.width/10
         text: "student"
 
 <AdditionPage>:
     name: "addition"
     Button:
+		on_release: app.root.current = "main"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
+    Button:
         text: "Level 1"
-        on_release: root.playGame()
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+        on_release: root.playGame(1)
+    Button:
+        text: "Level 2"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+        on_release: root.playGame(2)
+    Button:
+        text: "Level 3"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+        on_release: root.playGame(3)
+    Button:
+        text: "Level 4"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+        on_release: root.playGame(4)
+    Button:
+        text: "Level 5"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+        on_release: root.playGame("5")
+    Button:
+        text: "Level 6"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+        on_release: root.playGame(6)
+    Button:
+        text: "Level 7"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+        on_release: root.playGame(7)
+    Button:
+        text: "Level 8"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+        on_release: root.playGame(8)
+    Button:
+        text: "Level 9"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+        on_release: root.playGame(9)
+    Button:
+        text: "Level 10"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.05}
+        on_release: root.playGame(10)
 
 <SubtractionPage>:
     name: "subtraction"
+    Button:
+		on_release: app.root.current = "main"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
+    Button:
+        text: "Level 1"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+        on_release: root.playGame(1)
+    Button:
+        text: "Level 2"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+        on_release: root.playGame(2)
+    Button:
+        text: "Level 3"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+        on_release: root.playGame(3)
+    Button:
+        text: "Level 4"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+        on_release: root.playGame(4)
+    Button:
+        text: "Level 5"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+        on_release: root.playGame("5")
+    Button:
+        text: "Level 6"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+        on_release: root.playGame(6)
+    Button:
+        text: "Level 7"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+        on_release: root.playGame(7)
+    Button:
+        text: "Level 8"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+        on_release: root.playGame(8)
+    Button:
+        text: "Level 9"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+        on_release: root.playGame(9)
+    Button:
+        text: "Level 10"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.05}
+        on_release: root.playGame(10)
 
 <MultiplicationPage>:
     name: "multiplication"
+    Button:
+		on_release: app.root.current = "main"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
+
+    Button:
+        text: "Level 1"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+        on_release: root.playGame(1)
+    Button:
+        text: "Level 2"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+        on_release: root.playGame(2)
+    Button:
+        text: "Level 3"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+        on_release: root.playGame(3)
+    Button:
+        text: "Level 4"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+        on_release: root.playGame(4)
+    Button:
+        text: "Level 5"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+        on_release: root.playGame("5")
+    Button:
+        text: "Level 6"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+        on_release: root.playGame(6)
+    Button:
+        text: "Level 7"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+        on_release: root.playGame(7)
+    Button:
+        text: "Level 8"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+        on_release: root.playGame(8)
+    Button:
+        text: "Level 9"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+        on_release: root.playGame(9)
+    Button:
+        text: "Level 10"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.05}
+        on_release: root.playGame(10)
 
 <DivisionPage>:
     name: "division"
+    Button:
+		on_release: app.root.current = "main"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
+
+    Button:
+        text: "Level 1"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+        on_release: root.playGame(1)
+    Button:
+        text: "Level 2"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+        on_release: root.playGame(2)
+    Button:
+        text: "Level 3"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+        on_release: root.playGame(3)
+    Button:
+        text: "Level 4"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+        on_release: root.playGame(4)
+    Button:
+        text: "Level 5"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+        on_release: root.playGame("5")
+    Button:
+        text: "Level 6"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+        on_release: root.playGame(6)
+    Button:
+        text: "Level 7"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+        on_release: root.playGame(7)
+    Button:
+        text: "Level 8"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+        on_release: root.playGame(8)
+    Button:
+        text: "Level 9"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+        on_release: root.playGame(9)
+    Button:
+        text: "Level 10"
+        size_hint: 0.5, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.05}
+        on_release: root.playGame(10)
