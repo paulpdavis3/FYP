@@ -154,21 +154,31 @@ class PlayPage(Screen):
 
 
 class AdditionPage(Screen):
+    playerXP = 600
 
     def playGame(self, levelNumber):
         algo.algo("add", levelNumber)
 
 
 class SubtractionPage(Screen):
-    pass
+    playerXP = 600
+
+    def playGame(self, levelNumber):
+        algo.algo("add", levelNumber)
 
 
 class MultiplicationPage(Screen):
-    pass
+    playerXP = 600
+
+    def playGame(self, levelNumber):
+        algo.algo("add", levelNumber)
 
 
 class DivisionPage(Screen):
-    pass
+    playerXP = 600
+
+    def playGame(self, levelNumber):
+        algo.algo("add", levelNumber)
 
 
 kv_file = Builder.load_file('fyp.kv')

@@ -150,20 +150,26 @@ ScreenManagement:
             x: self.parent.x
             size: self.parent.size
 
-    GridLayout:
-        cols: 1
-        Button:
-            on_release: app.root.current = "addition"
-            text: "Addition"
-        Button:
-            on_release: app.root.current = "subtraction"
-            text: "Subtraction"
-        Button:
-            on_release: app.root.current = "multiplication"
-            text: "Multiplication"
-        Button:
-            on_release: app.root.current = "division"
-            text: "Division"
+    Button:
+        size_hint: 0.75, 0.2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.825}
+        on_release: app.root.current = "addition"
+        text: "Addition"
+    Button:
+        size_hint: 0.75, 0.2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+        on_release: app.root.current = "subtraction"
+        text: "Subtraction"
+    Button:
+        size_hint: 0.75, 0.2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.375}
+        on_release: app.root.current = "multiplication"
+        text: "Multiplication"
+    Button:
+        size_hint: 0.75, 0.2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+        on_release: app.root.current = "division"
+        text: "Division"
 
 <StudentClassroomPage>:
     name: "studentclassroom"
@@ -230,7 +236,7 @@ ScreenManagement:
 <AdditionPage>:
     name: "addition"
     Button:
-		on_release: app.root.current = "main"
+		on_release: app.root.current = "play"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -248,51 +254,60 @@ ScreenManagement:
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.85}
         on_release: root.playGame(2)
+        disabled: True if root.playerXP < 100 else False
     Button:
         text: "Level 3"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.75}
         on_release: root.playGame(3)
+        disabled: True if root.playerXP < 200 else False
     Button:
         text: "Level 4"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.65}
         on_release: root.playGame(4)
+        disabled: True if root.playerXP < 300 else False
     Button:
         text: "Level 5"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.55}
         on_release: root.playGame("5")
+        disabled: True if root.playerXP < 400 else False
     Button:
         text: "Level 6"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.45}
         on_release: root.playGame(6)
+        disabled: True if root.playerXP < 500 else False
     Button:
         text: "Level 7"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.35}
         on_release: root.playGame(7)
+        disabled: True if root.playerXP < 600 else False
     Button:
         text: "Level 8"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.25}
         on_release: root.playGame(8)
+        disabled: True if root.playerXP < 700 else False
     Button:
         text: "Level 9"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_release: root.playGame(9)
+        disabled: True if root.playerXP < 800 else False
     Button:
         text: "Level 10"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.05}
         on_release: root.playGame(10)
+        disabled: True if root.playerXP < 900 else False
 
 <SubtractionPage>:
     name: "subtraction"
     Button:
-		on_release: app.root.current = "main"
+		on_release: app.root.current = "play"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -300,6 +315,7 @@ ScreenManagement:
 	        y: self.parent.y
             x: self.parent.x
             size: self.parent.size
+
     Button:
         text: "Level 1"
         size_hint: 0.5, 0.1
@@ -310,51 +326,60 @@ ScreenManagement:
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.85}
         on_release: root.playGame(2)
+        disabled: True if root.playerXP < 100 else False
     Button:
         text: "Level 3"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.75}
         on_release: root.playGame(3)
+        disabled: True if root.playerXP < 200 else False
     Button:
         text: "Level 4"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.65}
         on_release: root.playGame(4)
+        disabled: True if root.playerXP < 300 else False
     Button:
         text: "Level 5"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.55}
         on_release: root.playGame("5")
+        disabled: True if root.playerXP < 400 else False
     Button:
         text: "Level 6"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.45}
         on_release: root.playGame(6)
+        disabled: True if root.playerXP < 500 else False
     Button:
         text: "Level 7"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.35}
         on_release: root.playGame(7)
+        disabled: True if root.playerXP < 600 else False
     Button:
         text: "Level 8"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.25}
         on_release: root.playGame(8)
+        disabled: True if root.playerXP < 700 else False
     Button:
         text: "Level 9"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_release: root.playGame(9)
+        disabled: True if root.playerXP < 800 else False
     Button:
         text: "Level 10"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.05}
         on_release: root.playGame(10)
+        disabled: True if root.playerXP < 900 else False
 
 <MultiplicationPage>:
     name: "multiplication"
     Button:
-		on_release: app.root.current = "main"
+		on_release: app.root.current = "play"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -373,51 +398,60 @@ ScreenManagement:
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.85}
         on_release: root.playGame(2)
+        disabled: True if root.playerXP < 100 else False
     Button:
         text: "Level 3"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.75}
         on_release: root.playGame(3)
+        disabled: True if root.playerXP < 200 else False
     Button:
         text: "Level 4"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.65}
         on_release: root.playGame(4)
+        disabled: True if root.playerXP < 300 else False
     Button:
         text: "Level 5"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.55}
         on_release: root.playGame("5")
+        disabled: True if root.playerXP < 400 else False
     Button:
         text: "Level 6"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.45}
         on_release: root.playGame(6)
+        disabled: True if root.playerXP < 500 else False
     Button:
         text: "Level 7"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.35}
         on_release: root.playGame(7)
+        disabled: True if root.playerXP < 600 else False
     Button:
         text: "Level 8"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.25}
         on_release: root.playGame(8)
+        disabled: True if root.playerXP < 700 else False
     Button:
         text: "Level 9"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_release: root.playGame(9)
+        disabled: True if root.playerXP < 800 else False
     Button:
         text: "Level 10"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.05}
         on_release: root.playGame(10)
+        disabled: True if root.playerXP < 900 else False
 
 <DivisionPage>:
     name: "division"
     Button:
-		on_release: app.root.current = "main"
+		on_release: app.root.current = "play"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -436,43 +470,52 @@ ScreenManagement:
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.85}
         on_release: root.playGame(2)
+        disabled: True if root.playerXP < 100 else False
     Button:
         text: "Level 3"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.75}
         on_release: root.playGame(3)
+        disabled: True if root.playerXP < 200 else False
     Button:
         text: "Level 4"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.65}
         on_release: root.playGame(4)
+        disabled: True if root.playerXP < 300 else False
     Button:
         text: "Level 5"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.55}
         on_release: root.playGame("5")
+        disabled: True if root.playerXP < 400 else False
     Button:
         text: "Level 6"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.45}
         on_release: root.playGame(6)
+        disabled: True if root.playerXP < 500 else False
     Button:
         text: "Level 7"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.35}
         on_release: root.playGame(7)
+        disabled: True if root.playerXP < 600 else False
     Button:
         text: "Level 8"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.25}
         on_release: root.playGame(8)
+        disabled: True if root.playerXP < 700 else False
     Button:
         text: "Level 9"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_release: root.playGame(9)
+        disabled: True if root.playerXP < 800 else False
     Button:
         text: "Level 10"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.05}
         on_release: root.playGame(10)
+        disabled: True if root.playerXP < 900 else False
