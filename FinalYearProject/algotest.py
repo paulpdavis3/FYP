@@ -59,8 +59,8 @@ def algo(op, level):
         elif operation == "multiply":
             numOfVariables = 3
 
-            rangeMin = 1
-            rangeMax = difficulty * 2
+            rangeMin = difficulty
+            rangeMax = round(difficulty * 1.2)
 
         # verify if the numbers will work in the equation
         possibleAnswer = False

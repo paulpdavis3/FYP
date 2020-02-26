@@ -19,14 +19,12 @@ ScreenManagement:
         cols:1
         Label:
             text: "Primary Mathletes"
-        GridLayout:
-            cols: 1
-            Button:
-                text: "Register"
-                on_release: app.root.current = "register"
-            Button:
-                text: "Login"
-                on_release: app.root.current = "login"
+        Button:
+            text: "Register"
+            on_release: app.root.current = "register"
+        Button:
+            text: "Login"
+            on_release: app.root.current = "login"
 
 <LoginPage>:
     name: "login"
@@ -271,7 +269,7 @@ ScreenManagement:
         text: "Level 5"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-        on_release: root.playGame("5")
+        on_release: root.playGame(5)
         disabled: True if root.playerXP < 400 else False
     Button:
         text: "Level 6"
@@ -343,7 +341,7 @@ ScreenManagement:
         text: "Level 5"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-        on_release: root.playGame("5")
+        on_release: root.playGame(5)
         disabled: True if root.playerXP < 400 else False
     Button:
         text: "Level 6"
@@ -415,7 +413,7 @@ ScreenManagement:
         text: "Level 5"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-        on_release: root.playGame("5")
+        on_release: root.playGame(5)
         disabled: True if root.playerXP < 400 else False
     Button:
         text: "Level 6"
@@ -487,7 +485,7 @@ ScreenManagement:
         text: "Level 5"
         size_hint: 0.5, 0.1
         pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-        on_release: root.playGame("5")
+        on_release: root.playGame(5)
         disabled: True if root.playerXP < 400 else False
     Button:
         text: "Level 6"

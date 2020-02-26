@@ -26,7 +26,7 @@ class ScreenManagement(ScreenManager):
 
 
 class TitlePage(Screen):
-    # Window.clearcolor = (0.1, 0.1, 0.1, 1)  # Sets the colour of the background. Tuple is in the format (R, G, B, S) S for saturation.
+    Window.clearcolor = (82/255, 144/255, 242/255, 66/255)  # Sets the colour of the background. Tuple is in the format (R, G, B, S) S for saturation.
     pass
 
 
@@ -124,14 +124,13 @@ class ProfilePage(Screen):
 
 
 class StudentClassroomPage(Screen):
+
     classroom = "no"
 
     try:
         ScreenManagement.store.get('credentials')['classroom']
     except KeyError:
         classroom = "no"
-    else:
-        classroom = ScreenManagement.store.get('credentials')['classroom']
 
     def deleteClassroom(self):
         # replace classroom in JSON store with 0
@@ -164,21 +163,21 @@ class SubtractionPage(Screen):
     playerXP = 600
 
     def playGame(self, levelNumber):
-        algo.algo("add", levelNumber)
+        algo.algo("subtract", levelNumber)
 
 
 class MultiplicationPage(Screen):
     playerXP = 600
 
     def playGame(self, levelNumber):
-        algo.algo("add", levelNumber)
+        algo.algo("multiply", levelNumber)
 
 
 class DivisionPage(Screen):
     playerXP = 600
 
     def playGame(self, levelNumber):
-        algo.algo("add", levelNumber)
+        algo.algo("divide", levelNumber)
 
 
 kv_file = Builder.load_file('fyp.kv')
