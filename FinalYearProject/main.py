@@ -26,7 +26,7 @@ class ScreenManagement(ScreenManager):
 
 
 class TitlePage(Screen):
-    Window.clearcolor = (82/255, 144/255, 242/255, 66/255)  # Sets the colour of the background. Tuple is in the format (R, G, B, S) S for saturation.
+    Window.clearcolor = (1, 72/255, 72/255, 1)  # Sets the colour of the background. Tuple is in the format (R, G, B, S) S for saturation.
     pass
 
 

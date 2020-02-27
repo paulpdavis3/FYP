@@ -15,16 +15,23 @@ ScreenManagement:
 
 <TitlePage>:
     name: "title"
-    GridLayout:
-        cols:1
-        Label:
-            text: "Primary Mathletes"
-        Button:
-            text: "Register"
-            on_release: app.root.current = "register"
-        Button:
-            text: "Login"
-            on_release: app.root.current = "login"
+    Image:
+        size_hint: 0.6, 0.6
+	    pos_hint: {"center_x": 0.5, 'center_y':0.7}
+        source: "logo.png"
+        y: self.parent.y
+        x: self.parent.x
+        size: self.parent.size
+    Button:
+        size_hint: 0.8, 0.15
+	    pos_hint: {"center_x": 0.5, 'center_y':0.3}
+        text: "Register"
+        on_release: app.root.current = "register"
+    Button:
+        size_hint: 0.8, 0.15
+	    pos_hint: {"center_x": 0.5, 'center_y':0.1}
+        text: "Login"
+        on_release: app.root.current = "login"
 
 <LoginPage>:
     name: "login"
