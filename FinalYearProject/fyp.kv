@@ -23,7 +23,7 @@ ScreenManagement:
         x: self.parent.x
         size: self.parent.size
     Button:
-        size_hint: 0.5, 0.3
+        size_hint: 0.6, 0.2
 	    pos_hint: {"center_x": 0.5, 'center_y':0.3}
 	    background_normal: "button.png"
 	    background_down: "buttondown.png"
@@ -34,41 +34,74 @@ ScreenManagement:
         on_release: app.root.current = "register"
 
     Button:
-        size_hint: 0.5, 0.3
 	    pos_hint: {"center_x": 0.5, 'center_y':0.1}
+	    size_hint: 0.6, 0.2
+        text: "Login"
+        on_release: app.root.current = "login"
 	    background_normal: "button.png"
 	    background_down: "buttondown.png"
-        text: "Login"
         font_size: "20dp"
         bold: True
         color: (1, 72/255, 72/255, 1)
-        on_release: app.root.current = "login"
 
 <LoginPage>:
     name: "login"
-    GridLayout:
-        cols:1
-        Label:
-            text: "Login Page"
-        GridLayout:
-            cols:1
-            Label:
-                text: 'Username'
-            TextInput:
-                id: usernameLogin
-                text: root.username
-            Label:
-                text: 'Password'
-            TextInput:
-                id: passwordLogin
-                text: root.password
-                password: True
-            Button:
-                text: "Login"
-                on_release: root.checkLogin(usernameLogin.text, passwordLogin.text)
-            Button:
-                text: "Click here to Register"
-                on_release: app.root.current = "register"
+    Label:
+        text: "Login Page"
+        pos_hint: {"center_x": 0.5, 'center_y':0.9}
+        size_hint: 0.1, 0.1
+        bold: True
+        font_size: self.width
+    Label:
+        text: 'Username'
+        pos_hint: {"center_x": 0.5, 'center_y':0.775}
+        font_size: "20dp"
+        size_hint: 0.5, 0.1
+        bold: True
+    TextInput:
+        id: usernameLogin
+        text: root.username
+        pos_hint: {"center_x": 0.5, 'center_y':0.7}
+        size_hint: 0.5, 0.1
+    Label:
+        text: 'Password'
+        pos_hint: {"center_x": 0.5, 'center_y':0.575}
+        font_size: "20dp"
+        size_hint: 0.5, 0.1
+        bold: True
+    TextInput:
+        id: passwordLogin
+        text: root.password
+        password: True
+        allow_copy: False
+        pos_hint: {"center_x": 0.5, 'center_y':0.5}
+        size_hint: 0.5, 0.1
+    Button:
+        text: "Login"
+        on_release: root.checkLogin(usernameLogin.text, passwordLogin.text)
+        pos_hint: {"center_x": 0.5, 'center_y':0.325}
+        size_hint: 0.6, 0.2
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+    Label:
+        text: "Don't have an account? Click below"
+        pos_hint: {"center_x": 0.5, 'center_y':0.2}
+        font_size: "20dp"
+        size_hint: 0.5, 0.1
+        bold: True
+    Button:
+        text: "Register"
+        on_release: app.root.current = "register"
+        pos_hint: {"center_x": 0.5, 'center_y':0.1}
+        size_hint: 0.6, 0.2
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
 
 
 <RegisterPage>:
