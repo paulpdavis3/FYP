@@ -175,28 +175,50 @@ ScreenManagement:
 
 <MainPage>:
     name: 'main'
-    GridLayout:
-        cols: 1
-        Label:
-            text: 'Home Page'
-        GridLayout:
-            cols: 1
-            Button:
-                id: playButton
-                text: "Play"
-                on_release: app.root.current = "play"
-            Button:
-                id: classroomButton
-                text: 'Classroom'
-                on_release: root.goToClassroom()
-            Button:
-                id: viewProfileButton
-                text: "View Profile"
-                on_release: app.root.current = "profile"
-            Button:
-                id: ViewProgressButton
-                text: "View Progress"
-                on_release: app.root.current = "progress"
+    Button:
+        id: playButton
+        text: "Play"
+        on_release: app.root.current = "play"
+        pos_hint: {"center_x": 0.5, 'center_y':0.85}
+        size_hint: 0.7, 0.275
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+    Button:
+        id: classroomButton
+        text: 'Classroom'
+        on_release: root.goToClassroom()
+        pos_hint: {"center_x": 0.5, 'center_y':0.6125}
+        size_hint: 0.7, 0.275
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+    Button:
+        id: viewProfileButton
+        text: "View Profile"
+        on_release: app.root.current = "profile"
+        pos_hint: {"center_x": 0.5, 'center_y':0.3825}
+        size_hint: 0.7, 0.275
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+    Button:
+        id: ViewProgressButton
+        text: "View Progress"
+        on_release: app.root.current = "progress"
+        pos_hint: {"center_x": 0.5, 'center_y':0.15}
+        size_hint: 0.7, 0.275
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
 
 <ProgressPage>:
     name: "progress"
