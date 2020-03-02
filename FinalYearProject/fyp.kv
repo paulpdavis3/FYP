@@ -17,7 +17,7 @@ ScreenManagement:
     name: "title"
     Image:
         size_hint: 0.6, 0.6
-	    pos_hint: {"center_x": 0.5, 'center_y':0.7}
+	    pos_hint: {"center_x": 0.5, 'center_y':0.675}
         source: "logo.png"
         y: self.parent.y
         x: self.parent.x
@@ -106,31 +106,71 @@ ScreenManagement:
 
 <RegisterPage>:
     name: "register"
-    GridLayout:
-        cols:1
-        Label:
-            text: "Register Page"
-        GridLayout:
-            cols:1
-            Label
-                text: "username"
-            TextInput:
-                id: usernameRegister
-            Label
-                text: "email"
-            TextInput:
-                id: emailRegister
-            Label
-                text: "password"
-            TextInput:
-                id: passwordRegister
-                password: True
-            Button:
-                text: "Register"
-                on_release: root.checkPassword(usernameRegister.text, emailRegister.text, passwordRegister.text)
-            Button:
-                text: "Click here to Login"
-                on_release: app.root.current = "login"
+    Label:
+        text: "Register Page"
+        pos_hint: {"center_x": 0.5, 'center_y':0.9}
+        size_hint: 0.1, 0.1
+        bold: True
+        font_size: self.width
+    Label:
+        text: 'Username'
+        pos_hint: {"center_x": 0.5, 'center_y':0.75}
+        font_size: "20dp"
+        size_hint: 0.5, 0.075
+        bold: True
+    TextInput:
+        id: usernameRegister
+        pos_hint: {"center_x": 0.5, 'center_y':0.675}
+        size_hint: 0.5, 0.075
+    Label:
+        text: "Parent's Email"
+        pos_hint: {"center_x": 0.5, 'center_y':0.6}
+        font_size: "20dp"
+        size_hint: 0.5, 0.075
+        bold: True
+    TextInput:
+        id: emailRegister
+        pos_hint: {"center_x": 0.5, 'center_y':0.525}
+        size_hint: 0.5, 0.075
+    Label:
+        text: 'Password'
+        pos_hint: {"center_x": 0.5, 'center_y':0.45}
+        font_size: "20dp"
+        size_hint: 0.5, 0.075
+        bold: True
+    TextInput:
+        id: passwordRegister
+        password: True
+        allow_copy: False
+        pos_hint: {"center_x": 0.5, 'center_y':0.375}
+        size_hint: 0.5, 0.075
+    Button:
+        text: "Register"
+        on_release: root.checkPassword(usernameRegister.text, emailRegister.text, passwordRegister.text)
+        pos_hint: {"center_x": 0.5, 'center_y':0.225}
+        size_hint: 0.5, 0.15
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+    Label:
+        text: "Already have an account? Click below"
+        pos_hint: {"center_x": 0.5, 'center_y':0.15}
+        font_size: "20dp"
+        size_hint: 0.5, 0.075
+        bold: True
+
+    Button:
+        text: "Login"
+        on_release: app.root.current = "login"
+        pos_hint: {"center_x": 0.5, 'center_y':0.075}
+        size_hint: 0.5, 0.15
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
 
 
 <MainPage>:
