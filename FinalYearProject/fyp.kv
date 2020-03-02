@@ -63,6 +63,7 @@ ScreenManagement:
         text: root.username
         pos_hint: {"center_x": 0.5, 'center_y':0.7}
         size_hint: 0.5, 0.1
+        font_size: self.height * 0.5
     Label:
         text: 'Password'
         pos_hint: {"center_x": 0.5, 'center_y':0.575}
@@ -76,6 +77,7 @@ ScreenManagement:
         allow_copy: False
         pos_hint: {"center_x": 0.5, 'center_y':0.5}
         size_hint: 0.5, 0.1
+        font_size: self.height * 0.8
     Button:
         text: "Login"
         on_release: root.checkLogin(usernameLogin.text, passwordLogin.text)
@@ -122,6 +124,7 @@ ScreenManagement:
         id: usernameRegister
         pos_hint: {"center_x": 0.5, 'center_y':0.675}
         size_hint: 0.5, 0.075
+        font_size: self.height * 0.5
     Label:
         text: "Parent's Email"
         pos_hint: {"center_x": 0.5, 'center_y':0.6}
@@ -132,6 +135,7 @@ ScreenManagement:
         id: emailRegister
         pos_hint: {"center_x": 0.5, 'center_y':0.525}
         size_hint: 0.5, 0.075
+        font_size: self.height * 0.5
     Label:
         text: 'Password'
         pos_hint: {"center_x": 0.5, 'center_y':0.45}
@@ -144,6 +148,7 @@ ScreenManagement:
         allow_copy: False
         pos_hint: {"center_x": 0.5, 'center_y':0.375}
         size_hint: 0.5, 0.075
+        font_size: self.height * 0.5
     Button:
         text: "Register"
         on_release: root.checkPassword(usernameRegister.text, emailRegister.text, passwordRegister.text)
@@ -187,7 +192,7 @@ ScreenManagement:
         text: "Play"
         on_release: app.root.current = "play"
         pos_hint: {"center_x": 0.5, 'center_y':0.85}
-        size_hint: 0.7, 0.275
+        size_hint: 0.7, 0.2
         background_normal: "button.png"
         background_down: "buttondown.png"
         font_size: "20dp"
@@ -198,7 +203,7 @@ ScreenManagement:
         text: 'Classroom'
         on_release: root.goToClassroom()
         pos_hint: {"center_x": 0.5, 'center_y':0.6125}
-        size_hint: 0.7, 0.275
+        size_hint: 0.7, 0.2
         background_normal: "button.png"
         background_down: "buttondown.png"
         font_size: "20dp"
@@ -209,7 +214,7 @@ ScreenManagement:
         text: "View Profile"
         on_release: app.root.current = "profile"
         pos_hint: {"center_x": 0.5, 'center_y':0.3825}
-        size_hint: 0.7, 0.275
+        size_hint: 0.7, 0.2
         background_normal: "button.png"
         background_down: "buttondown.png"
         font_size: "20dp"
@@ -220,7 +225,7 @@ ScreenManagement:
         text: "View Progress"
         on_release: app.root.current = "progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.15}
-        size_hint: 0.7, 0.275
+        size_hint: 0.7, 0.2
         background_normal: "button.png"
         background_down: "buttondown.png"
         font_size: "20dp"
@@ -303,27 +308,29 @@ ScreenManagement:
 
     Label:
         text: "Student's Classroom"
-        pos_hint: {"center_x": 0.5, 'center_y':0.9}
+        pos_hint: {"center_x": 0.5, 'center_y':0.825}
         size_hint: 0.1, 0.1
         bold: True
         font_size: self.width
     Label
-        pos_hint: {"center_x": 0.5, 'center_y':0.7}
+        pos_hint: {"center_x": 0.5, 'center_y':0.675}
         size_hint: 0.8, 0.2
         text: root.classroom
     TextInput:
         id: classroomInput
         pos_hint: {"center_x": 0.5, 'center_y':0.6}
         size_hint: 0.5, 0.1
+        font_size: self.height * 0.5
         disabled: False if root.classroom == "no classroom" else True
     Button:
         text: "Join Classroom"
         on_release: root.joinClassroom(classroomInput.text)
         disabled: False if root.classroom == "no classroom" else True
         pos_hint: {"center_x": 0.5, 'center_y':0.4}
-        size_hint: 0.7, 0.275
+        size_hint: 0.7, 0.2
         background_normal: "button.png"
         background_down: "buttondown.png"
+        background_disabled_normal: 'buttondisabled.png'
         font_size: "20dp"
         bold: True
         color: (1, 72/255, 72/255, 1)
@@ -332,9 +339,10 @@ ScreenManagement:
         on_release: root.deleteClassroom()
         disabled: True if root.classroom == "no classroom" else False
         pos_hint: {"center_x": 0.5, 'center_y':0.15}
-        size_hint: 0.7, 0.275
+        size_hint: 0.7, 0.2
         background_normal: "button.png"
         background_down: "buttondown.png"
+        background_disabled_normal: 'buttondisabled.png'
         font_size: "20dp"
         bold: True
         color: (1, 72/255, 72/255, 1)
@@ -377,62 +385,111 @@ ScreenManagement:
             size: self.parent.size
     Button:
         text: "Level 1"
-        size_hint: 0.5, 0.1
-        pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+        size_hint: 0.45, 0.15
+        pos_hint: {'center_x': 0.25, 'center_y': 0.85}
         on_release: root.playGame(1)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
     Button:
         text: "Level 2"
-        size_hint: 0.5, 0.1
-        pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+        size_hint: 0.45, 0.15
+        pos_hint: {'center_x': 0.25, 'center_y': 0.675}
         on_release: root.playGame(2)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: "buttondisabled.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 100 else False
     Button:
         text: "Level 3"
-        size_hint: 0.5, 0.1
-        pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+        size_hint: 0.45, 0.15
+        pos_hint: {'center_x': 0.25, 'center_y': 0.5}
         on_release: root.playGame(3)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: "buttondisabled.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 200 else False
     Button:
         text: "Level 4"
-        size_hint: 0.5, 0.1
-        pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+        size_hint: 0.45, 0.15
+        pos_hint: {'center_x': 0.25, 'center_y': 0.325}
         on_release: root.playGame(4)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: "buttondisabled.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 300 else False
     Button:
         text: "Level 5"
-        size_hint: 0.5, 0.1
-        pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+        size_hint: 0.45, 0.15
+        pos_hint: {'center_x': 0.25, 'center_y': 0.15}
         on_release: root.playGame(5)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: "buttondisabled.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 400 else False
     Button:
         text: "Level 6"
-        size_hint: 0.5, 0.1
-        pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+        size_hint: 0.45, 0.15
+        pos_hint: {'center_x': 0.75, 'center_y': 0.85}
         on_release: root.playGame(6)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: "buttondisabled.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 500 else False
     Button:
         text: "Level 7"
-        size_hint: 0.5, 0.1
-        pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+        size_hint: 0.45, 0.15
+        pos_hint: {'center_x': 0.75, 'center_y': 0.675}
         on_release: root.playGame(7)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: "buttondisabled.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 600 else False
     Button:
         text: "Level 8"
-        size_hint: 0.5, 0.1
-        pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+        size_hint: 0.45, 0.15
+        pos_hint: {'center_x': 0.75, 'center_y': 0.5}
         on_release: root.playGame(8)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: "buttondisabled.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 700 else False
     Button:
         text: "Level 9"
-        size_hint: 0.5, 0.1
-        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+        size_hint: 0.45, 0.15
+        pos_hint: {'center_x': 0.75, 'center_y': 0.325}
         on_release: root.playGame(9)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: "buttondisabled.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 800 else False
     Button:
         text: "Level 10"
-        size_hint: 0.5, 0.1
-        pos_hint: {'center_x': 0.5, 'center_y': 0.05}
+        size_hint: 0.45, 0.15
+        pos_hint: {'center_x': 0.75, 'center_y': 0.15}
         on_release: root.playGame(10)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: "buttondisabled.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 900 else False
 
 <SubtractionPage>:
