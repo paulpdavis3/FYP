@@ -176,6 +176,13 @@ ScreenManagement:
 <MainPage>:
     name: 'main'
     Button:
+        id: logoutButton
+        pos_hint: {"center_x": 0.075, 'center_y':0.925}
+        size_hint: 0.15, 0.15
+        background_normal: "logout.png"
+        background_down: "logoutdown.png"
+        on_release: app.root.current = "login" # can change this to a pop up to make sure they want to logout
+    Button:
         id: playButton
         text: "Play"
         on_release: app.root.current = "play"
@@ -294,30 +301,43 @@ ScreenManagement:
             x: self.parent.x
             size: self.parent.size
 
-    GridLayout:
-        cols: 1
-        Label
-            size_hint: 0.8, 0.2
-            font_size: root.width/10
-            text: "Student"
-        Label
-            size_hint: 0.8, 0.2
-            text: root.classroom
-        TextInput:
-            id: classroomInput
-            font_size: classroomInput.height / 1.2
-            size_hint: 0.8, 0.2
-            disabled: False if root.classroom == "no" else True
-        Button:
-            size_hint: 0.8, 0.2
-            text: "Join Classroom"
-            on_release: root.joinClassroom(classroomInput.text)
-            disabled: False if root.classroom == "no" else True
-        Button:
-            size_hint: 0.8, 0.2
-            text: "Delete"
-            on_release: root.deleteClassroom()
-            disabled: True if root.classroom == "no" else False
+    Label:
+        text: "Student's Classroom"
+        pos_hint: {"center_x": 0.5, 'center_y':0.9}
+        size_hint: 0.1, 0.1
+        bold: True
+        font_size: self.width
+    Label
+        pos_hint: {"center_x": 0.5, 'center_y':0.7}
+        size_hint: 0.8, 0.2
+        text: root.classroom
+    TextInput:
+        id: classroomInput
+        pos_hint: {"center_x": 0.5, 'center_y':0.6}
+        size_hint: 0.5, 0.1
+        disabled: False if root.classroom == "no classroom" else True
+    Button:
+        text: "Join Classroom"
+        on_release: root.joinClassroom(classroomInput.text)
+        disabled: False if root.classroom == "no classroom" else True
+        pos_hint: {"center_x": 0.5, 'center_y':0.4}
+        size_hint: 0.7, 0.275
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+    Button:
+        text: "Delete"
+        on_release: root.deleteClassroom()
+        disabled: True if root.classroom == "no classroom" else False
+        pos_hint: {"center_x": 0.5, 'center_y':0.15}
+        size_hint: 0.7, 0.275
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
 
 
 <TeacherClassroomPage>:

@@ -84,9 +84,9 @@ class RegisterPage(Screen):
             print('data not added to the DB')
         else:
             firebase.post('/users',
-                          {'username': uname, 'email': email, 'password': pword, 'teacher': 'no', 'classroom': 0})
+                          {'username': uname, 'email': email, 'password': pword, 'teacher': 'no', 'classroom': "no classroom"})
             ScreenManagement.store.put('credentials', username=uname, password=pword, email=email, teacher="no",
-                                       classroom=0)
+                                       classroom="no classroom")
             print('data added to the db successfully')
             self.manager.current = 'login'
 
@@ -125,12 +125,12 @@ class ProfilePage(Screen):
 
 class StudentClassroomPage(Screen):
 
-    classroom = "no"
+    classroom = "no classroom"
 
     try:
         ScreenManagement.store.get('credentials')['classroom']
     except KeyError:
-        classroom = "no"
+        classroom = "no classroom"
 
     def deleteClassroom(self):
         # replace classroom in JSON store with 0
