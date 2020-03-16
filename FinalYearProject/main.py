@@ -1,4 +1,5 @@
 from kivy.app import App
+from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang.builder import Builder
 from firebase import firebase
@@ -10,6 +11,14 @@ from os.path import join
 import algo
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
+
+level = None
+operation = None
+numOfVars = None
+x = None
+y = None
+z = None
+answer = None
 
 
 # Create a new db for just classrooms to avoid checking all users to save time
@@ -26,8 +35,27 @@ class ScreenManagement(ScreenManager):
 
 
 class TitlePage(Screen):
-    Window.clearcolor = (1, 72/255, 72/255, 1)  # Sets the colour of the background. Tuple is in the format (R, G, B, S) S for saturation.
+    Window.clearcolor = (1, 72 / 255, 72 / 255,
+                         1)  # Sets the colour of the background. Tuple is in the format (R, G, B, S) S for saturation.
     pass
+
+
+class MinigamePage(Screen):
+
+    levelNumber = StringProperty()
+    operationType = StringProperty()
+
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        self.levelNumber = ""
+        self.operationType = ""
+
+    def on_enter(self, *args):
+        global level
+        global operation
+
+        self.levelNumber = str(level)
+        self.operationType = operation
 
 
 class LoginPage(Screen):
@@ -84,7 +112,8 @@ class RegisterPage(Screen):
             print('data not added to the DB')
         else:
             firebase.post('/users',
-                          {'username': uname, 'email': email, 'password': pword, 'teacher': 'no', 'classroom': "no classroom"})
+                          {'username': uname, 'email': email, 'password': pword, 'teacher': 'no',
+                           'classroom': "no classroom"})
             ScreenManagement.store.put('credentials', username=uname, password=pword, email=email, teacher="no",
                                        classroom="no classroom")
             print('data added to the db successfully')
@@ -124,7 +153,6 @@ class ProfilePage(Screen):
 
 
 class StudentClassroomPage(Screen):
-
     classroom = "no classroom"
 
     try:
@@ -156,7 +184,14 @@ class AdditionPage(Screen):
     playerXP = 600
 
     def playGame(self, levelNumber):
-        algo.algo("add", levelNumber)
+        # algo.algo("add", levelNumber)
+        global level
+        global operation
+
+        level = levelNumber
+        operation = "add"
+
+        self.manager.current = 'minigame'
 
 
 class SubtractionPage(Screen):

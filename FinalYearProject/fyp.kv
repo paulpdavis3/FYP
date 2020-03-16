@@ -12,6 +12,7 @@ ScreenManagement:
     SubtractionPage:
     MultiplicationPage:
     DivisionPage:
+    MinigamePage:
 
 <TitlePage>:
     name: "title"
@@ -886,3 +887,9 @@ ScreenManagement:
         bold: True
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 900 else False
+
+<MinigamePage>
+    name: "minigame"
+
+    Label:
+        text: root.operationType

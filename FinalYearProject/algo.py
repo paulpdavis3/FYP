@@ -1,7 +1,12 @@
 import random
 
-
 def algo(op, level):
+
+    global x
+    global y
+    global z
+    global answer
+
     operation = op
     startingRange = level
     difficulty = startingRange
