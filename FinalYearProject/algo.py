@@ -1,11 +1,8 @@
 import random
+import globalVariables
+
 
 def algo(op, level):
-
-    global x
-    global y
-    global z
-    global answer
 
     operation = op
     startingRange = level
@@ -13,16 +10,14 @@ def algo(op, level):
     rangeMin = None
     rangeMax = None
     numOfVariables = None
-    x = None
-    y = None
-    z = None
-    answer = None
     correctAnswer = 0
     incorrectAnswer = 0
     blank = None
     expectedAnswer = None
     userAnswer = None
     roundNum = 0
+
+    print(op, level)
 
     def randomInRange(min, max):
         return random.randrange(min, max + 1)
@@ -73,53 +68,53 @@ def algo(op, level):
         while not possibleAnswer:
             if operation == "add":
                 if numOfVariables == 4:
-                    x = randomInRange(rangeMin, rangeMax)
-                    y = randomInRange(rangeMin, rangeMax)
-                    z = randomInRange(rangeMin, rangeMax)
-                    answer = x + y + z
+                    globalVariables.x = randomInRange(rangeMin, rangeMax)
+                    globalVariables.y = randomInRange(rangeMin, rangeMax)
+                    globalVariables.z = randomInRange(rangeMin, rangeMax)
+                    globalVariables.answer = globalVariables.x + globalVariables.y + globalVariables.z
                 else:
-                    x = randomInRange(rangeMin, rangeMax)
-                    y = randomInRange(rangeMin, rangeMax)
-                    answer = x + y
+                    globalVariables.x = randomInRange(rangeMin, rangeMax)
+                    globalVariables.y = randomInRange(rangeMin, rangeMax)
+                    globalVariables.answer = globalVariables.x + globalVariables.y
 
-                if answer < 1000:
+                if globalVariables.answer < 1000:
                     possibleAnswer = True
 
             if operation == "subtract":
-                x = randomInRange(rangeMin, rangeMax)
-                y = randomInRange(rangeMin, rangeMax)
+                globalVariables.x = randomInRange(rangeMin, rangeMax)
+                globalVariables.y = randomInRange(rangeMin, rangeMax)
 
-                if x >= y:
-                    answer = x - y
+                if globalVariables.x >= globalVariables.y:
+                    globalVariables.answer = globalVariables.x - globalVariables.y
                     possibleAnswer = True
                 else:
-                    temp = x
-                    x = y
-                    y = temp
-                    answer = x - y
+                    temp = globalVariables.x
+                    globalVariables.x = globalVariables.y
+                    globalVariables.y = temp
+                    globalVariables.answer = globalVariables.x - globalVariables.y
                     possibleAnswer = True
 
             if operation == "multiply":
-                x = randomInRange(rangeMin, rangeMax)
-                y = randomInRange(rangeMin, rangeMax)
-                answer = x * y
+                globalVariables.x = randomInRange(rangeMin, rangeMax)
+                globalVariables.y = randomInRange(rangeMin, rangeMax)
+                globalVariables.answer = globalVariables.x * globalVariables.y
                 possibleAnswer = True
 
             if operation == "divide":
-                x = randomInRange(rangeMin, rangeMax)
-                y = randomInRange(rangeMin, rangeMax)
+                globalVariables.x = randomInRange(rangeMin, rangeMax)
+                globalVariables.y = randomInRange(rangeMin, rangeMax)
 
-                if x >= y == 0:
-                    if x % y == 0:
-                        answer = x / y
+                if globalVariables.x >= globalVariables.y == 0:
+                    if globalVariables.x % globalVariables.y == 0:
+                        globalVariables.answer = globalVariables.x / globalVariables.y
                         possibleAnswer = True
                 else:
-                    temp = x
-                    x = y
-                    y = temp
+                    temp = globalVariables.x
+                    globalVariables.x = globalVariables.y
+                    globalVariables.y = temp
 
-                    if x % y == 0:
-                        answer = x / y
+                    if globalVariables.x % globalVariables.y == 0:
+                        globalVariables.answer = globalVariables.x / globalVariables.y
                         possibleAnswer = True
 
         # give the users all of the numbers of the equation except one and have them enter the missing number
@@ -128,63 +123,63 @@ def algo(op, level):
 
             if blank == 0:
                 if operation == "add":
-                    print("? + ", y, " = ", answer)
-                    expectedAnswer = x
+                    print("? + ", globalVariables.y, " = ", globalVariables.answer)
+                    expectedAnswer = globalVariables.x
                 if operation == "subtract":
-                    print("? - ", y, " = ", answer)
-                    expectedAnswer = x
+                    print("? - ", globalVariables.y, " = ", globalVariables.answer)
+                    expectedAnswer = globalVariables.x
                 if operation == "multiply":
-                    print("? * ", y, " = ", answer)
-                    expectedAnswer = x
+                    print("? * ", globalVariables.y, " = ", globalVariables.answer)
+                    expectedAnswer = globalVariables.x
                 if operation == "divide":
-                    print("? / ", y, " = ", answer)
-                    expectedAnswer = x
+                    print("? / ", globalVariables.y, " = ", globalVariables.answer)
+                    expectedAnswer = globalVariables.x
             elif blank == 1:
                 if operation == "add":
-                    print(x, " + ? = ", answer)
-                    expectedAnswer = y
+                    print(globalVariables.x, " + ? = ", globalVariables.answer)
+                    expectedAnswer = globalVariables.y
                 if operation == "subtract":
-                    print(x, " - ? = ", answer)
-                    expectedAnswer = y
+                    print(globalVariables.x, " - ? = ", globalVariables.answer)
+                    expectedAnswer = globalVariables.y
                 if operation == "multiply":
-                    print(x, " * ? = ", answer)
-                    expectedAnswer = y
+                    print(globalVariables.x, " * ? = ", globalVariables.answer)
+                    expectedAnswer = globalVariables.y
                 if operation == "divide":
-                    print(x, " / ? = ", answer)
-                    expectedAnswer = y
+                    print(globalVariables.x, " / ? = ", globalVariables.answer)
+                    expectedAnswer = globalVariables.y
             elif blank == 2:
                 if operation == "add":
-                    print(x, " + ", y, " = ?")
-                    expectedAnswer = answer
+                    print(globalVariables.x, " + ", globalVariables.y, " = ?")
+                    expectedAnswer = globalVariables.answer
                 if operation == "subtract":
-                    print(x, " - ", y, " = ?")
-                    expectedAnswer = answer
+                    print(globalVariables.x, " - ", globalVariables.y, " = ?")
+                    expectedAnswer = globalVariables.answer
                 if operation == "multiply":
-                    print(x, " * ", y, " = ?")
-                    expectedAnswer = answer
+                    print(globalVariables.x, " * ", globalVariables.y, " = ?")
+                    expectedAnswer = globalVariables.answer
                 if operation == "divide":
-                    print(x, " / ", y, " = ?")
-                    expectedAnswer = answer
+                    print(globalVariables.x, " / ", globalVariables.y, " = ?")
+                    expectedAnswer = globalVariables.answer
 
         else:
             blank = randomInRange(0, 3)
 
             if blank == 0:
                 if operation == "add":
-                    print("? + ", y, " + ", z, " = ", answer)
-                    expectedAnswer = x
+                    print("? + ", globalVariables.y, " + ", globalVariables.z, " = ", globalVariables.answer)
+                    expectedAnswer = globalVariables.x
             elif blank == 1:
                 if operation == "add":
-                    print(x, " + ? + ", z, " = ", answer)
-                    expectedAnswer = y
+                    print(globalVariables.x, " + ? + ", globalVariables.z, " = ", globalVariables.answer)
+                    expectedAnswer = globalVariables.y
             elif blank == 2:
                 if operation == "add":
-                    print(x, " + ", y, " + ? = ", answer)
-                    expectedAnswer = z
+                    print(globalVariables.x, " + ", globalVariables.y, " + ? = ", globalVariables.answer)
+                    expectedAnswer = globalVariables.z
             elif blank == 3:
                 if operation == "add":
-                    print(x, " + ", y, " + ", z, " = ?")
-                    expectedAnswer = answer
+                    print(globalVariables.x, " + ", globalVariables.y, " + ", globalVariables.z, " = ?")
+                    expectedAnswer = globalVariables.answer
 
         acceptableAnswer = False
 

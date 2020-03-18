@@ -8,17 +8,13 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.storage.jsonstore import JsonStore
 from os.path import join
+from kivy.graphics import Line
+from kivy.clock import Clock
 import algo
+import time
+import globalVariables
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
-
-level = None
-operation = None
-numOfVars = None
-x = None
-y = None
-z = None
-answer = None
 
 
 # Create a new db for just classrooms to avoid checking all users to save time
@@ -41,21 +37,25 @@ class TitlePage(Screen):
 
 
 class MinigamePage(Screen):
-
     levelNumber = StringProperty()
     operationType = StringProperty()
 
     def __init__(self, **kw):
         super().__init__(**kw)
-        self.levelNumber = ""
-        self.operationType = ""
 
     def on_enter(self, *args):
-        global level
-        global operation
 
-        self.levelNumber = str(level)
-        self.operationType = operation
+        self.levelNumber = str(globalVariables.level)
+        self.operationType = globalVariables.operation
+
+        # algo.initialize(globalVariables.operation, globalVariables.level)
+
+        # Clock.schedule_once(self.updateText, 2)
+        # algo.algo(globalVariables.operation, globalVariables.level)
+
+    def updateText(self, dt):
+        self.levelNumber = str(globalVariables.level)
+        self.operationType = "hello"
 
 
 class LoginPage(Screen):
@@ -185,11 +185,9 @@ class AdditionPage(Screen):
 
     def playGame(self, levelNumber):
         # algo.algo("add", levelNumber)
-        global level
-        global operation
 
-        level = levelNumber
-        operation = "add"
+        globalVariables.level = levelNumber
+        globalVariables.operation = "add"
 
         self.manager.current = 'minigame'
 
@@ -198,21 +196,33 @@ class SubtractionPage(Screen):
     playerXP = 600
 
     def playGame(self, levelNumber):
-        algo.algo("subtract", levelNumber)
+        # algo.algo("subtract", levelNumber)
+        globalVariables.level = levelNumber
+        globalVariables.operation = "subtract"
+
+        self.manager.current = 'minigame'
 
 
 class MultiplicationPage(Screen):
     playerXP = 600
 
     def playGame(self, levelNumber):
-        algo.algo("multiply", levelNumber)
+        # algo.algo("multiply", levelNumber)
+        globalVariables.level = levelNumber
+        globalVariables.operation = "multiply"
+
+        self.manager.current = 'minigame'
 
 
 class DivisionPage(Screen):
     playerXP = 600
 
     def playGame(self, levelNumber):
-        algo.algo("divide", levelNumber)
+        # algo.algo("divide", levelNumber)
+        globalVariables.level = levelNumber
+        globalVariables.operation = "divide"
+
+        self.manager.current = 'minigame'
 
 
 kv_file = Builder.load_file('fyp.kv')
@@ -224,4 +234,5 @@ class FYPApp(App):
 
 
 if __name__ == '__main__':
+    globalVariables.initialize()
     FYPApp().run()
