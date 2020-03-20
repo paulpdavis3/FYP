@@ -54,9 +54,10 @@ class MinigamePage(Screen):
         self.answer = str(0)
         self.levelNum = str(0)
         self.roundNum = str(0)
-        self.operator = str("+")
+        self.operator = str(0)
 
     def on_enter(self, *args):
+        algo.algo(globalVariables.operation, globalVariables.level)
         self.updateText()
 
     def updateText(self):
@@ -66,7 +67,14 @@ class MinigamePage(Screen):
         self.answer = str(globalVariables.answer)
         self.levelNum = str(globalVariables.level)
         self.roundNum = str(globalVariables.roundNumber)
-        self.operator = str(globalVariables.operation)
+        if globalVariables.operation == "add":
+            self.operator = str("+")
+        elif globalVariables.operation == "subtract":
+            self.operator = str("-")
+        if globalVariables.operation == "multiply":
+            self.operator = str("x")
+        elif globalVariables.operation == "divide":
+            self.operator = str("÷")
 
 
 class LoginPage(Screen):
