@@ -12,6 +12,7 @@ from kivy.graphics import Line
 from kivy.clock import Clock
 import algo
 import time
+import random
 import globalVariables
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
@@ -37,25 +38,35 @@ class TitlePage(Screen):
 
 
 class MinigamePage(Screen):
-    levelNumber = StringProperty()
-    operationType = StringProperty()
+    xNum = StringProperty()
+    yNum = StringProperty()
+    zNum = StringProperty()
+    answer = StringProperty()
+    levelNum = StringProperty()
+    roundNum = StringProperty()
+    operator = StringProperty()
 
     def __init__(self, **kw):
         super().__init__(**kw)
+        self.xNum = str(0)
+        self.yNum = str(0)
+        self.zNum = str(0)
+        self.answer = str(0)
+        self.levelNum = str(0)
+        self.roundNum = str(0)
+        self.operator = str("+")
 
     def on_enter(self, *args):
+        self.updateText()
 
-        self.levelNumber = str(globalVariables.level)
-        self.operationType = globalVariables.operation
-
-        # algo.initialize(globalVariables.operation, globalVariables.level)
-
-        # Clock.schedule_once(self.updateText, 2)
-        # algo.algo(globalVariables.operation, globalVariables.level)
-
-    def updateText(self, dt):
-        self.levelNumber = str(globalVariables.level)
-        self.operationType = "hello"
+    def updateText(self):
+        self.xNum = str(globalVariables.x)
+        self.yNum = str(globalVariables.y)
+        self.zNum = str(globalVariables.z)
+        self.answer = str(globalVariables.answer)
+        self.levelNum = str(globalVariables.level)
+        self.roundNum = str(globalVariables.roundNumber)
+        self.operator = str(globalVariables.operation)
 
 
 class LoginPage(Screen):

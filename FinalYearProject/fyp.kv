@@ -891,9 +891,40 @@ ScreenManagement:
 <MinigamePage>
     name: "minigame"
     canvas:
+        Color:
+            rgba: 1, 1, 1, 1
         Line:
+            width: 2
             points: (0, self.height*0.9, self.width, self.height*0.9)
+        Line:
+            width: 2
+            points: (self.width*0.4, self.height*0.45, self.width*0.6, self.height*0.45)
+    Label:
+        font_size: "20dp"
+        pos_hint: {'center_x': 0.9, 'center_y': 0.95}
+        text: "Level " + root.levelNum
+    Label:
+        font_size: "20dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+        text: "Round " + root.roundNum
 
     Label:
-        id: "poo"
-        text: root.operationType
+        font_size: "20dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+        text: root.xNum
+    Label:
+        font_size: "20dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+        text: root.yNum
+    Label:
+        font_size: "20dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        text: root.zNum
+    Label:
+        font_size: "20dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+        text: root.answer
+    Label:
+        font_size: "20dp"
+        pos_hint: {'center_x': 0.45, 'center_y': 0.5}
+        text: root.operator

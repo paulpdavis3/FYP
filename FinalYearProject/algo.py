@@ -9,7 +9,6 @@ def algo(op, level):
     difficulty = startingRange
     rangeMin = None
     rangeMax = None
-    numOfVariables = None
     correctAnswer = 0
     incorrectAnswer = 0
     blank = None
@@ -39,7 +38,7 @@ def algo(op, level):
 
         if operation == "add":
             # decide how many variables will be used in the equation
-            numOfVariables = randomInRange(3, 4)
+            numOfVariables = 3
 
             rangeMin = difficulty * 9
             rangeMax = difficulty * 99

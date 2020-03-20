@@ -2,7 +2,6 @@ def initialize():
 
     global level
     global operation
-    global numOfVars
     global roundNumber
     global x
     global y
@@ -10,8 +9,7 @@ def initialize():
     global answer
 
     level = 0
-    operation = None
-    numOfVars = 0
+    operation = "add"
     roundNumber = 0
     x = 0
     y = 0
