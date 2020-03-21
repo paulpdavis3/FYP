@@ -11,7 +11,6 @@ def algo(op, level):
     rangeMax = None
     correctAnswer = 0
     incorrectAnswer = 0
-    blank = None
     expectedAnswer = None
     userAnswer = None
     roundNum = 0
@@ -116,9 +115,9 @@ def algo(op, level):
 
     # give the users all of the numbers of the equation except one and have them enter the missing number
     if numOfVariables == 3:
-        blank = randomInRange(0, 2)
+        globalVariables.blank = randomInRange(0, 2)
 
-        if blank == 0:
+        if globalVariables.blank == 0:
             if operation == "add":
                 print("? + ", globalVariables.y, " = ", globalVariables.answer)
                 expectedAnswer = globalVariables.x
@@ -131,7 +130,7 @@ def algo(op, level):
             if operation == "divide":
                 print("? / ", globalVariables.y, " = ", globalVariables.answer)
                 expectedAnswer = globalVariables.x
-        elif blank == 1:
+        elif globalVariables.blank == 1:
             if operation == "add":
                 print(globalVariables.x, " + ? = ", globalVariables.answer)
                 expectedAnswer = globalVariables.y
@@ -144,7 +143,7 @@ def algo(op, level):
             if operation == "divide":
                 print(globalVariables.x, " / ? = ", globalVariables.answer)
                 expectedAnswer = globalVariables.y
-        elif blank == 2:
+        elif globalVariables.blank == 2:
             if operation == "add":
                 print(globalVariables.x, " + ", globalVariables.y, " = ?")
                 expectedAnswer = globalVariables.answer
@@ -159,21 +158,21 @@ def algo(op, level):
                 expectedAnswer = globalVariables.answer
 
     else:
-        blank = randomInRange(0, 3)
+        globalVariables.blank = randomInRange(0, 3)
 
-        if blank == 0:
+        if globalVariables.blank == 0:
             if operation == "add":
                 print("? + ", globalVariables.y, " + ", globalVariables.z, " = ", globalVariables.answer)
                 expectedAnswer = globalVariables.x
-        elif blank == 1:
+        elif globalVariables.blank == 1:
             if operation == "add":
                 print(globalVariables.x, " + ? + ", globalVariables.z, " = ", globalVariables.answer)
                 expectedAnswer = globalVariables.y
-        elif blank == 2:
+        elif globalVariables.blank == 2:
             if operation == "add":
                 print(globalVariables.x, " + ", globalVariables.y, " + ? = ", globalVariables.answer)
                 expectedAnswer = globalVariables.z
-        elif blank == 3:
+        elif globalVariables.blank == 3:
             if operation == "add":
                 print(globalVariables.x, " + ", globalVariables.y, " + ", globalVariables.z, " = ?")
                 expectedAnswer = globalVariables.answer

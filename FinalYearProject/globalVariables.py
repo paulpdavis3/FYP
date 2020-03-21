@@ -7,6 +7,7 @@ def initialize():
     global y
     global z
     global answer
+    global blank
 
     level = 0
     operation = "add"
@@ -15,4 +16,4 @@ def initialize():
     y = 0
     z = 0
     answer = 0
-
+    blank = 0

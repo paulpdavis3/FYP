@@ -61,10 +61,19 @@ class MinigamePage(Screen):
         self.updateText()
 
     def updateText(self):
-        self.xNum = str(globalVariables.x)
-        self.yNum = str(globalVariables.y)
-        self.zNum = str(globalVariables.z)
-        self.answer = str(globalVariables.answer)
+        if globalVariables.blank == 0:
+            self.xNum = str("?")
+        else:
+            self.xNum = str(globalVariables.x)
+        if globalVariables.blank == 1:
+            self.yNum = str("?")
+        else:
+            self.yNum = str(globalVariables.y)
+        if globalVariables.blank == 2:
+            self.answer = str("?")
+        else:
+            self.answer = str(globalVariables.answer)
+
         self.levelNum = str(globalVariables.level)
         self.roundNum = str(globalVariables.roundNumber)
         if globalVariables.operation == "add":
