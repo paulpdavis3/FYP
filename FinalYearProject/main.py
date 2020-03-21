@@ -45,6 +45,14 @@ class MinigamePage(Screen):
     levelNum = StringProperty()
     roundNum = StringProperty()
     operator = StringProperty()
+    potentialAnswer1 = StringProperty()
+    potentialAnswer2 = StringProperty()
+    potentialAnswer3 = StringProperty()
+    potentialAnswer4 = StringProperty()
+    expectedAnswer = 0
+    correctAnswers = 0
+    incorrectAnswers = 0
+
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -55,22 +63,26 @@ class MinigamePage(Screen):
         self.levelNum = str(0)
         self.roundNum = str(0)
         self.operator = str(0)
+        self.expectedAnswer = 0
 
     def on_enter(self, *args):
-        algo.algo(globalVariables.operation, globalVariables.level)
-        self.updateText()
+        globalVariables.roundNumber = 1
+        self.reinitialize()
 
     def updateText(self):
         if globalVariables.blank == 0:
             self.xNum = str("?")
+            self.expectedAnswer = globalVariables.x
         else:
             self.xNum = str(globalVariables.x)
         if globalVariables.blank == 1:
             self.yNum = str("?")
+            self.expectedAnswer = globalVariables.y
         else:
             self.yNum = str(globalVariables.y)
         if globalVariables.blank == 2:
             self.answer = str("?")
+            self.expectedAnswer = globalVariables.answer
         else:
             self.answer = str(globalVariables.answer)
 
@@ -85,6 +97,48 @@ class MinigamePage(Screen):
         elif globalVariables.operation == "divide":
             self.operator = str("÷")
 
+        randomNum = random.randrange(0, 4)
+
+        if randomNum == 0:
+            self.potentialAnswer1 = str(self.expectedAnswer)
+            self.potentialAnswer2 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer3 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer4 = str(self.expectedAnswer + random.randrange(-5, 5))
+        elif randomNum == 1:
+            self.potentialAnswer1 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer2 = str(self.expectedAnswer)
+            self.potentialAnswer3 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer4 = str(self.expectedAnswer + random.randrange(-5, 5))
+        elif randomNum == 2:
+            self.potentialAnswer1 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer2 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer3 = str(self.expectedAnswer)
+            self.potentialAnswer4 = str(self.expectedAnswer + random.randrange(-5, 5))
+        elif randomNum == 3:
+            self.potentialAnswer1 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer2 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer3 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer4 = str(self.expectedAnswer)
+
+    def checkAnswer(self, answer):
+        answer = int(answer)
+
+        if answer == self.expectedAnswer:
+            print("correct answer")
+        else:
+            print("incorrect answer")
+
+        globalVariables.roundNumber += 1
+
+        self.reinitialize()
+
+    def reinitialize(self):
+        if globalVariables.roundNumber > 10:
+            # end the minigame
+            pass
+        else:
+            algo.algo(globalVariables.operation, globalVariables.level)
+            self.updateText()
 
 class LoginPage(Screen):
     # gets the username and password if the person has logged in before

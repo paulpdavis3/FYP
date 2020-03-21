@@ -899,6 +899,12 @@ ScreenManagement:
         Line:
             width: 2
             points: (self.width*0.4, self.height*0.45, self.width*0.6, self.height*0.45)
+    Button:
+        size_hint: 0.15, 0.1
+        pos_hint: {'left': 1, 'top': 1}
+        on_release: print("are you sure you want to leave?")
+        background_normal: "x.png"
+        background_down: "xdown.png"
     Label:
         font_size: "20dp"
         pos_hint: {'center_x': 0.9, 'center_y': 0.95}
@@ -909,18 +915,58 @@ ScreenManagement:
         text: "Round " + root.roundNum
 
     Label:
-        font_size: "20dp"
+        font_size: "30dp"
         pos_hint: {'center_x': 0.5, 'center_y': 0.6}
         text: root.xNum
     Label:
-        font_size: "20dp"
+        font_size: "30dp"
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
         text: root.yNum
     Label:
-        font_size: "20dp"
+        font_size: "30dp"
         pos_hint: {'center_x': 0.5, 'center_y': 0.4}
         text: root.answer
     Label:
-        font_size: "20dp"
+        font_size: "30dp"
         pos_hint: {'center_x': 0.45, 'center_y': 0.5}
         text: root.operator
+    Button:
+        id: potentialAnswer1
+        size_hint: 0.2, 0.1
+        pos_hint: {'center_x': 0.2, 'center_y': 0.2}
+        on_release: root.checkAnswer(potentialAnswer1.text)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+        text: root.potentialAnswer1
+    Button:
+        id: potentialAnswer2
+        size_hint: 0.2, 0.1
+        pos_hint: {'center_x': 0.4, 'center_y': 0.2}
+        on_release: root.checkAnswer(potentialAnswer2.text)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+        text: root.potentialAnswer2
+    Button:
+        id: potentialAnswer3
+        size_hint: 0.2, 0.1
+        pos_hint: {'center_x': 0.6, 'center_y': 0.2}
+        on_release: root.checkAnswer(potentialAnswer3.text)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+        text: root.potentialAnswer3
+    Button:
+        id: potentialAnswer4
+        size_hint: 0.2, 0.1
+        pos_hint: {'center_x': 0.8, 'center_y': 0.2}
+        on_release: root.checkAnswer(potentialAnswer4.text)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+        text: root.potentialAnswer4
