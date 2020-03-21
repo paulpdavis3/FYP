@@ -13,6 +13,7 @@ ScreenManagement:
     MultiplicationPage:
     DivisionPage:
     MinigamePage:
+    ResultsPage:
 
 <TitlePage>:
     name: "title"
@@ -970,3 +971,24 @@ ScreenManagement:
         bold: True
         color: (1, 72/255, 72/255, 1)
         text: root.potentialAnswer4
+
+<ResultsPage>
+    name: "results"
+    Label:
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+        text: "You got " + root.correctAnswers + " out of 10 questions correct"
+    Label:
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+        text: "You earned " + root.xpEarned + "xp"
+    Button:
+        size_hint: 0.5, 0.3
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        on_release: app.root.current = 'play'
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "30dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+        text: "Return to Play Page"

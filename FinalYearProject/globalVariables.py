@@ -8,6 +8,8 @@ def initialize():
     global z
     global answer
     global blank
+    global correctAnswers
+    global incorrectAnswers
 
     level = 0
     operation = "add"
@@ -17,3 +19,5 @@ def initialize():
     z = 0
     answer = 0
     blank = 0
+    correctAnswers = 0
+    incorrectAnswers = 0

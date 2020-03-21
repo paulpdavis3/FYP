@@ -50,9 +50,6 @@ class MinigamePage(Screen):
     potentialAnswer3 = StringProperty()
     potentialAnswer4 = StringProperty()
     expectedAnswer = 0
-    correctAnswers = 0
-    incorrectAnswers = 0
-
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -66,6 +63,8 @@ class MinigamePage(Screen):
         self.expectedAnswer = 0
 
     def on_enter(self, *args):
+        globalVariables.correctAnswers = 0
+        globalVariables.incorrectAnswers = 0
         globalVariables.roundNumber = 1
         self.reinitialize()
 
@@ -121,12 +120,14 @@ class MinigamePage(Screen):
             self.potentialAnswer4 = str(self.expectedAnswer)
 
     def checkAnswer(self, answer):
-        answer = int(answer)
+        answer = float(answer)
 
         if answer == self.expectedAnswer:
             print("correct answer")
+            globalVariables.correctAnswers += 1
         else:
             print("incorrect answer")
+            globalVariables.incorrectAnswers += 1
 
         globalVariables.roundNumber += 1
 
@@ -134,11 +135,21 @@ class MinigamePage(Screen):
 
     def reinitialize(self):
         if globalVariables.roundNumber > 10:
-            # end the minigame
-            pass
+            self.manager.current = 'results'
         else:
             algo.algo(globalVariables.operation, globalVariables.level)
             self.updateText()
+
+
+class ResultsPage(Screen):
+    correctAnswers = StringProperty()
+    incorrectAnswers = StringProperty()
+    xpEarned = StringProperty()
+
+    def on_enter(self, *args):
+        self.correctAnswers = str(globalVariables.correctAnswers)
+        xpEarned = self.correctAnswers * 10  # * timerMultiplier which will be a multiplier if the user finishes under 30 seconds, if over 1 minute to answer all maybe 0.75 multiplier
+
 
 class LoginPage(Screen):
     # gets the username and password if the person has logged in before

@@ -15,8 +15,6 @@ def algo(op, level):
     userAnswer = None
     roundNum = 0
 
-    print(op, level)
-
     def randomInRange(min, max):
         return random.randrange(min, max + 1)
 
