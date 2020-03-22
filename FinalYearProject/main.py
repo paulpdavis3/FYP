@@ -269,23 +269,106 @@ class ProfilePage(Screen):
 
 
 class StudentClassroomPage(Screen):
-    classroom = "no classroom"
 
-    try:
-        ScreenManagement.store.get('credentials')['classroom']
-    except KeyError:
-        classroom = "no classroom"
+    classroom = ""
 
-    def deleteClassroom(self):
-        # replace classroom in JSON store with 0
-        # replace classroom in DB with 0
-        pass
+    def on_pre_enter(self, *args):
+        try:
+            ScreenManagement.store.get('credentials')['classroom']
+        except KeyError:
+            self.classroom = "no classroom"
+        else:
+            self.classroom = ScreenManagement.store.get('credentials')['classroom']
 
-    def joinClassroom(self):
-        # check the DB to see if the classroom name exists
-        # if it exists, add the classroom name to the students DB and to the JSON store of the device
-        # if it doesn't exist then write to the screen to check if the classroom definitely exists
-        pass
+        self.updatePage()
+
+    def updatePage(self):
+        self.classroom = ScreenManagement.store.get('credentials')['classroom']
+        if self.classroom == "no classroom":
+            self.ids.studentClassroomName.text = "No Classroom"
+            self.ids.studentLeaveClassroom.disabled = True
+            self.ids.studentJoinClassroom.disabled = False
+            self.ids.studentClassroomJoin.text = "Enter the name of the classroom you'd like to join"
+        else:
+            self.ids.studentClassroomName.text = self.classroom
+            self.ids.studentLeaveClassroom.disabled = False
+            self.ids.studentJoinClassroom.disabled = True
+            self.ids.studentClassroomJoin.text = "Press the button below to leave your current classroom"
+
+    def leaveClassroom(self, classroomName):
+        if self.checkClassroomLoop(classroomName) == -1:
+            print("Classroom doesn't exist")
+        else:
+            if self.leaveUserClassroomLoop(classroomName) == -1:
+                print("Unable to leave classroom from users data in database")
+            else:
+                print("Successfully left classroom from users info in db")
+
+            ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
+                                       password=ScreenManagement.store.get('credentials')['password'],
+                                       email=ScreenManagement.store.get('credentials')['email'],
+                                       teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                       classroom="no classroom",
+                                       add=ScreenManagement.store.get('credentials')['add'],
+                                       subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                       multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                       divide=ScreenManagement.store.get('credentials')['divide'])
+            print("Classroom Successfully Left")
+            self.updatePage()
+
+    def leaveUserClassroomLoop(self, classroomName):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    firebase.put('/users/' + index, 'classroom', "no classroom")
+                    return 1
+
+            return -1
+
+
+    def joinClassroom(self, classroomName):
+        if self.checkClassroomLoop(classroomName) == -1:
+            print("classroom doesn't exist")
+        else:
+            if self.joinUserClassroomLoop(classroomName) == -1:
+                print("Unable to join classroom in database")
+            else:
+                print("Successfully joined classroom in db")
+
+            ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
+                                       password=ScreenManagement.store.get('credentials')['password'],
+                                       email=ScreenManagement.store.get('credentials')['email'],
+                                       teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                       classroom=classroomName,
+                                       add=ScreenManagement.store.get('credentials')['add'],
+                                       subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                       multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                       divide=ScreenManagement.store.get('credentials')['divide'])
+            print("joined classroom successfully")
+            self.updatePage()
+
+    def checkClassroomLoop(self, classroomName):
+        while True:
+            results = firebase.get('/classrooms/', None)
+
+            for index in results:
+                if results[index]['classroomName'] == classroomName:
+                    return 1
+
+            return -1
+
+    def joinUserClassroomLoop(self, classroomName):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    firebase.put('/users/' + index, 'classroom', classroomName)
+                    return 1
+
+            return -1
 
 
 class TeacherClassroomPage(Screen):
@@ -355,7 +438,7 @@ class TeacherClassroomPage(Screen):
 
             for index in results:
                 if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
-                    firebase.put('/users/'+index, 'classroom', classroomName)
+                    firebase.put('/users/' + index, 'classroom', classroomName)
                     return 1
 
             return -1
@@ -400,10 +483,11 @@ class TeacherClassroomPage(Screen):
 
             for index in results:
                 if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
-                    firebase.put('/users/'+index, 'classroom', "no classroom")
+                    firebase.put('/users/' + index, 'classroom', "no classroom")
                     return 1
 
             return -1
+
 
 class PlayPage(Screen):
     pass
