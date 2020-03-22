@@ -118,29 +118,29 @@ ScreenManagement:
         font_size: self.width
     Label:
         text: 'Username'
-        pos_hint: {"center_x": 0.5, 'center_y':0.75}
+        pos_hint: {"center_x": 0.5, 'center_y':0.775}
         font_size: "20dp"
         size_hint: 0.5, 0.075
         bold: True
     TextInput:
         id: usernameRegister
-        pos_hint: {"center_x": 0.5, 'center_y':0.675}
+        pos_hint: {"center_x": 0.5, 'center_y':0.7}
         size_hint: 0.5, 0.075
         font_size: self.height * 0.5
     Label:
-        text: "Parent's Email"
-        pos_hint: {"center_x": 0.5, 'center_y':0.6}
+        text: "Email"
+        pos_hint: {"center_x": 0.5, 'center_y':0.625}
         font_size: "20dp"
         size_hint: 0.5, 0.075
         bold: True
     TextInput:
         id: emailRegister
-        pos_hint: {"center_x": 0.5, 'center_y':0.525}
+        pos_hint: {"center_x": 0.5, 'center_y':0.55}
         size_hint: 0.5, 0.075
         font_size: self.height * 0.5
     Label:
         text: 'Password'
-        pos_hint: {"center_x": 0.5, 'center_y':0.45}
+        pos_hint: {"center_x": 0.5, 'center_y':0.475}
         font_size: "20dp"
         size_hint: 0.5, 0.075
         bold: True
@@ -148,12 +148,22 @@ ScreenManagement:
         id: passwordRegister
         password: True
         allow_copy: False
-        pos_hint: {"center_x": 0.5, 'center_y':0.375}
+        pos_hint: {"center_x": 0.5, 'center_y':0.4}
         size_hint: 0.5, 0.075
         font_size: self.height * 0.5
+    CheckBox:
+        id: teacherCheckBox
+        color: 1, 1, 1, 1
+        pos_hint: {"center_x": 0.3, 'center_y':0.3125}
+        size_hint: 0.05, 0.05
+    Label:
+        text: "Check box if you are a teacher"
+        pos_hint: {"center_x": 0.5, 'center_y':0.3125}
+        bold: True
+        font_size: "20dp"
     Button:
         text: "Register"
-        on_release: root.checkPassword(usernameRegister.text, emailRegister.text, passwordRegister.text)
+        on_release: root.checkPassword(usernameRegister.text, emailRegister.text, passwordRegister.text, teacherCheckBox.active)
         pos_hint: {"center_x": 0.5, 'center_y':0.225}
         size_hint: 0.5, 0.15
         background_normal: "button.png"
@@ -395,16 +405,10 @@ ScreenManagement:
             size: self.parent.size
 
     Label:
-        pos_hint: {'center_x': 0.5, 'center_y': 0.9}
-        size_hint: 0.2, 0.2
-        font_size: root.width/10
-        text: "Student"
-
-    Label:
-        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        size_hint: 0.2, 0.2
-        font_size: root.width/10
-        text: "student"
+        id: teacherClassroomName
+        size_hint: 0.1, 0.1
+	    pos_hint: {"center_x": 0.5, 'center_y':0.9}
+        font_size: "30dp"
 
 <AdditionPage>:
     name: "addition"
@@ -418,6 +422,7 @@ ScreenManagement:
             x: self.parent.x
             size: self.parent.size
     Button:
+        id: addButton1
         text: "Level 1"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.85}
@@ -427,6 +432,7 @@ ScreenManagement:
         bold: True
         color: (1, 72/255, 72/255, 1)
     Button:
+        id: addButton2
         text: "Level 2"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.675}
@@ -436,8 +442,8 @@ ScreenManagement:
         background_disabled_normal: "buttonlocked.png"
         bold: True
         color: (1, 72/255, 72/255, 1)
-        disabled: True if root.playerXP < 100 else False
     Button:
+        id: addButton3
         text: "Level 3"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.5}
@@ -447,8 +453,8 @@ ScreenManagement:
         background_disabled_normal: "buttonlocked.png"
         bold: True
         color: (1, 72/255, 72/255, 1)
-        disabled: True if root.playerXP < 200 else False
     Button:
+        id: addButton4
         text: "Level 4"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.325}
@@ -458,8 +464,8 @@ ScreenManagement:
         background_disabled_normal: "buttonlocked.png"
         bold: True
         color: (1, 72/255, 72/255, 1)
-        disabled: True if root.playerXP < 300 else False
     Button:
+        id: addButton5
         text: "Level 5"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.15}
@@ -469,8 +475,8 @@ ScreenManagement:
         background_disabled_normal: "buttonlocked.png"
         bold: True
         color: (1, 72/255, 72/255, 1)
-        disabled: True if root.playerXP < 400 else False
     Button:
+        id: addButton6
         text: "Level 6"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.85}
@@ -480,8 +486,8 @@ ScreenManagement:
         background_disabled_normal: "buttonlocked.png"
         bold: True
         color: (1, 72/255, 72/255, 1)
-        disabled: True if root.playerXP < 500 else False
     Button:
+        id: addButton7
         text: "Level 7"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.675}
@@ -491,8 +497,8 @@ ScreenManagement:
         background_disabled_normal: "buttonlocked.png"
         bold: True
         color: (1, 72/255, 72/255, 1)
-        disabled: True if root.playerXP < 600 else False
     Button:
+        id: addButton8
         text: "Level 8"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.5}
@@ -502,8 +508,8 @@ ScreenManagement:
         background_disabled_normal: "buttonlocked.png"
         bold: True
         color: (1, 72/255, 72/255, 1)
-        disabled: True if root.playerXP < 700 else False
     Button:
+        id: addButton9
         text: "Level 9"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.325}
@@ -513,8 +519,8 @@ ScreenManagement:
         background_disabled_normal: "buttonlocked.png"
         bold: True
         color: (1, 72/255, 72/255, 1)
-        disabled: True if root.playerXP < 800 else False
     Button:
+        id: addButton10
         text: "Level 10"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.15}
@@ -524,7 +530,6 @@ ScreenManagement:
         background_disabled_normal: "buttonlocked.png"
         bold: True
         color: (1, 72/255, 72/255, 1)
-        disabled: True if root.playerXP < 900 else False
 
 <SubtractionPage>:
     name: "subtraction"
@@ -539,6 +544,7 @@ ScreenManagement:
             size: self.parent.size
 
     Button:
+        id: subtractButton1
         text: "Level 1"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.85}
@@ -548,6 +554,7 @@ ScreenManagement:
         bold: True
         color: (1, 72/255, 72/255, 1)
     Button:
+        id: subtractButton2
         text: "Level 2"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.675}
@@ -559,6 +566,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 100 else False
     Button:
+        id: subtractButton3
         text: "Level 3"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.5}
@@ -570,6 +578,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 200 else False
     Button:
+        id: subtractButton4
         text: "Level 4"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.325}
@@ -581,6 +590,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 300 else False
     Button:
+        id: subtractButton5
         text: "Level 5"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.15}
@@ -592,6 +602,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 400 else False
     Button:
+        id: subtractButton6
         text: "Level 6"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.85}
@@ -603,6 +614,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 500 else False
     Button:
+        id: subtractButton7
         text: "Level 7"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.675}
@@ -614,6 +626,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 600 else False
     Button:
+        id: subtractButton8
         text: "Level 8"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.5}
@@ -625,6 +638,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 700 else False
     Button:
+        id: subtractButton9
         text: "Level 9"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.325}
@@ -636,6 +650,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 800 else False
     Button:
+        id: subtractButton10
         text: "Level 10"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.15}
@@ -660,6 +675,7 @@ ScreenManagement:
             size: self.parent.size
 
     Button:
+        id: multiplyButton1
         text: "Level 1"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.85}
@@ -669,6 +685,7 @@ ScreenManagement:
         bold: True
         color: (1, 72/255, 72/255, 1)
     Button:
+        id: multiplyButton2
         text: "Level 2"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.675}
@@ -680,6 +697,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 100 else False
     Button:
+        id: multiplyButton3
         text: "Level 3"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.5}
@@ -691,6 +709,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 200 else False
     Button:
+        id: multiplyButton4
         text: "Level 4"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.325}
@@ -702,6 +721,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 300 else False
     Button:
+        id: multiplyButton5
         text: "Level 5"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.15}
@@ -713,6 +733,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 400 else False
     Button:
+        id: multiplyButton6
         text: "Level 6"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.85}
@@ -724,6 +745,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 500 else False
     Button:
+        id: multiplyButton7
         text: "Level 7"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.675}
@@ -735,6 +757,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 600 else False
     Button:
+        id: multiplyButton8
         text: "Level 8"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.5}
@@ -746,6 +769,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 700 else False
     Button:
+        id: multiplyButton9
         text: "Level 9"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.325}
@@ -757,6 +781,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 800 else False
     Button:
+        id: multiplyButton10
         text: "Level 10"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.15}
@@ -781,6 +806,7 @@ ScreenManagement:
             size: self.parent.size
 
     Button:
+        id: divideButton1
         text: "Level 1"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.85}
@@ -790,6 +816,7 @@ ScreenManagement:
         bold: True
         color: (1, 72/255, 72/255, 1)
     Button:
+        id: divideButton2
         text: "Level 2"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.675}
@@ -801,6 +828,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 100 else False
     Button:
+        id: divideButton3
         text: "Level 3"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.5}
@@ -812,6 +840,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 200 else False
     Button:
+        id: divideButton4
         text: "Level 4"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.325}
@@ -823,6 +852,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 300 else False
     Button:
+        id: divideButton5
         text: "Level 5"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.15}
@@ -834,6 +864,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 400 else False
     Button:
+        id: divideButton6
         text: "Level 6"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.85}
@@ -845,6 +876,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 500 else False
     Button:
+        id: divideButton7
         text: "Level 7"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.675}
@@ -856,6 +888,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 600 else False
     Button:
+        id: divideButton8
         text: "Level 8"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.5}
@@ -867,6 +900,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 700 else False
     Button:
+        id: divideButton9
         text: "Level 9"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.325}
@@ -878,6 +912,7 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 800 else False
     Button:
+        id: divideButton10
         text: "Level 10"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.15}
@@ -980,8 +1015,12 @@ ScreenManagement:
         text: "You got " + root.correctAnswers + " out of 10 questions correct"
     Label:
         font_size: "30dp"
-        pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
         text: "You earned " + root.xpEarned + "xp"
+    Label:
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        text: "75xp away from next level"
     Button:
         size_hint: 0.5, 0.3
         pos_hint: {'center_x': 0.5, 'center_y': 0.2}
