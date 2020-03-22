@@ -289,7 +289,6 @@ class StudentClassroomPage(Screen):
 
 
 class TeacherClassroomPage(Screen):
-
     classroom = "no classroom"
 
     def on_pre_enter(self, *args):
@@ -300,11 +299,111 @@ class TeacherClassroomPage(Screen):
         else:
             self.classroom = ScreenManagement.store.get('credentials')['classroom']
 
-        if self.classroom == "no classroom":
-            pass
-        else:
-            pass
+        self.updatePage()
 
+    def updatePage(self):
+        self.classroom = ScreenManagement.store.get('credentials')['classroom']
+        if self.classroom == "no classroom":
+            self.ids.teacherClassroomName.text = "No Classroom"
+            self.ids.teacherDeleteClassroom.disabled = True
+            self.ids.teacherCreateClassroom.disabled = False
+            self.ids.teacherClassroomCreate.text = "Enter the name of your classroom below"
+        else:
+            self.ids.teacherClassroomName.text = self.classroom
+            self.ids.teacherDeleteClassroom.disabled = False
+            self.ids.teacherCreateClassroom.disabled = True
+            self.ids.teacherClassroomCreate.text = "Press the button below to delete your current classroom"
+
+    def createClassroom(self, classroomName):
+
+        if self.createClassroomLoop(classroomName) == -1:
+            print("classroom already exists")
+        else:
+            firebase.post('/classrooms',
+                          {'classroomName': classroomName})
+
+            if self.createUserClassroomLoop(classroomName) == -1:
+                print("Unable to add classroom to users data in database")
+            else:
+                print("Successfully added classroom to users info in db")
+
+            ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
+                                       password=ScreenManagement.store.get('credentials')['password'],
+                                       email=ScreenManagement.store.get('credentials')['email'],
+                                       teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                       classroom=classroomName,
+                                       add=ScreenManagement.store.get('credentials')['add'],
+                                       subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                       multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                       divide=ScreenManagement.store.get('credentials')['divide'])
+            print("created classroom successfully")
+            self.updatePage()
+
+    def createClassroomLoop(self, classroomName):
+        while True:
+            results = firebase.get('/classrooms/', None)
+
+            for index in results:
+                if results[index]['classroomName'] == classroomName:
+                    return -1
+
+            return 1
+
+    def createUserClassroomLoop(self, classroomName):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    firebase.put('/users/'+index, 'classroom', classroomName)
+                    return 1
+
+            return -1
+
+    def deleteClassroom(self, classroomName):
+
+        if self.deleteClassroomLoop(classroomName) == -1:
+            print("Unable to delete this classroom / Classroom doesn't exist")
+        else:
+
+            if self.deleteUserClassroomLoop(classroomName) == -1:
+                print("Unable to remove classroom from users data in database")
+            else:
+                print("Successfully removed classroom from users info in db")
+
+            ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
+                                       password=ScreenManagement.store.get('credentials')['password'],
+                                       email=ScreenManagement.store.get('credentials')['email'],
+                                       teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                       classroom="no classroom",
+                                       add=ScreenManagement.store.get('credentials')['add'],
+                                       subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                       multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                       divide=ScreenManagement.store.get('credentials')['divide'])
+            print("Classroom Successfully Deleted")
+            self.updatePage()
+
+    def deleteClassroomLoop(self, classroomName):
+        while True:
+            results = firebase.get('/classrooms/', None)
+
+            for index in results:
+                if results[index]['classroomName'] == classroomName:
+                    firebase.delete('/classrooms', index)
+                    return 1
+
+            return -1
+
+    def deleteUserClassroomLoop(self, classroomName):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    firebase.put('/users/'+index, 'classroom', "no classroom")
+                    return 1
+
+            return -1
 
 class PlayPage(Screen):
     pass
@@ -312,6 +411,7 @@ class PlayPage(Screen):
 
 class AdditionPage(Screen):
     playerXP = 0
+
     # if something breaks there was a block of code here that said:
     # addButton1 = ObjectProperty() ...
 

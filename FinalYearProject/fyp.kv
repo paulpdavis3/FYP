@@ -403,12 +403,40 @@ ScreenManagement:
 	        y: self.parent.y
             x: self.parent.x
             size: self.parent.size
-
     Label:
         id: teacherClassroomName
-        size_hint: 0.1, 0.1
 	    pos_hint: {"center_x": 0.5, 'center_y':0.9}
         font_size: "30dp"
+    Label:
+        id: teacherClassroomCreate
+	    pos_hint: {"center_x": 0.5, 'center_y':0.7}
+        font_size: "30dp"
+    TextInput:
+        id: teacherClassroomInput
+        pos_hint: {"center_x": 0.5, 'center_y':0.5}
+        size_hint: 0.5, 0.1
+    Button:
+        id: teacherDeleteClassroom
+        text: "Delete Current Classroom"
+        size_hint: 0.45, 0.15
+        pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+        on_release: root.deleteClassroom(teacherClassroomName.text)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: "buttondisabled.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+    Button:
+        id: teacherCreateClassroom
+        text: "Create Classroom"
+        size_hint: 0.45, 0.15
+        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        on_release: root.createClassroom(teacherClassroomInput.text)
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: "buttondisabled.png"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
 
 <AdditionPage>:
     name: "addition"
