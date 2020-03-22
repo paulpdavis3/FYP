@@ -19,6 +19,7 @@ import algo
 import time
 import random
 import globalVariables
+import math
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 
@@ -55,6 +56,7 @@ class MinigamePage(Screen):
     potentialAnswer3 = StringProperty()
     potentialAnswer4 = StringProperty()
     expectedAnswer = 0
+    timer = StringProperty()
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -67,11 +69,35 @@ class MinigamePage(Screen):
         self.operator = str(0)
         self.expectedAnswer = 0
 
+        self.timer = "00:00"
+
     def on_enter(self, *args):
         globalVariables.correctAnswers = 0
         globalVariables.incorrectAnswers = 0
         globalVariables.roundNumber = 1
         self.reinitialize()
+        Clock.schedule_interval(self.incrementTimer, .1)
+        self.incrementTimer(0)
+        self.startTimer()
+
+    def incrementTimer(self, interval):
+        if globalVariables.seconds == 59:
+            globalVariables.seconds = 0
+            globalVariables.minutes += 1
+
+        if globalVariables.seconds > 9:
+            self.timer = "0" + str(globalVariables.minutes) + ":" + str(round(globalVariables.seconds))
+        else:
+            self.timer = "0" + str(globalVariables.minutes) + ":0" + str(round(globalVariables.seconds))
+
+        globalVariables.seconds += .1
+
+    def startTimer(self):
+        Clock.unschedule(self.incrementTimer)
+        Clock.schedule_interval(self.incrementTimer, .1)
+
+    def stopTimer(self):
+        Clock.unschedule(self.incrementTimer)
 
     def updateText(self):
         if globalVariables.blank == 0:
@@ -140,6 +166,7 @@ class MinigamePage(Screen):
 
     def reinitialize(self):
         if globalVariables.roundNumber > 10:
+            self.stopTimer()
             self.manager.current = 'results'
         else:
             algo.algo(globalVariables.operation, globalVariables.level)
@@ -147,18 +174,68 @@ class MinigamePage(Screen):
 
 
 class ResultsPage(Screen):
-    correctAnswers = StringProperty()
-    incorrectAnswers = StringProperty()
-    xpEarned = StringProperty()
+    xpEarned = 0
 
     def __init__(self, **kw):
         super().__init__(**kw)
-        self.progressValue = 0
 
     def on_enter(self, *args):
-        self.progressValue = Clock.create_trigger(self.updateBar)
-        self.correctAnswers = str(globalVariables.correctAnswers)
-        xpEarned = self.correctAnswers * 10  # * timerMultiplier which will be a multiplier if the user finishes under 30 seconds, if over 1 minute to answer all maybe 0.75 multiplier
+        self.ids.resultsInfo.text = "You got " + str(globalVariables.correctAnswers) + " out of 10 questions correct"
+        xpEarned = ((int(globalVariables.correctAnswers) * 5) * (30/((globalVariables.minutes * 60) + globalVariables.seconds))) - (int(globalVariables.incorrectAnswers * 10))
+
+        if xpEarned < int(globalVariables.correctAnswers):
+            xpEarned = int(globalVariables.correctAnswers)
+
+        currentXP = ScreenManagement.store.get('credentials')[globalVariables.operation]
+
+        currentXP += xpEarned
+
+        if globalVariables.operation == "add":
+            ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
+                                       password=ScreenManagement.store.get('credentials')['password'],
+                                       email=ScreenManagement.store.get('credentials')['email'],
+                                       teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                       classroom=ScreenManagement.store.get('credentials')['classroom'],
+                                       add=currentXP,
+                                       subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                       multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                       divide=ScreenManagement.store.get('credentials')['divide'])
+        elif globalVariables.operation == "subtract":
+            ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
+                                       password=ScreenManagement.store.get('credentials')['password'],
+                                       email=ScreenManagement.store.get('credentials')['email'],
+                                       teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                       classroom=ScreenManagement.store.get('credentials')['classroom'],
+                                       add=ScreenManagement.store.get('credentials')['add'],
+                                       subtract=currentXP,
+                                       multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                       divide=ScreenManagement.store.get('credentials')['divide'])
+        elif globalVariables.operation == "multiply":
+            ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
+                                       password=ScreenManagement.store.get('credentials')['password'],
+                                       email=ScreenManagement.store.get('credentials')['email'],
+                                       teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                       classroom=ScreenManagement.store.get('credentials')['classroom'],
+                                       add=ScreenManagement.store.get('credentials')['add'],
+                                       subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                       multiply=currentXP,
+                                       divide=ScreenManagement.store.get('credentials')['divide'])
+        elif globalVariables.operation == "divide":
+            ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
+                                       password=ScreenManagement.store.get('credentials')['password'],
+                                       email=ScreenManagement.store.get('credentials')['email'],
+                                       teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                       classroom=ScreenManagement.store.get('credentials')['classroom'],
+                                       add=ScreenManagement.store.get('credentials')['add'],
+                                       subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                       multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                       divide=currentXP)
+        nextHundred = int(math.ceil(currentXP / 100.0)) * 100
+
+        if nextHundred % 100 == 0 and nextHundred != 1000:
+            nextHundred += 1
+
+        self.ids.progressBar.value = (currentXP/nextHundred) * 100
 
 
 class LoginPage(Screen):
@@ -269,7 +346,6 @@ class ProfilePage(Screen):
 
 
 class StudentClassroomPage(Screen):
-
     classroom = ""
 
     def on_pre_enter(self, *args):
@@ -326,7 +402,6 @@ class StudentClassroomPage(Screen):
                     return 1
 
             return -1
-
 
     def joinClassroom(self, classroomName):
         if self.checkClassroomLoop(classroomName) == -1:

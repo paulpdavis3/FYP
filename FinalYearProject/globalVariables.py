@@ -10,6 +10,8 @@ def initialize():
     global blank
     global correctAnswers
     global incorrectAnswers
+    global seconds
+    global minutes
 
     level = 0
     operation = "add"
@@ -21,3 +23,5 @@ def initialize():
     blank = 0
     correctAnswers = 0
     incorrectAnswers = 0
+    seconds = 0
+    minutes = 0
