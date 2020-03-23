@@ -75,13 +75,15 @@ class MinigamePage(Screen):
         globalVariables.correctAnswers = 0
         globalVariables.incorrectAnswers = 0
         globalVariables.roundNumber = 1
+        globalVariables.seconds = 0
+        globalVariables.minutes = 0
         self.reinitialize()
         Clock.schedule_interval(self.incrementTimer, .1)
         self.incrementTimer(0)
         self.startTimer()
 
     def incrementTimer(self, interval):
-        if globalVariables.seconds == 59:
+        if int(globalVariables.seconds) == 59:
             globalVariables.seconds = 0
             globalVariables.minutes += 1
 
@@ -190,6 +192,9 @@ class ResultsPage(Screen):
 
         currentXP += xpEarned
 
+        if currentXP > 1000:
+            currentXP = 1000
+
         if globalVariables.operation == "add":
             ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
                                        password=ScreenManagement.store.get('credentials')['password'],
@@ -230,12 +235,12 @@ class ResultsPage(Screen):
                                        subtract=ScreenManagement.store.get('credentials')['subtract'],
                                        multiply=ScreenManagement.store.get('credentials')['multiply'],
                                        divide=currentXP)
+
         nextHundred = int(math.ceil(currentXP / 100.0)) * 100
-
-        if nextHundred % 100 == 0 and nextHundred != 1000:
-            nextHundred += 1
-
-        self.ids.progressBar.value = (currentXP/nextHundred) * 100
+        print(currentXP, nextHundred)
+        self.ids.progressBar.value = (int(currentXP)/int(nextHundred)) * 100
+        self.ids.resultsOverallXP.text = "Overall XP for Addition: " + str(int(currentXP))
+        self.ids.resultsNextLevel.text = str(int(nextHundred - currentXP)) + "xp until next level"
 
 
 class LoginPage(Screen):
