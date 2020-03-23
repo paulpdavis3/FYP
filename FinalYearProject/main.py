@@ -32,7 +32,7 @@ firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 # https://www.youtube.com/watch?v=Q3HdZMtBQUw
 # post gives garbage string as parent and then multiple pieces of data go afterwards
 # firebase.post('/users', {'nameOfFirstData': 'actualDataValue', 'nameOfSecondData': 'actualDataValue'})
-# firebase.post('/users', {'username': 'testymctestface', 'email': 'test@test.test', 'password': '12345', 'teacher': 'yes', 'classroom': 'test'})
+# firebase.post('/users',{'username': 'uname', 'email': 'email', 'password': 'pword', 'teacher': "yes",'classroom': "teachersclassroom", 'add': 0, 'subtract': 0, 'multiply': 0, 'divide': 0})
 
 
 class ScreenManagement(ScreenManager):
@@ -300,7 +300,6 @@ class LoginPage(Screen):
         else:
             if self.updateJsonLoop(uname) == 1:
                 print("successfully updated JSON file")
-                print(ScreenManagement.store.get('credentials'))
             else:
                 print("couldn't update JSON file")
 
@@ -429,26 +428,37 @@ class TeacherProgressPage(Screen):
 
         for studentName in studentList:
             layout.add_widget(Button(on_release=partial(self.studentInfo, studentName),
+                                     text=studentName, font_size="30dp",
+                                     size_hint=(0.8, None),
                                      background_normal="button.png",
                                      background_down="buttondown.png",
-                                     font_size="30dp",
-                                     bold=True,
-                                     color=(1, 72/255, 72/255, 1),
-                                     text=studentName,
-                                     size_hint=(0.8, 0.2)))
+                                     color=(1, 72/255, 72/255, 1)))
         scrollview = ScrollView(size_hint=(1, None), size=(Window.width, Window.height))
         scrollview.add_widget(layout)
         self.view.add_widget(scrollview)
 
     def studentInfo(self, *args):
         globalVariables.studentName = args[0]
-        self.manager.current = 'studentInfo'
+        self.manager.current = 'studentinfo'
 
 
 class StudentInfoPage(Screen):
 
     def on_pre_enter(self, *args):
-        pass
+        if self.findStudent() == 1:
+            print("student found")
+        else:
+            print("Unable to find student")
+
+    def findStudent(self):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == globalVariables.studentName:
+                    return 1
+
+            return -1
 
 
 class AdditionProgressPage(Screen):
