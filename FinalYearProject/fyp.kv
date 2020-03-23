@@ -1121,9 +1121,48 @@ ScreenManagement:
 
 <AdditionProgressPage>
     name: 'additionProgress'
+    Button:
+		on_release: app.root.current = "play"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
+
 <SubtractionProgressPage>
     name: 'subtractionProgress'
+    Button:
+		on_release: app.root.current = "play"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
+
 <MultiplicationProgressPage>
     name: 'multiplicationProgress'
+    Button:
+		on_release: app.root.current = "play"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
+
 <DivisionProgressPage>
     name: 'divisionProgress'
+    Button:
+		on_release: app.root.current = "play"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size

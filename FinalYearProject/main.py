@@ -183,7 +183,9 @@ class ResultsPage(Screen):
 
     def on_enter(self, *args):
         self.ids.resultsInfo.text = "You got " + str(globalVariables.correctAnswers) + " out of 10 questions correct"
-        xpEarned = ((int(globalVariables.correctAnswers) * 5) * (30/((globalVariables.minutes * 60) + globalVariables.seconds))) - (int(globalVariables.incorrectAnswers * 10))
+        xpEarned = ((int(globalVariables.correctAnswers) * 5) * (
+                    30 / ((globalVariables.minutes * 60) + globalVariables.seconds))) - (
+                       int(globalVariables.incorrectAnswers * 10))
 
         if xpEarned < int(globalVariables.correctAnswers):
             xpEarned = int(globalVariables.correctAnswers)
@@ -205,6 +207,10 @@ class ResultsPage(Screen):
                                        subtract=ScreenManagement.store.get('credentials')['subtract'],
                                        multiply=ScreenManagement.store.get('credentials')['multiply'],
                                        divide=ScreenManagement.store.get('credentials')['divide'])
+            if self.updateUserDatabase("add", currentXP) == 1:
+                print("update db successfully")
+            else:
+                print("couldnt update db")
         elif globalVariables.operation == "subtract":
             ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
                                        password=ScreenManagement.store.get('credentials')['password'],
@@ -215,6 +221,10 @@ class ResultsPage(Screen):
                                        subtract=currentXP,
                                        multiply=ScreenManagement.store.get('credentials')['multiply'],
                                        divide=ScreenManagement.store.get('credentials')['divide'])
+            if self.updateUserDatabase("add", currentXP) == 1:
+                print("update db successfully")
+            else:
+                print("couldnt update db")
         elif globalVariables.operation == "multiply":
             ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
                                        password=ScreenManagement.store.get('credentials')['password'],
@@ -225,6 +235,10 @@ class ResultsPage(Screen):
                                        subtract=ScreenManagement.store.get('credentials')['subtract'],
                                        multiply=currentXP,
                                        divide=ScreenManagement.store.get('credentials')['divide'])
+            if self.updateUserDatabase("add", currentXP) == 1:
+                print("update db successfully")
+            else:
+                print("couldnt update db")
         elif globalVariables.operation == "divide":
             ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
                                        password=ScreenManagement.store.get('credentials')['password'],
@@ -235,12 +249,27 @@ class ResultsPage(Screen):
                                        subtract=ScreenManagement.store.get('credentials')['subtract'],
                                        multiply=ScreenManagement.store.get('credentials')['multiply'],
                                        divide=currentXP)
+            if self.updateUserDatabase("add", currentXP) == 1:
+                print("update db successfully")
+            else:
+                print("couldnt update db")
 
         nextHundred = int(math.ceil(currentXP / 100.0)) * 100
         print(currentXP, nextHundred)
-        self.ids.progressBar.value = (int(currentXP)/int(nextHundred)) * 100
+        self.ids.progressBar.value = (int(currentXP) / int(nextHundred)) * 100
         self.ids.resultsOverallXP.text = "Overall XP for Addition: " + str(int(currentXP))
         self.ids.resultsNextLevel.text = str(int(nextHundred - currentXP)) + "xp until next level"
+
+    def updateUserDatabase(self, operator, xp):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    firebase.put('/users/' + index, operator, xp)
+                    return 1
+
+            return -1
 
 
 class LoginPage(Screen):
@@ -343,6 +372,22 @@ class MainPage(Screen):
 
 
 class ProgressPage(Screen):
+    pass
+
+
+class AdditionProgressPage(Screen):
+    pass
+
+
+class SubtractionProgressPage(Screen):
+    pass
+
+
+class MultiplicationProgressPage(Screen):
+    pass
+
+
+class DivisionProgressPage(Screen):
     pass
 
 
