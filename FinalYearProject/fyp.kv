@@ -1221,7 +1221,7 @@ ScreenManagement:
             size_hint: (1, None)
 
         Button:
-            on_release: app.root.current = "play"
+            on_release: app.root.current = "main"
             size_hint: 0.1, 0.1
             pos_hint: {"left": 1, 'top':1}
             Image:
@@ -1235,3 +1235,42 @@ ScreenManagement:
 
 <StudentInfoPage>
     name: 'studentinfo'
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            width: 2
+            points: (0, self.height*0.85, self.width, self.height*0.85)
+    Button:
+		on_release: root.goBack()
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
+    Label:
+        id: studentInfoTitle
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.925}
+    Label:
+        id: addition
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+    Label:
+        id: subtraction
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+    Label:
+        id: multiplication
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+    Label:
+        id: division
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+    Label:
+        id: overall
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}

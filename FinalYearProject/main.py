@@ -23,6 +23,10 @@ import math
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
+import matplotlib
+# matplotlib.use('module://../../kivy/ext/mpl/backend_kivy')
+import numpy as np
+import matplotlib.pyplot as plt
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 
@@ -410,8 +414,12 @@ class StudentProgressPage(Screen):
 class TeacherProgressPage(Screen):
     view = ObjectProperty(None)
 
+    check = 0
+
     def on_pre_enter(self, *args):
-        Clock.schedule_once(self.createScrollview)
+        if self.check == 0:
+            self.check = 1
+            Clock.schedule_once(self.createScrollview)
 
     def createScrollview(self, dt):
 
@@ -420,7 +428,8 @@ class TeacherProgressPage(Screen):
         results = firebase.get('/users/', None)
 
         for index in results:
-            if results[index]['classroom'] == ScreenManagement.store.get('credentials')['classroom'] and results[index]['username'] != ScreenManagement.store.get('credentials')['username']:
+            if results[index]['classroom'] == ScreenManagement.store.get('credentials')['classroom'] and results[index][
+                'username'] != ScreenManagement.store.get('credentials')['username']:
                 studentList.append(results[index]['username'])
 
         layout = GridLayout(cols=1, spacing=10, size_hint_y=None)
@@ -432,13 +441,14 @@ class TeacherProgressPage(Screen):
                                      size_hint=(0.8, None),
                                      background_normal="button.png",
                                      background_down="buttondown.png",
-                                     color=(1, 72/255, 72/255, 1)))
+                                     color=(1, 72 / 255, 72 / 255, 1)))
         scrollview = ScrollView(size_hint=(1, None), size=(Window.width, Window.height))
         scrollview.add_widget(layout)
         self.view.add_widget(scrollview)
 
     def studentInfo(self, *args):
         globalVariables.studentName = args[0]
+        Clock.unschedule(self.createScrollview)
         self.manager.current = 'studentinfo'
 
 
@@ -456,9 +466,18 @@ class StudentInfoPage(Screen):
 
             for index in results:
                 if results[index]['username'] == globalVariables.studentName:
+                    self.ids.studentInfoTitle.text = globalVariables.studentName + "'s Progress"
+                    self.ids.addition.text = "Total Addition XP: " + str(int(results[index]['add']))
+                    self.ids.subtraction.text = "Total Subtraction XP: " + str(int(results[index]['subtract']))
+                    self.ids.multiplication.text = "Total Multiplication XP: " + str(int(results[index]['multiply']))
+                    self.ids.division.text = "Total Division XP: " + str(int(results[index]['divide']))
+                    self.ids.overall.text = "Overall XP: " + str(int(results[index]['divide'])+(results[index]['multiply'])+(results[index]['subtract'])+int(results[index]['add']))
                     return 1
 
             return -1
+
+    def goBack(self):
+        self.manager.current = "teacherprogress"
 
 
 class AdditionProgressPage(Screen):
