@@ -14,6 +14,10 @@ ScreenManagement:
     DivisionPage:
     MinigamePage:
     ResultsPage:
+    AdditionProgressPage:
+    SubtractionProgressPage:
+    MultiplicationProgressPage:
+    DivisionProgressPage:
 
 <TitlePage>:
     name: "title"
@@ -255,8 +259,58 @@ ScreenManagement:
 	        y: self.parent.y
             x: self.parent.x
             size: self.parent.size
-	Label:
-	    text: "This is where the progress page will be"
+    Button:
+        size_hint: 0.75, 0.2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.825}
+        on_release: app.root.current = "additionProgress"
+        text: "Addition"
+        pos_hint: {"center_x": 0.5, 'center_y':0.8}
+        size_hint: 0.7, 0.2
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: 'buttondisabled.png'
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+    Button:
+        size_hint: 0.75, 0.2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+        on_release: app.root.current = "subtractionProgress"
+        text: "Subtraction"
+        pos_hint: {"center_x": 0.5, 'center_y':0.6}
+        size_hint: 0.7, 0.2
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: 'buttondisabled.png'
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+    Button:
+        size_hint: 0.75, 0.2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.375}
+        on_release: app.root.current = "multiplicationProgress"
+        text: "Multiplication"
+        pos_hint: {"center_x": 0.5, 'center_y':0.4}
+        size_hint: 0.7, 0.2
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: 'buttondisabled.png'
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+    Button:
+        size_hint: 0.75, 0.2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+        on_release: app.root.current = "divisionProgress"
+        text: "Division"
+        pos_hint: {"center_x": 0.5, 'center_y':0.2}
+        size_hint: 0.7, 0.2
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        background_disabled_normal: 'buttondisabled.png'
+        font_size: "20dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
 
 <ProfilePage>:
     name: "profile"
@@ -284,7 +338,6 @@ ScreenManagement:
 	        y: self.parent.y
             x: self.parent.x
             size: self.parent.size
-
     Button:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.825}
@@ -1065,3 +1118,12 @@ ScreenManagement:
         bold: True
         color: (1, 72/255, 72/255, 1)
         text: "Return to Play Page"
+
+<AdditionProgressPage>
+    name: 'additionProgress'
+<SubtractionProgressPage>
+    name: 'subtractionProgress'
+<MultiplicationProgressPage>
+    name: 'multiplicationProgress'
+<DivisionProgressPage>
+    name: 'divisionProgress'
