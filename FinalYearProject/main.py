@@ -1,5 +1,5 @@
 from kivy.app import App
-from kivy.properties import StringProperty, ObjectProperty
+from kivy.properties import StringProperty, ObjectProperty, partial
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang.builder import Builder
 from firebase import firebase
@@ -20,6 +20,9 @@ import time
 import random
 import globalVariables
 import math
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.button import Button
+from kivy.uix.scrollview import ScrollView
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 
@@ -184,7 +187,7 @@ class ResultsPage(Screen):
     def on_enter(self, *args):
         self.ids.resultsInfo.text = "You got " + str(globalVariables.correctAnswers) + " out of 10 questions correct"
         xpEarned = ((int(globalVariables.correctAnswers) * 5) * (
-                    30 / ((globalVariables.minutes * 60) + globalVariables.seconds))) - (
+                30 / ((globalVariables.minutes * 60) + globalVariables.seconds))) - (
                        int(globalVariables.incorrectAnswers * 10))
 
         if xpEarned < int(globalVariables.correctAnswers):
@@ -392,9 +395,60 @@ class MainPage(Screen):
             # go to create classroom
             self.manager.current = "teacherclassroom"
 
+    def goToProgress(self):
+        if ScreenManagement.store.get('credentials')['teacher'] == "no":
+            # go to join classroom
+            self.manager.current = "studentprogress"
+        else:
+            # go to create classroom
+            self.manager.current = "teacherprogress"
 
-class ProgressPage(Screen):
+
+class StudentProgressPage(Screen):
     pass
+
+
+class TeacherProgressPage(Screen):
+    view = ObjectProperty(None)
+
+    def on_pre_enter(self, *args):
+        Clock.schedule_once(self.createScrollview)
+
+    def createScrollview(self, dt):
+
+        studentList = []
+
+        results = firebase.get('/users/', None)
+
+        for index in results:
+            if results[index]['classroom'] == ScreenManagement.store.get('credentials')['classroom'] and results[index]['username'] != ScreenManagement.store.get('credentials')['username']:
+                studentList.append(results[index]['username'])
+
+        layout = GridLayout(cols=1, spacing=10, size_hint_y=None)
+        layout.bind(minimum_height=layout.setter("height"))
+
+        for studentName in studentList:
+            layout.add_widget(Button(on_release=partial(self.studentInfo, studentName),
+                                     background_normal="button.png",
+                                     background_down="buttondown.png",
+                                     font_size="30dp",
+                                     bold=True,
+                                     color=(1, 72/255, 72/255, 1),
+                                     text=studentName,
+                                     size_hint=(0.8, 0.2)))
+        scrollview = ScrollView(size_hint=(1, None), size=(Window.width, Window.height))
+        scrollview.add_widget(layout)
+        self.view.add_widget(scrollview)
+
+    def studentInfo(self, *args):
+        globalVariables.studentName = args[0]
+        self.manager.current = 'studentInfo'
+
+
+class StudentInfoPage(Screen):
+
+    def on_pre_enter(self, *args):
+        pass
 
 
 class AdditionProgressPage(Screen):

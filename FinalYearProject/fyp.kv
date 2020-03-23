@@ -6,7 +6,7 @@ ScreenManagement:
     StudentClassroomPage:
     TeacherClassroomPage:
     ProfilePage:
-    ProgressPage:
+    StudentProgressPage:
     PlayPage:
     AdditionPage:
     SubtractionPage:
@@ -18,6 +18,8 @@ ScreenManagement:
     SubtractionProgressPage:
     MultiplicationProgressPage:
     DivisionProgressPage:
+    TeacherProgressPage:
+    StudentInfoPage:
 
 <TitlePage>:
     name: "title"
@@ -193,7 +195,6 @@ ScreenManagement:
         bold: True
         color: (1, 72/255, 72/255, 1)
 
-
 <MainPage>:
     name: 'main'
     Button:
@@ -202,7 +203,7 @@ ScreenManagement:
         size_hint: 0.15, 0.15
         background_normal: "logout.png"
         background_down: "logoutdown.png"
-        on_release: app.root.current = "login" # can change this to a pop up to make sure they want to logout
+        on_release: app.root.current = "login"
     Button:
         id: playButton
         text: "Play"
@@ -239,7 +240,7 @@ ScreenManagement:
     Button:
         id: ViewProgressButton
         text: "View Progress"
-        on_release: app.root.current = "progress"
+        on_release: root.goToProgress()
         pos_hint: {"center_x": 0.5, 'center_y':0.15}
         size_hint: 0.7, 0.2
         background_normal: "button.png"
@@ -248,8 +249,8 @@ ScreenManagement:
         bold: True
         color: (1, 72/255, 72/255, 1)
 
-<ProgressPage>:
-    name: "progress"
+<StudentProgressPage>:
+    name: "studentprogress"
     Button:
 		on_release: app.root.current = "main"
 		size_hint: 0.1, 0.1
@@ -1207,3 +1208,30 @@ ScreenManagement:
         font_size: "30dp"
         pos_hint: {'center_x': 0.5, 'center_y': 0.925}
         text: "Division"
+
+<TeacherProgressPage>
+    name: "teacherprogress"
+    view: view
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            size: (.64, .64)
+            size_hint: (1, None)
+
+        Button:
+            on_release: app.root.current = "play"
+            size_hint: 0.1, 0.1
+            pos_hint: {"left": 1, 'top':1}
+            Image:
+                source: "back.png"
+                y: self.parent.y
+                x: self.parent.x
+                size: self.parent.size
+
+        ScrollView:
+            id: view
+
+<StudentInfoPage>
+    name: 'studentinfo'
