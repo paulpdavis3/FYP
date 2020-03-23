@@ -295,11 +295,33 @@ class LoginPage(Screen):
         if self.loginLoop(uname, pword) == -1:
             print('this username and password do not match anything in the database')
         else:
-            # ScreenManagement.store.put('credentials', username=uname, password=pword,
-            #                            email=ScreenManagement.store.get('credentials')['email'],
-            #                            teacher=ScreenManagement.store.get('credentials')['teacher'],
-            #                            classroom=ScreenManagement.store.get('credentials')['classroom'])
+            if self.updateJsonLoop(uname) == 1:
+                print("successfully updated JSON file")
+                print(ScreenManagement.store.get('credentials'))
+            else:
+                print("couldn't update JSON file")
+
             self.manager.current = 'main'
+
+    def updateJsonLoop(self, username):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == username:
+                    ScreenManagement.store.put('credentials',
+                                               username=results[index]['username'],
+                                               password=results[index]['password'],
+                                               email=results[index]['email'],
+                                               teacher=results[index]['teacher'],
+                                               classroom=results[index]['classroom'],
+                                               add=results[index]['add'],
+                                               subtract=results[index]['subtract'],
+                                               multiply=results[index]['multiply'],
+                                               divide=results[index]['divide'])
+                    return 1
+
+            return -1
 
     def loginLoop(self, uname, pword):
         while True:
@@ -376,19 +398,23 @@ class ProgressPage(Screen):
 
 
 class AdditionProgressPage(Screen):
-    pass
+    def on_enter(self, *args):
+        pass
 
 
 class SubtractionProgressPage(Screen):
-    pass
+    def on_enter(self, *args):
+        pass
 
 
 class MultiplicationProgressPage(Screen):
-    pass
+    def on_enter(self, *args):
+        pass
 
 
 class DivisionProgressPage(Screen):
-    pass
+    def on_enter(self, *args):
+        pass
 
 
 class ProfilePage(Screen):
