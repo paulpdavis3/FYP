@@ -5,7 +5,8 @@ ScreenManagement:
     RegisterPage:
     StudentClassroomPage:
     TeacherClassroomPage:
-    ProfilePage:
+    StudentProfilePage:
+    TeacherProfilePage:
     StudentProgressPage:
     PlayPage:
     AdditionPage:
@@ -229,7 +230,7 @@ ScreenManagement:
     Button:
         id: viewProfileButton
         text: "View Profile"
-        on_release: app.root.current = "profile"
+        on_release: root.goToProfile()
         pos_hint: {"center_x": 0.5, 'center_y':0.3825}
         size_hint: 0.7, 0.2
         background_normal: "button.png"
@@ -264,7 +265,7 @@ ScreenManagement:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.825}
         on_release: app.root.current = "additionProgress"
-        text: "Addition"
+        text: "Addition Progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.8}
         size_hint: 0.7, 0.2
         background_normal: "button.png"
@@ -277,7 +278,7 @@ ScreenManagement:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.6}
         on_release: app.root.current = "subtractionProgress"
-        text: "Subtraction"
+        text: "Subtraction Progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.6}
         size_hint: 0.7, 0.2
         background_normal: "button.png"
@@ -290,7 +291,7 @@ ScreenManagement:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.375}
         on_release: app.root.current = "multiplicationProgress"
-        text: "Multiplication"
+        text: "Multiplication Progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.4}
         size_hint: 0.7, 0.2
         background_normal: "button.png"
@@ -303,7 +304,7 @@ ScreenManagement:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_release: app.root.current = "divisionProgress"
-        text: "Division"
+        text: "Division Progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.2}
         size_hint: 0.7, 0.2
         background_normal: "button.png"
@@ -313,8 +314,8 @@ ScreenManagement:
         bold: True
         color: (1, 72/255, 72/255, 1)
 
-<ProfilePage>:
-    name: "profile"
+<StudentProfilePage>:
+    name: "studentprofile"
     Button:
 		on_release: app.root.current = "main"
 		size_hint: 0.1, 0.1
@@ -324,9 +325,18 @@ ScreenManagement:
 	        y: self.parent.y
             x: self.parent.x
             size: self.parent.size
-	Label:
-	    text: "This is where the profile will be"
 
+<TeacherProfilePage>:
+    name: "teacherprofile"
+    Button:
+		on_release: app.root.current = "main"
+		size_hint: 0.1, 0.1
+	    pos_hint: {"left": 1, 'top':1}
+        Image:
+	        source: "back.png"
+	        y: self.parent.y
+            x: self.parent.x
+            size: self.parent.size
 
 <PlayPage>:
     name: "play"
@@ -343,7 +353,7 @@ ScreenManagement:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.825}
         on_release: app.root.current = "addition"
-        text: "Addition"
+        text: "Addition Minigame"
         pos_hint: {"center_x": 0.5, 'center_y':0.8}
         size_hint: 0.7, 0.2
         background_normal: "button.png"
@@ -356,7 +366,7 @@ ScreenManagement:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.6}
         on_release: app.root.current = "subtraction"
-        text: "Subtraction"
+        text: "Subtraction Minigame"
         pos_hint: {"center_x": 0.5, 'center_y':0.6}
         size_hint: 0.7, 0.2
         background_normal: "button.png"
@@ -369,7 +379,7 @@ ScreenManagement:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.375}
         on_release: app.root.current = "multiplication"
-        text: "Multiplication"
+        text: "Multiplication Minigame"
         pos_hint: {"center_x": 0.5, 'center_y':0.4}
         size_hint: 0.7, 0.2
         background_normal: "button.png"
@@ -382,7 +392,7 @@ ScreenManagement:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_release: app.root.current = "division"
-        text: "Division"
+        text: "Division Minigame"
         pos_hint: {"center_x": 0.5, 'center_y':0.2}
         size_hint: 0.7, 0.2
         background_normal: "button.png"
@@ -1129,7 +1139,7 @@ ScreenManagement:
             width: 2
             points: (0, self.height*0.85, self.width, self.height*0.85)
     Button:
-		on_release: app.root.current = "play"
+		on_release: app.root.current = "studentprogress"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -1141,6 +1151,20 @@ ScreenManagement:
         font_size: "30dp"
         pos_hint: {'center_x': 0.5, 'center_y': 0.925}
         text: "Addition"
+    Label:
+        id: studentAdditionInfo
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+    Button:
+        on_release: root.resetAddition()
+        size_hint: 0.8, 0.3
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "30dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+        text: "Reset Addition Progress"
 
 
 <SubtractionProgressPage>
@@ -1152,7 +1176,7 @@ ScreenManagement:
             width: 2
             points: (0, self.height*0.85, self.width, self.height*0.85)
     Button:
-		on_release: app.root.current = "play"
+		on_release: app.root.current = "studentprogress"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -1164,6 +1188,20 @@ ScreenManagement:
         font_size: "30dp"
         pos_hint: {'center_x': 0.5, 'center_y': 0.925}
         text: "Subtraction"
+    Label:
+        id: studentSubtractionInfo
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+    Button:
+        on_release: root.resetSubtraction()
+        size_hint: 0.8, 0.3
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "30dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+        text: "Reset Subtraction Progress"
 
 <MultiplicationProgressPage>
     name: 'multiplicationProgress'
@@ -1174,7 +1212,7 @@ ScreenManagement:
             width: 2
             points: (0, self.height*0.85, self.width, self.height*0.85)
     Button:
-		on_release: app.root.current = "play"
+		on_release: app.root.current = "studentprogress"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -1186,6 +1224,20 @@ ScreenManagement:
         font_size: "30dp"
         pos_hint: {'center_x': 0.5, 'center_y': 0.925}
         text: "Multiplication"
+    Label:
+        id: studentMultiplicationInfo
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+    Button:
+        on_release: root.resetMultiplication()
+        size_hint: 0.8, 0.3
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "30dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+        text: "Reset Multiplication Progress"
 
 <DivisionProgressPage>
     name: 'divisionProgress'
@@ -1196,7 +1248,7 @@ ScreenManagement:
             width: 2
             points: (0, self.height*0.85, self.width, self.height*0.85)
     Button:
-		on_release: app.root.current = "play"
+		on_release: app.root.current = "studentprogress"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -1208,6 +1260,20 @@ ScreenManagement:
         font_size: "30dp"
         pos_hint: {'center_x': 0.5, 'center_y': 0.925}
         text: "Division"
+    Label:
+        id: studentDivisionInfo
+        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+    Button:
+        on_release: root.resetDivision()
+        size_hint: 0.8, 0.3
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        background_normal: "button.png"
+        background_down: "buttondown.png"
+        font_size: "30dp"
+        bold: True
+        color: (1, 72/255, 72/255, 1)
+        text: "Reset Division Progress"
 
 <TeacherProgressPage>
     name: "teacherprogress"

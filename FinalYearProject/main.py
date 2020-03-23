@@ -406,6 +406,14 @@ class MainPage(Screen):
             # go to create classroom
             self.manager.current = "teacherprogress"
 
+    def goToProfile(self):
+        if ScreenManagement.store.get('credentials')['teacher'] == "no":
+            # go to join classroom
+            self.manager.current = "studentprofile"
+        else:
+            # go to create classroom
+            self.manager.current = "teacherprofile"
+
 
 class StudentProgressPage(Screen):
     pass
@@ -428,8 +436,7 @@ class TeacherProgressPage(Screen):
         results = firebase.get('/users/', None)
 
         for index in results:
-            if results[index]['classroom'] == ScreenManagement.store.get('credentials')['classroom'] and results[index][
-                'username'] != ScreenManagement.store.get('credentials')['username']:
+            if results[index]['classroom'] == ScreenManagement.store.get('credentials')['classroom'] and results[index]['username'] != ScreenManagement.store.get('credentials')['username']:
                 studentList.append(results[index]['username'])
 
         layout = GridLayout(cols=1, spacing=10, size_hint_y=None)
@@ -471,7 +478,9 @@ class StudentInfoPage(Screen):
                     self.ids.subtraction.text = "Total Subtraction XP: " + str(int(results[index]['subtract']))
                     self.ids.multiplication.text = "Total Multiplication XP: " + str(int(results[index]['multiply']))
                     self.ids.division.text = "Total Division XP: " + str(int(results[index]['divide']))
-                    self.ids.overall.text = "Overall XP: " + str(int(results[index]['divide'])+(results[index]['multiply'])+(results[index]['subtract'])+int(results[index]['add']))
+                    self.ids.overall.text = "Overall XP: " + str(
+                        int(results[index]['divide']) + (results[index]['multiply']) + (
+                            results[index]['subtract']) + int(results[index]['add']))
                     return 1
 
             return -1
@@ -482,26 +491,145 @@ class StudentInfoPage(Screen):
 
 class AdditionProgressPage(Screen):
     def on_enter(self, *args):
-        pass
+        self.reinitialize()
+
+    def reinitialize(self):
+        self.ids.studentAdditionInfo.text = "Total Addition XP: " + str(
+            int(ScreenManagement.store.get('credentials')['add']))
+
+    def resetAddition(self):
+        ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
+                                   password=ScreenManagement.store.get('credentials')['password'],
+                                   email=ScreenManagement.store.get('credentials')['email'],
+                                   teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                   classroom="no classroom",
+                                   add=0,
+                                   subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                   multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                   divide=ScreenManagement.store.get('credentials')['divide'])
+
+        self.resetAdditionDB()
+        self.reinitialize()
+
+    def resetAdditionDB(self):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    firebase.put('/users/' + index, 'add', 0)
+                    return 1
+            return -1
 
 
 class SubtractionProgressPage(Screen):
     def on_enter(self, *args):
-        pass
+        self.reinitialize()
+
+    def reinitialize(self):
+        self.ids.studentSubtractionInfo.text = "Total Subtraction XP: " + str(
+            int(ScreenManagement.store.get('credentials')['subtract']))
+
+    def resetSubtraction(self):
+        ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
+                                   password=ScreenManagement.store.get('credentials')['password'],
+                                   email=ScreenManagement.store.get('credentials')['email'],
+                                   teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                   classroom="no classroom",
+                                   add=ScreenManagement.store.get('credentials')['add'],
+                                   subtract=0,
+                                   multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                   divide=ScreenManagement.store.get('credentials')['divide'])
+
+        self.resetSubtractionDB()
+        self.reinitialize()
+
+    def resetSubtractionDB(self):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    firebase.put('/users/' + index, 'subtract', 0)
+                    return 1
+            return -1
 
 
 class MultiplicationProgressPage(Screen):
     def on_enter(self, *args):
-        pass
+        self.reinitialize()
+
+    def reinitialize(self):
+        self.ids.studentMultiplicationInfo.text = "Total Multiplication XP: " + str(
+            int(ScreenManagement.store.get('credentials')['multiply']))
+
+    def resetMultiplication(self):
+        ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
+                                   password=ScreenManagement.store.get('credentials')['password'],
+                                   email=ScreenManagement.store.get('credentials')['email'],
+                                   teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                   classroom="no classroom",
+                                   add=ScreenManagement.store.get('credentials')['add'],
+                                   subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                   multiply=0,
+                                   divide=ScreenManagement.store.get('credentials')['divide'])
+
+        self.resetMultiplicationDB()
+        self.reinitialize()
+
+    def resetMultiplicationDB(self):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    firebase.put('/users/' + index, 'multiply', 0)
+                    return 1
+            return -1
 
 
 class DivisionProgressPage(Screen):
     def on_enter(self, *args):
-        pass
+        self.reinitialize()
+
+    def reinitialize(self):
+        self.ids.studentDivisionInfo.text = "Total Division XP: " + str(
+            int(ScreenManagement.store.get('credentials')['divide']))
+
+    def resetDivision(self):
+        ScreenManagement.store.put('credentials', username=ScreenManagement.store.get('credentials')['username'],
+                                   password=ScreenManagement.store.get('credentials')['password'],
+                                   email=ScreenManagement.store.get('credentials')['email'],
+                                   teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                   classroom="no classroom",
+                                   add=ScreenManagement.store.get('credentials')['add'],
+                                   subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                   multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                   divide=0)
+
+        self.resetDivisionDB()
+        self.reinitialize()
+
+    def resetDivisionDB(self):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    firebase.put('/users/' + index, 'divide', 0)
+                    return 1
+            return -1
 
 
-class ProfilePage(Screen):
-    pass
+
+class StudentProfilePage(Screen):
+    def on_pre_enter(self, *args):
+        print("student profile page")
+
+
+class TeacherProfilePage(Screen):
+    def on_pre_enter(self, *args):
+        print("teacher profile page")
 
 
 class StudentClassroomPage(Screen):
