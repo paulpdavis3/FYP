@@ -59,26 +59,30 @@ ScreenManagement:
         text: "Login Page"
         pos_hint: {"center_x": 0.5, 'center_y':0.9}
         size_hint: 0.1, 0.1
-        bold: True
+        bold: False
+        font_name: 'Helvetica'
         font_size: self.width
     Label:
         text: 'Username'
         pos_hint: {"center_x": 0.5, 'center_y':0.775}
-        font_size: "20dp"
-        size_hint: 0.5, 0.1
-        bold: True
+        font_size: self.width/2
+        font_name: 'Helvetica'
+        size_hint: 0.1, 0.1
+        bold: False
     TextInput:
         id: usernameLogin
         text: root.username
         pos_hint: {"center_x": 0.5, 'center_y':0.7}
         size_hint: 0.5, 0.1
+        font_name: 'Helvetica'
         font_size: self.height * 0.5
     Label:
         text: 'Password'
         pos_hint: {"center_x": 0.5, 'center_y':0.575}
-        font_size: "20dp"
+        font_name: 'Helvetica'
+        font_size: "30dp"
         size_hint: 0.5, 0.1
-        bold: True
+        bold: False
     TextInput:
         id: passwordLogin
         text: root.password
@@ -86,6 +90,7 @@ ScreenManagement:
         allow_copy: False
         pos_hint: {"center_x": 0.5, 'center_y':0.5}
         size_hint: 0.5, 0.1
+        font_name: 'DejaVuSans'
         font_size: self.height * 0.8
     Button:
         text: "Login"
@@ -94,15 +99,17 @@ ScreenManagement:
         size_hint: 0.6, 0.2
         background_normal: "button.png"
         background_down: "buttondown.png"
-        font_size: "20dp"
-        bold: True
+        font_name: 'DejaVuSans'
+        font_size: "30dp"
+        bold: False
         color: (1, 72/255, 72/255, 1)
     Label:
         text: "Don't have an account? Click below"
         pos_hint: {"center_x": 0.5, 'center_y':0.2}
-        font_size: "20dp"
+        font_name: 'Helvetica'
+        font_size: "30dp"
         size_hint: 0.5, 0.1
-        bold: True
+        bold: False
     Button:
         text: "Register"
         on_release: app.root.current = "register"
@@ -110,8 +117,9 @@ ScreenManagement:
         size_hint: 0.6, 0.2
         background_normal: "button.png"
         background_down: "buttondown.png"
-        font_size: "20dp"
-        bold: True
+        font_size: "30dp"
+        font_name: 'DejaVuSans'
+        bold: False
         color: (1, 72/255, 72/255, 1)
 
 
@@ -121,34 +129,40 @@ ScreenManagement:
         text: "Register Page"
         pos_hint: {"center_x": 0.5, 'center_y':0.9}
         size_hint: 0.1, 0.1
+        font_name: 'Helvetica'
         bold: True
         font_size: self.width
     Label:
         text: 'Username'
         pos_hint: {"center_x": 0.5, 'center_y':0.775}
         font_size: "20dp"
+        font_name: 'Helvetica'
         size_hint: 0.5, 0.075
         bold: True
     TextInput:
         id: usernameRegister
         pos_hint: {"center_x": 0.5, 'center_y':0.7}
         size_hint: 0.5, 0.075
+        font_name: 'Helvetica'
         font_size: self.height * 0.5
     Label:
         text: "Email"
         pos_hint: {"center_x": 0.5, 'center_y':0.625}
         font_size: "20dp"
+        font_name: 'Helvetica'
         size_hint: 0.5, 0.075
         bold: True
     TextInput:
         id: emailRegister
         pos_hint: {"center_x": 0.5, 'center_y':0.55}
         size_hint: 0.5, 0.075
+        font_name: 'Helvetica'
         font_size: self.height * 0.5
     Label:
         text: 'Password'
         pos_hint: {"center_x": 0.5, 'center_y':0.475}
         font_size: "20dp"
+        font_name: 'Helvetica'
         size_hint: 0.5, 0.075
         bold: True
     TextInput:
@@ -157,6 +171,7 @@ ScreenManagement:
         allow_copy: False
         pos_hint: {"center_x": 0.5, 'center_y':0.4}
         size_hint: 0.5, 0.075
+        font_name: 'Helvetica'
         font_size: self.height * 0.5
     CheckBox:
         id: teacherCheckBox
@@ -167,6 +182,7 @@ ScreenManagement:
         text: "Check box if you are a teacher"
         pos_hint: {"center_x": 0.5, 'center_y':0.3125}
         bold: True
+        font_name: 'Helvetica'
         font_size: "20dp"
     Button:
         text: "Register"
@@ -176,12 +192,14 @@ ScreenManagement:
         background_normal: "button.png"
         background_down: "buttondown.png"
         font_size: "20dp"
+        font_name: 'Helvetica'
         bold: True
         color: (1, 72/255, 72/255, 1)
     Label:
         text: "Already have an account? Click below"
         pos_hint: {"center_x": 0.5, 'center_y':0.15}
         font_size: "20dp"
+        font_name: 'Helvetica'
         size_hint: 0.5, 0.075
         bold: True
 
@@ -193,6 +211,7 @@ ScreenManagement:
         background_normal: "button.png"
         background_down: "buttondown.png"
         font_size: "20dp"
+        font_name: 'Helvetica'
         bold: True
         color: (1, 72/255, 72/255, 1)
 
@@ -202,6 +221,7 @@ ScreenManagement:
         id: logoutButton
         pos_hint: {"center_x": 0.075, 'center_y':0.925}
         size_hint: 0.15, 0.15
+        font_name: 'Helvetica'
         background_normal: "logout.png"
         background_down: "logoutdown.png"
         on_release: app.root.current = "login"
@@ -211,6 +231,7 @@ ScreenManagement:
         on_release: app.root.current = "play"
         pos_hint: {"center_x": 0.5, 'center_y':0.85}
         size_hint: 0.7, 0.2
+        font_name: 'Helvetica'
         background_normal: "button.png"
         background_down: "buttondown.png"
         font_size: "20dp"
@@ -222,6 +243,7 @@ ScreenManagement:
         on_release: root.goToClassroom()
         pos_hint: {"center_x": 0.5, 'center_y':0.6125}
         size_hint: 0.7, 0.2
+        font_name: 'Helvetica'
         background_normal: "button.png"
         background_down: "buttondown.png"
         font_size: "20dp"
@@ -233,6 +255,7 @@ ScreenManagement:
         on_release: root.goToProfile()
         pos_hint: {"center_x": 0.5, 'center_y':0.3825}
         size_hint: 0.7, 0.2
+        font_name: 'Helvetica'
         background_normal: "button.png"
         background_down: "buttondown.png"
         font_size: "20dp"
@@ -244,6 +267,7 @@ ScreenManagement:
         on_release: root.goToProgress()
         pos_hint: {"center_x": 0.5, 'center_y':0.15}
         size_hint: 0.7, 0.2
+        font_name: 'Helvetica'
         background_normal: "button.png"
         background_down: "buttondown.png"
         font_size: "20dp"
@@ -268,6 +292,7 @@ ScreenManagement:
         text: "Addition Progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.8}
         size_hint: 0.7, 0.2
+        font_name: 'Helvetica'
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: 'buttondisabled.png'
@@ -281,6 +306,7 @@ ScreenManagement:
         text: "Subtraction Progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.6}
         size_hint: 0.7, 0.2
+        font_name: 'Helvetica'
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: 'buttondisabled.png'
@@ -294,6 +320,7 @@ ScreenManagement:
         text: "Multiplication Progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.4}
         size_hint: 0.7, 0.2
+        font_name: 'Helvetica'
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: 'buttondisabled.png'
@@ -307,6 +334,7 @@ ScreenManagement:
         text: "Division Progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.2}
         size_hint: 0.7, 0.2
+        font_name: 'Helvetica'
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: 'buttondisabled.png'
@@ -325,6 +353,16 @@ ScreenManagement:
 	        y: self.parent.y
             x: self.parent.x
             size: self.parent.size
+    Label:
+        id: username
+        font_size: "30dp"
+        font_name: 'Helvetica'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+    Button:
+        on_release:
+        size_hint: 0.75, 0.2
+        font_name: 'Helvetica'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
 
 <TeacherProfilePage>:
     name: "teacherprofile"
@@ -360,6 +398,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: 'buttondisabled.png'
         font_size: "20dp"
+        font_name: 'Helvetica'
         bold: True
         color: (1, 72/255, 72/255, 1)
     Button:
@@ -369,6 +408,7 @@ ScreenManagement:
         text: "Subtraction Minigame"
         pos_hint: {"center_x": 0.5, 'center_y':0.6}
         size_hint: 0.7, 0.2
+        font_name: 'Helvetica'
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: 'buttondisabled.png'
@@ -382,6 +422,7 @@ ScreenManagement:
         text: "Multiplication Minigame"
         pos_hint: {"center_x": 0.5, 'center_y':0.4}
         size_hint: 0.7, 0.2
+        font_name: 'Helvetica'
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: 'buttondisabled.png'
@@ -399,6 +440,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: 'buttondisabled.png'
         font_size: "20dp"
+        font_name: 'Helvetica'
         bold: True
         color: (1, 72/255, 72/255, 1)
 
@@ -417,14 +459,17 @@ ScreenManagement:
         id: studentClassroomName
 	    pos_hint: {"center_x": 0.5, 'center_y':0.9}
         font_size: "30dp"
+        font_name: 'Helvetica'
     Label:
         id: studentClassroomJoin
 	    pos_hint: {"center_x": 0.5, 'center_y':0.7}
         font_size: "30dp"
+        font_name: 'Helvetica'
     TextInput:
         id: studentClassroomInput
         pos_hint: {"center_x": 0.5, 'center_y':0.5}
         size_hint: 0.5, 0.1
+        font_name: 'Helvetica'
     Button:
         id: studentLeaveClassroom
         text: "Leave Current Classroom"
@@ -435,6 +480,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttondisabled.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: studentJoinClassroom
@@ -446,6 +492,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttondisabled.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
 
 <TeacherClassroomPage>:
@@ -463,14 +510,17 @@ ScreenManagement:
         id: teacherClassroomName
 	    pos_hint: {"center_x": 0.5, 'center_y':0.9}
         font_size: "30dp"
+        font_name: 'Helvetica'
     Label:
         id: teacherClassroomCreate
 	    pos_hint: {"center_x": 0.5, 'center_y':0.7}
         font_size: "30dp"
+        font_name: 'Helvetica'
     TextInput:
         id: teacherClassroomInput
         pos_hint: {"center_x": 0.5, 'center_y':0.5}
         size_hint: 0.5, 0.1
+        font_name: 'Helvetica'
     Button:
         id: teacherDeleteClassroom
         text: "Delete Current Classroom"
@@ -481,6 +531,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttondisabled.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: teacherCreateClassroom
@@ -492,6 +543,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttondisabled.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
 
 <AdditionPage>:
@@ -514,6 +566,7 @@ ScreenManagement:
         background_normal: "button.png"
         background_down: "buttondown.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: addButton2
@@ -525,6 +578,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: addButton3
@@ -536,6 +590,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: addButton4
@@ -547,6 +602,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: addButton5
@@ -558,6 +614,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: addButton6
@@ -569,6 +626,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: addButton7
@@ -580,6 +638,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: addButton8
@@ -591,6 +650,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: addButton9
@@ -602,6 +662,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: addButton10
@@ -613,6 +674,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
 
 <SubtractionPage>:
@@ -636,6 +698,7 @@ ScreenManagement:
         background_normal: "button.png"
         background_down: "buttondown.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: subtractButton2
@@ -647,6 +710,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 100 else False
     Button:
@@ -659,6 +723,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 200 else False
     Button:
@@ -671,6 +736,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 300 else False
     Button:
@@ -683,6 +749,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 400 else False
     Button:
@@ -695,6 +762,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 500 else False
     Button:
@@ -707,6 +775,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 600 else False
     Button:
@@ -719,6 +788,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 700 else False
     Button:
@@ -731,6 +801,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 800 else False
     Button:
@@ -743,6 +814,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 900 else False
 
@@ -767,6 +839,7 @@ ScreenManagement:
         background_normal: "button.png"
         background_down: "buttondown.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: multiplyButton2
@@ -778,6 +851,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 100 else False
     Button:
@@ -790,6 +864,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 200 else False
     Button:
@@ -802,6 +877,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 300 else False
     Button:
@@ -814,6 +890,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 400 else False
     Button:
@@ -826,6 +903,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 500 else False
     Button:
@@ -838,6 +916,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 600 else False
     Button:
@@ -850,6 +929,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 700 else False
     Button:
@@ -862,6 +942,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 800 else False
     Button:
@@ -874,6 +955,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 900 else False
 
@@ -898,6 +980,7 @@ ScreenManagement:
         background_normal: "button.png"
         background_down: "buttondown.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
     Button:
         id: divideButton2
@@ -909,6 +992,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 100 else False
     Button:
@@ -921,6 +1005,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 200 else False
     Button:
@@ -933,6 +1018,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 300 else False
     Button:
@@ -945,6 +1031,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 400 else False
     Button:
@@ -957,6 +1044,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 500 else False
     Button:
@@ -969,6 +1057,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 600 else False
     Button:
@@ -981,6 +1070,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 700 else False
     Button:
@@ -993,6 +1083,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 800 else False
     Button:
@@ -1005,6 +1096,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         disabled: True if root.playerXP < 900 else False
 
@@ -1022,36 +1114,44 @@ ScreenManagement:
     Label:
         text: root.timer
         font_size: "20dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.9, 'center_y': 0.85}
     Button:
         size_hint: 0.15, 0.1
         pos_hint: {'left': 1, 'top': 1}
+        font_name: 'Helvetica'
         on_release: print("are you sure you want to leave?")
         background_normal: "x.png"
         background_down: "xdown.png"
     Label:
         font_size: "20dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.9, 'center_y': 0.95}
         text: "Level " + root.levelNum
     Label:
         font_size: "20dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.95}
         text: "Round " + root.roundNum
 
     Label:
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.6}
         text: root.xNum
     Label:
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
         text: root.yNum
     Label:
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.4}
         text: root.answer
     Label:
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.45, 'center_y': 0.5}
         text: root.operator
     Button:
@@ -1062,6 +1162,7 @@ ScreenManagement:
         background_normal: "button.png"
         background_down: "buttondown.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         text: root.potentialAnswer1
     Button:
@@ -1072,6 +1173,7 @@ ScreenManagement:
         background_normal: "button.png"
         background_down: "buttondown.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         text: root.potentialAnswer2
     Button:
@@ -1082,6 +1184,7 @@ ScreenManagement:
         background_normal: "button.png"
         background_down: "buttondown.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         text: root.potentialAnswer3
     Button:
@@ -1092,6 +1195,7 @@ ScreenManagement:
         background_normal: "button.png"
         background_down: "buttondown.png"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         text: root.potentialAnswer4
 
@@ -1100,6 +1204,7 @@ ScreenManagement:
     Label:
         id: resultsInfo
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.9}
         text: ""
     ProgressBar:
@@ -1112,11 +1217,13 @@ ScreenManagement:
     Label:
         id: resultsNextLevel
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.6}
         text: ""
     Label:
         id: resultsOverallXP
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.45}
         text: ""
     Button:
@@ -1127,6 +1234,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         font_size: "30dp"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         text: "Return to Play Page"
 
@@ -1149,11 +1257,13 @@ ScreenManagement:
             size: self.parent.size
     Label:
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.925}
         text: "Addition"
     Label:
         id: studentAdditionInfo
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
     Button:
         on_release: root.resetAddition()
@@ -1163,6 +1273,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         font_size: "30dp"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         text: "Reset Addition Progress"
 
@@ -1186,11 +1297,13 @@ ScreenManagement:
             size: self.parent.size
     Label:
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.925}
         text: "Subtraction"
     Label:
         id: studentSubtractionInfo
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
     Button:
         on_release: root.resetSubtraction()
@@ -1200,6 +1313,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         font_size: "30dp"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         text: "Reset Subtraction Progress"
 
@@ -1222,11 +1336,13 @@ ScreenManagement:
             size: self.parent.size
     Label:
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.925}
         text: "Multiplication"
     Label:
         id: studentMultiplicationInfo
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
     Button:
         on_release: root.resetMultiplication()
@@ -1236,6 +1352,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         font_size: "30dp"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         text: "Reset Multiplication Progress"
 
@@ -1260,9 +1377,11 @@ ScreenManagement:
         font_size: "30dp"
         pos_hint: {'center_x': 0.5, 'center_y': 0.925}
         text: "Division"
+        font_name: 'Helvetica'
     Label:
         id: studentDivisionInfo
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
     Button:
         on_release: root.resetDivision()
@@ -1272,6 +1391,7 @@ ScreenManagement:
         background_down: "buttondown.png"
         font_size: "30dp"
         bold: True
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
         text: "Reset Division Progress"
 
@@ -1319,24 +1439,30 @@ ScreenManagement:
     Label:
         id: studentInfoTitle
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.925}
     Label:
         id: addition
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.75}
     Label:
         id: subtraction
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.6}
     Label:
         id: multiplication
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.45}
     Label:
         id: division
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.3}
     Label:
         id: overall
         font_size: "30dp"
+        font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}

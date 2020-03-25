@@ -23,10 +23,11 @@ import math
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
-import matplotlib
-# matplotlib.use('module://../../kivy/ext/mpl/backend_kivy')
-import numpy as np
-import matplotlib.pyplot as plt
+from kivy.core.text import LabelBase
+
+LabelBase.register(name="Helvetica",
+                   fn_regular="HelveticaTextbookLTRoman.ttf")
+
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 
@@ -264,7 +265,15 @@ class ResultsPage(Screen):
         nextHundred = int(math.ceil(currentXP / 100.0)) * 100
         print(currentXP, nextHundred)
         self.ids.progressBar.value = (int(currentXP) / int(nextHundred)) * 100
-        self.ids.resultsOverallXP.text = "Overall XP for Addition: " + str(int(currentXP))
+
+        if globalVariables.operation == "add":
+            self.ids.resultsOverallXP.text = "Overall XP for Addition: " + str(int(currentXP))
+        elif globalVariables.operation == "subtract":
+            self.ids.resultsOverallXP.text = "Overall XP for Subtraction: " + str(int(currentXP))
+        elif globalVariables.operation == "multiply":
+            self.ids.resultsOverallXP.text = "Overall XP for Multiplication: " + str(int(currentXP))
+        elif globalVariables.operation == "divide":
+            self.ids.resultsOverallXP.text = "Overall XP for Division: " + str(int(currentXP))
         self.ids.resultsNextLevel.text = str(int(nextHundred - currentXP)) + "xp until next level"
 
     def updateUserDatabase(self, operator, xp):
@@ -436,7 +445,8 @@ class TeacherProgressPage(Screen):
         results = firebase.get('/users/', None)
 
         for index in results:
-            if results[index]['classroom'] == ScreenManagement.store.get('credentials')['classroom'] and results[index]['username'] != ScreenManagement.store.get('credentials')['username']:
+            if results[index]['classroom'] == ScreenManagement.store.get('credentials')['classroom'] and results[index][
+                'username'] != ScreenManagement.store.get('credentials')['username']:
                 studentList.append(results[index]['username'])
 
         layout = GridLayout(cols=1, spacing=10, size_hint_y=None)
@@ -446,6 +456,7 @@ class TeacherProgressPage(Screen):
             layout.add_widget(Button(on_release=partial(self.studentInfo, studentName),
                                      text=studentName, font_size="30dp",
                                      size_hint=(0.8, None),
+                                     font_name='Helvetica',
                                      background_normal="button.png",
                                      background_down="buttondown.png",
                                      color=(1, 72 / 255, 72 / 255, 1)))
@@ -502,7 +513,7 @@ class AdditionProgressPage(Screen):
                                    password=ScreenManagement.store.get('credentials')['password'],
                                    email=ScreenManagement.store.get('credentials')['email'],
                                    teacher=ScreenManagement.store.get('credentials')['teacher'],
-                                   classroom="no classroom",
+                                   classroom=ScreenManagement.store.get('credentials'['classroom']),
                                    add=0,
                                    subtract=ScreenManagement.store.get('credentials')['subtract'],
                                    multiply=ScreenManagement.store.get('credentials')['multiply'],
@@ -535,7 +546,7 @@ class SubtractionProgressPage(Screen):
                                    password=ScreenManagement.store.get('credentials')['password'],
                                    email=ScreenManagement.store.get('credentials')['email'],
                                    teacher=ScreenManagement.store.get('credentials')['teacher'],
-                                   classroom="no classroom",
+                                   classroom=ScreenManagement.store.get('credentials'['classroom']),
                                    add=ScreenManagement.store.get('credentials')['add'],
                                    subtract=0,
                                    multiply=ScreenManagement.store.get('credentials')['multiply'],
@@ -568,7 +579,7 @@ class MultiplicationProgressPage(Screen):
                                    password=ScreenManagement.store.get('credentials')['password'],
                                    email=ScreenManagement.store.get('credentials')['email'],
                                    teacher=ScreenManagement.store.get('credentials')['teacher'],
-                                   classroom="no classroom",
+                                   classroom=ScreenManagement.store.get('credentials'['classroom']),
                                    add=ScreenManagement.store.get('credentials')['add'],
                                    subtract=ScreenManagement.store.get('credentials')['subtract'],
                                    multiply=0,
@@ -601,7 +612,7 @@ class DivisionProgressPage(Screen):
                                    password=ScreenManagement.store.get('credentials')['password'],
                                    email=ScreenManagement.store.get('credentials')['email'],
                                    teacher=ScreenManagement.store.get('credentials')['teacher'],
-                                   classroom="no classroom",
+                                   classroom=ScreenManagement.store.get('credentials'['classroom']),
                                    add=ScreenManagement.store.get('credentials')['add'],
                                    subtract=ScreenManagement.store.get('credentials')['subtract'],
                                    multiply=ScreenManagement.store.get('credentials')['multiply'],
@@ -621,16 +632,43 @@ class DivisionProgressPage(Screen):
             return -1
 
 
-
 class StudentProfilePage(Screen):
+
     def on_pre_enter(self, *args):
         print("student profile page")
+        self.ids.username.text = ScreenManagement.store.get('credentials')['username'] + "'s Profile"
 
 
 class TeacherProfilePage(Screen):
     def on_pre_enter(self, *args):
         print("teacher profile page")
+        self.ids.username.text = ScreenManagement.store.get('credentials')['username'] + "'s Profile"
 
+    def changeUsername(self, new):
+
+        old = ScreenManagement.store.get('credentials')['username']
+
+        self.changeUsernameLoop(old, new)
+
+        ScreenManagement.store.put('credentials', username=new,
+                                   password=ScreenManagement.store.get('credentials')['password'],
+                                   email=ScreenManagement.store.get('credentials')['email'],
+                                   teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                   classroom=ScreenManagement.store.get('credentials')['classroom'],
+                                   add=ScreenManagement.store.get('credentials')['add'],
+                                   subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                   multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                   divide=ScreenManagement.store.get('credentials')['divide'])
+
+    def changeUsernameLoop(self, oldUsername, newUsername):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == oldUsername:
+                    firebase.put('/users/' + index, 'username', newUsername)
+                    return 1
+            return -1
 
 class StudentClassroomPage(Screen):
     classroom = ""
