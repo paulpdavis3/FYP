@@ -1,3 +1,5 @@
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+
 ScreenManagement:
     TitlePage:
     MainPage:
@@ -40,13 +42,17 @@ ScreenManagement:
         font_size: "20dp"
         bold: True
         color: (1, 72/255, 72/255, 1)
-        on_release: app.root.current = "register"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "register"
 
     Button:
 	    pos_hint: {"center_x": 0.5, 'center_y':0.1}
 	    size_hint: 0.6, 0.2
         text: "Login"
-        on_release: app.root.current = "login"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "login"
 	    background_normal: "button.png"
 	    background_down: "buttondown.png"
         font_size: "20dp"
@@ -94,7 +100,9 @@ ScreenManagement:
         font_size: self.height * 0.8
     Button:
         text: "Login"
-        on_release: root.checkLogin(usernameLogin.text, passwordLogin.text)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.checkLogin(usernameLogin.text, passwordLogin.text)
         pos_hint: {"center_x": 0.5, 'center_y':0.325}
         size_hint: 0.6, 0.2
         background_normal: "button.png"
@@ -112,7 +120,9 @@ ScreenManagement:
         bold: False
     Button:
         text: "Register"
-        on_release: app.root.current = "register"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "register"
         pos_hint: {"center_x": 0.5, 'center_y':0.1}
         size_hint: 0.6, 0.2
         background_normal: "button.png"
@@ -186,7 +196,9 @@ ScreenManagement:
         font_size: "20dp"
     Button:
         text: "Register"
-        on_release: root.checkPassword(usernameRegister.text, emailRegister.text, passwordRegister.text, teacherCheckBox.active)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.checkPassword(usernameRegister.text, emailRegister.text, passwordRegister.text, teacherCheckBox.active)
         pos_hint: {"center_x": 0.5, 'center_y':0.225}
         size_hint: 0.5, 0.15
         background_normal: "button.png"
@@ -205,7 +217,9 @@ ScreenManagement:
 
     Button:
         text: "Login"
-        on_release: app.root.current = "login"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "login"
         pos_hint: {"center_x": 0.5, 'center_y':0.075}
         size_hint: 0.5, 0.15
         background_normal: "button.png"
@@ -224,11 +238,15 @@ ScreenManagement:
         font_name: 'Helvetica'
         background_normal: "logout.png"
         background_down: "logoutdown.png"
-        on_release: app.root.current = "login"
+        on_release:
+            app.root.transition = SlideTransition(direction="right")
+            app.root.current = "login"
     Button:
         id: playButton
         text: "Play"
-        on_release: app.root.current = "play"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "play"
         pos_hint: {"center_x": 0.5, 'center_y':0.85}
         size_hint: 0.7, 0.2
         font_name: 'Helvetica'
@@ -240,7 +258,9 @@ ScreenManagement:
     Button:
         id: classroomButton
         text: 'Classroom'
-        on_release: root.goToClassroom()
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.goToClassroom()
         pos_hint: {"center_x": 0.5, 'center_y':0.6125}
         size_hint: 0.7, 0.2
         font_name: 'Helvetica'
@@ -252,7 +272,9 @@ ScreenManagement:
     Button:
         id: viewProfileButton
         text: "View Profile"
-        on_release: root.goToProfile()
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.goToProfile()
         pos_hint: {"center_x": 0.5, 'center_y':0.3825}
         size_hint: 0.7, 0.2
         font_name: 'Helvetica'
@@ -264,7 +286,9 @@ ScreenManagement:
     Button:
         id: ViewProgressButton
         text: "View Progress"
-        on_release: root.goToProgress()
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.goToProgress()
         pos_hint: {"center_x": 0.5, 'center_y':0.15}
         size_hint: 0.7, 0.2
         font_name: 'Helvetica'
@@ -277,7 +301,9 @@ ScreenManagement:
 <StudentProgressPage>:
     name: "studentprogress"
     Button:
-		on_release: app.root.current = "main"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "main"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -288,7 +314,9 @@ ScreenManagement:
     Button:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.825}
-        on_release: app.root.current = "additionProgress"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "additionProgress"
         text: "Addition Progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.8}
         size_hint: 0.7, 0.2
@@ -302,7 +330,9 @@ ScreenManagement:
     Button:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.6}
-        on_release: app.root.current = "subtractionProgress"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "subtractionProgress"
         text: "Subtraction Progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.6}
         size_hint: 0.7, 0.2
@@ -316,7 +346,9 @@ ScreenManagement:
     Button:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.375}
-        on_release: app.root.current = "multiplicationProgress"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "multiplicationProgress"
         text: "Multiplication Progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.4}
         size_hint: 0.7, 0.2
@@ -330,7 +362,9 @@ ScreenManagement:
     Button:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
-        on_release: app.root.current = "divisionProgress"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "divisionProgress"
         text: "Division Progress"
         pos_hint: {"center_x": 0.5, 'center_y':0.2}
         size_hint: 0.7, 0.2
@@ -345,7 +379,9 @@ ScreenManagement:
 <StudentProfilePage>:
     name: "studentprofile"
     Button:
-		on_release: app.root.current = "main"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "main"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -367,7 +403,9 @@ ScreenManagement:
 <TeacherProfilePage>:
     name: "teacherprofile"
     Button:
-		on_release: app.root.current = "main"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "main"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -379,7 +417,9 @@ ScreenManagement:
 <PlayPage>:
     name: "play"
     Button:
-		on_release: app.root.current = "main"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "main"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -390,7 +430,9 @@ ScreenManagement:
     Button:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.825}
-        on_release: app.root.current = "addition"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "addition"
         text: "Addition Minigame"
         pos_hint: {"center_x": 0.5, 'center_y':0.8}
         size_hint: 0.7, 0.2
@@ -404,7 +446,9 @@ ScreenManagement:
     Button:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.6}
-        on_release: app.root.current = "subtraction"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "subtraction"
         text: "Subtraction Minigame"
         pos_hint: {"center_x": 0.5, 'center_y':0.6}
         size_hint: 0.7, 0.2
@@ -418,7 +462,9 @@ ScreenManagement:
     Button:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.375}
-        on_release: app.root.current = "multiplication"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "multiplication"
         text: "Multiplication Minigame"
         pos_hint: {"center_x": 0.5, 'center_y':0.4}
         size_hint: 0.7, 0.2
@@ -432,7 +478,9 @@ ScreenManagement:
     Button:
         size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
-        on_release: app.root.current = "division"
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            app.root.current = "division"
         text: "Division Minigame"
         pos_hint: {"center_x": 0.5, 'center_y':0.2}
         size_hint: 0.7, 0.2
@@ -447,7 +495,9 @@ ScreenManagement:
 <StudentClassroomPage>:
     name: "studentclassroom"
     Button:
-		on_release: app.root.current = "main"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "main"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -475,7 +525,9 @@ ScreenManagement:
         text: "Leave Current Classroom"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.5, 'center_y': 0.3}
-        on_release: root.leaveClassroom(studentClassroomName.text)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.leaveClassroom(studentClassroomName.text)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttondisabled.png"
@@ -487,7 +539,9 @@ ScreenManagement:
         text: "Join Classroom"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.5, 'center_y': 0.1}
-        on_release: root.joinClassroom(studentClassroomInput.text)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.joinClassroom(studentClassroomInput.text)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttondisabled.png"
@@ -498,7 +552,9 @@ ScreenManagement:
 <TeacherClassroomPage>:
     name: "teacherclassroom"
     Button:
-		on_release: app.root.current = "main"
+		on_release:
+		    app.root.transition = SlideTransition(direction="left")
+		    app.root.current = "main"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -526,7 +582,9 @@ ScreenManagement:
         text: "Delete Current Classroom"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.5, 'center_y': 0.3}
-        on_release: root.deleteClassroom(teacherClassroomName.text)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.deleteClassroom(teacherClassroomName.text)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttondisabled.png"
@@ -538,7 +596,9 @@ ScreenManagement:
         text: "Create Classroom"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.5, 'center_y': 0.1}
-        on_release: root.createClassroom(teacherClassroomInput.text)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.createClassroom(teacherClassroomInput.text)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttondisabled.png"
@@ -549,7 +609,9 @@ ScreenManagement:
 <AdditionPage>:
     name: "addition"
     Button:
-		on_release: app.root.current = "play"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "play"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -562,7 +624,9 @@ ScreenManagement:
         text: "Level 1"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.85}
-        on_release: root.playGame(1)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(1)
         background_normal: "button.png"
         background_down: "buttondown.png"
         bold: True
@@ -573,7 +637,9 @@ ScreenManagement:
         text: "Level 2"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.675}
-        on_release: root.playGame(2)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(2)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -585,7 +651,9 @@ ScreenManagement:
         text: "Level 3"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.5}
-        on_release: root.playGame(3)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(3)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -597,7 +665,9 @@ ScreenManagement:
         text: "Level 4"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.325}
-        on_release: root.playGame(4)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(4)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -609,7 +679,9 @@ ScreenManagement:
         text: "Level 5"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.15}
-        on_release: root.playGame(5)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(5)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -621,7 +693,9 @@ ScreenManagement:
         text: "Level 6"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.85}
-        on_release: root.playGame(6)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(6)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -633,7 +707,9 @@ ScreenManagement:
         text: "Level 7"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.675}
-        on_release: root.playGame(7)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(7)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -645,7 +721,9 @@ ScreenManagement:
         text: "Level 8"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.5}
-        on_release: root.playGame(8)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(8)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -657,7 +735,9 @@ ScreenManagement:
         text: "Level 9"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.325}
-        on_release: root.playGame(9)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(9)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -669,7 +749,9 @@ ScreenManagement:
         text: "Level 10"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.15}
-        on_release: root.playGame(10)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(10)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -680,7 +762,9 @@ ScreenManagement:
 <SubtractionPage>:
     name: "subtraction"
     Button:
-		on_release: app.root.current = "play"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "play"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -694,7 +778,9 @@ ScreenManagement:
         text: "Level 1"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.85}
-        on_release: root.playGame(1)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(1)
         background_normal: "button.png"
         background_down: "buttondown.png"
         bold: True
@@ -705,7 +791,9 @@ ScreenManagement:
         text: "Level 2"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.675}
-        on_release: root.playGame(2)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(2)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -718,7 +806,9 @@ ScreenManagement:
         text: "Level 3"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.5}
-        on_release: root.playGame(3)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(3)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -731,7 +821,9 @@ ScreenManagement:
         text: "Level 4"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.325}
-        on_release: root.playGame(4)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(4)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -744,7 +836,9 @@ ScreenManagement:
         text: "Level 5"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.15}
-        on_release: root.playGame(5)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(5)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -757,7 +851,9 @@ ScreenManagement:
         text: "Level 6"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.85}
-        on_release: root.playGame(6)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(6)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -770,7 +866,9 @@ ScreenManagement:
         text: "Level 7"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.675}
-        on_release: root.playGame(7)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(7)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -783,7 +881,9 @@ ScreenManagement:
         text: "Level 8"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.5}
-        on_release: root.playGame(8)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(8)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -796,7 +896,9 @@ ScreenManagement:
         text: "Level 9"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.325}
-        on_release: root.playGame(9)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(9)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -809,7 +911,9 @@ ScreenManagement:
         text: "Level 10"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.15}
-        on_release: root.playGame(10)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(10)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -821,7 +925,9 @@ ScreenManagement:
 <MultiplicationPage>:
     name: "multiplication"
     Button:
-		on_release: app.root.current = "play"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "play"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -835,7 +941,9 @@ ScreenManagement:
         text: "Level 1"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.85}
-        on_release: root.playGame(1)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(1)
         background_normal: "button.png"
         background_down: "buttondown.png"
         bold: True
@@ -846,7 +954,9 @@ ScreenManagement:
         text: "Level 2"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.675}
-        on_release: root.playGame(2)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(2)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -859,7 +969,9 @@ ScreenManagement:
         text: "Level 3"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.5}
-        on_release: root.playGame(3)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(3)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -872,7 +984,9 @@ ScreenManagement:
         text: "Level 4"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.325}
-        on_release: root.playGame(4)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(4)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -885,7 +999,9 @@ ScreenManagement:
         text: "Level 5"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.15}
-        on_release: root.playGame(5)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(5)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -898,7 +1014,9 @@ ScreenManagement:
         text: "Level 6"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.85}
-        on_release: root.playGame(6)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(6)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -911,7 +1029,9 @@ ScreenManagement:
         text: "Level 7"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.675}
-        on_release: root.playGame(7)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(7)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -924,7 +1044,9 @@ ScreenManagement:
         text: "Level 8"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.5}
-        on_release: root.playGame(8)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(8)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -937,7 +1059,9 @@ ScreenManagement:
         text: "Level 9"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.325}
-        on_release: root.playGame(9)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(9)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -950,7 +1074,9 @@ ScreenManagement:
         text: "Level 10"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.15}
-        on_release: root.playGame(10)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(10)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -962,7 +1088,9 @@ ScreenManagement:
 <DivisionPage>:
     name: "division"
     Button:
-		on_release: app.root.current = "play"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "play"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -976,7 +1104,9 @@ ScreenManagement:
         text: "Level 1"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.85}
-        on_release: root.playGame(1)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(1)
         background_normal: "button.png"
         background_down: "buttondown.png"
         bold: True
@@ -987,7 +1117,9 @@ ScreenManagement:
         text: "Level 2"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.675}
-        on_release: root.playGame(2)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(2)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -1000,7 +1132,9 @@ ScreenManagement:
         text: "Level 3"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.5}
-        on_release: root.playGame(3)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(3)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -1013,7 +1147,9 @@ ScreenManagement:
         text: "Level 4"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.325}
-        on_release: root.playGame(4)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(4)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -1026,7 +1162,9 @@ ScreenManagement:
         text: "Level 5"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.25, 'center_y': 0.15}
-        on_release: root.playGame(5)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(5)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -1039,7 +1177,9 @@ ScreenManagement:
         text: "Level 6"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.85}
-        on_release: root.playGame(6)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(6)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -1052,7 +1192,9 @@ ScreenManagement:
         text: "Level 7"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.675}
-        on_release: root.playGame(7)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(7)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -1065,7 +1207,9 @@ ScreenManagement:
         text: "Level 8"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.5}
-        on_release: root.playGame(8)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(8)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -1078,7 +1222,9 @@ ScreenManagement:
         text: "Level 9"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.325}
-        on_release: root.playGame(9)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(9)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -1091,7 +1237,9 @@ ScreenManagement:
         text: "Level 10"
         size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.75, 'center_y': 0.15}
-        on_release: root.playGame(10)
+        on_release:
+            app.root.transition = SlideTransition(direction="left")
+            root.playGame(10)
         background_normal: "button.png"
         background_down: "buttondown.png"
         background_disabled_normal: "buttonlocked.png"
@@ -1120,7 +1268,9 @@ ScreenManagement:
         size_hint: 0.15, 0.1
         pos_hint: {'left': 1, 'top': 1}
         font_name: 'Helvetica'
-        on_release: print("are you sure you want to leave?")
+        on_release:
+            app.root.transition = SlideTransition(direction="right")
+            print("are you sure you want to leave?")
         background_normal: "x.png"
         background_down: "xdown.png"
     Label:
@@ -1229,7 +1379,9 @@ ScreenManagement:
     Button:
         size_hint: 0.5, 0.3
         pos_hint: {'center_x': 0.5, 'center_y': 0.2}
-        on_release: app.root.current = 'play'
+        on_release:
+            app.root.transition = SlideTransition(direction="right")
+            app.root.current = 'play'
         background_normal: "button.png"
         background_down: "buttondown.png"
         font_size: "30dp"
@@ -1247,7 +1399,9 @@ ScreenManagement:
             width: 2
             points: (0, self.height*0.85, self.width, self.height*0.85)
     Button:
-		on_release: app.root.current = "studentprogress"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "studentprogress"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -1287,7 +1441,9 @@ ScreenManagement:
             width: 2
             points: (0, self.height*0.85, self.width, self.height*0.85)
     Button:
-		on_release: app.root.current = "studentprogress"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "studentprogress"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -1326,7 +1482,9 @@ ScreenManagement:
             width: 2
             points: (0, self.height*0.85, self.width, self.height*0.85)
     Button:
-		on_release: app.root.current = "studentprogress"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "studentprogress"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -1365,7 +1523,9 @@ ScreenManagement:
             width: 2
             points: (0, self.height*0.85, self.width, self.height*0.85)
     Button:
-		on_release: app.root.current = "studentprogress"
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    app.root.current = "studentprogress"
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
@@ -1407,7 +1567,9 @@ ScreenManagement:
             size_hint: (1, None)
 
         Button:
-            on_release: app.root.current = "main"
+            on_release:
+                app.root.transition = SlideTransition(direction="right")
+                app.root.current = "main"
             size_hint: 0.1, 0.1
             pos_hint: {"left": 1, 'top':1}
             Image:
@@ -1428,7 +1590,9 @@ ScreenManagement:
             width: 2
             points: (0, self.height*0.85, self.width, self.height*0.85)
     Button:
-		on_release: root.goBack()
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    root.goBack()
 		size_hint: 0.1, 0.1
 	    pos_hint: {"left": 1, 'top':1}
         Image:
