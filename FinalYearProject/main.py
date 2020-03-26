@@ -12,7 +12,7 @@ from os.path import join
 from kivy.uix.progressbar import ProgressBar
 from kivy.graphics import Line
 from kivy.clock import Clock
-from kivy.core.text import Label as CoreLabel
+from kivy.uix.label import Label
 from kivy.lang.builder import Builder
 from kivy.graphics import Color, Ellipse, Rectangle
 import algo
@@ -361,6 +361,15 @@ class RegisterPage(Screen):
         length = len(pword)
 
         if length < 8 or number is False or lowercase is False or capital is False:
+            popup = Popup(title='Error Message',
+                          title_color=[1, 72/255, 72/255, 1],
+                          separator_color=[1, 72/255, 72/255, 1],
+                          content=Label(halign='center', text='Make sure that your password is at least 8 \ncharacters long and contains \n1 uppercase letter and 1 number',
+                                        color=[1, 72/255, 72/255, 1]),
+                          size_hint=(None, None),
+                          size=(400, 400),
+                          background='errorMessage.png'
+                          ).open()
             print(
                 'Make sure that your password is at least 8 characters long and contains 1 uppercase letter and 1 number')
         else:
