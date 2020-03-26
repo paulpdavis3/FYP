@@ -24,10 +24,10 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
 from kivy.core.text import LabelBase
+from kivy.core.audio import SoundLoader
 
 LabelBase.register(name="Helvetica",
                    fn_regular="HelveticaTextbookLTRoman.ttf")
-
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 
@@ -76,6 +76,8 @@ class MinigamePage(Screen):
         self.roundNum = str(0)
         self.operator = str(0)
         self.expectedAnswer = 0
+        self.correctSound = SoundLoader.load("correct.wav")
+        self.incorrectSound = SoundLoader.load("incorrect.wav")
 
         self.timer = "00:00"
 
@@ -164,9 +166,11 @@ class MinigamePage(Screen):
         answer = float(answer)
 
         if answer == self.expectedAnswer:
+            self.correctSound.play()
             print("correct answer")
             globalVariables.correctAnswers += 1
         else:
+            self.incorrectSound.play()
             print("incorrect answer")
             globalVariables.incorrectAnswers += 1
 
@@ -669,6 +673,7 @@ class TeacherProfilePage(Screen):
                     firebase.put('/users/' + index, 'username', newUsername)
                     return 1
             return -1
+
 
 class StudentClassroomPage(Screen):
     classroom = ""
