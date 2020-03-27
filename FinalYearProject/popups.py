@@ -11,3 +11,47 @@ class LogOutPopup(BoxLayout):
         super(LogOutPopup, self).__init__(**kwargs)
         self.dialog = LogOutDialog()
         self.dialog.open()
+
+
+class UsernameAndPasswordDialog(Popup):
+    pass
+
+
+class UsernameAndPasswordPopup(BoxLayout):
+    def __init__(self, **kwargs):
+        super(UsernameAndPasswordPopup, self).__init__(**kwargs)
+        self.dialog = UsernameAndPasswordDialog()
+        self.dialog.open()
+
+
+class PasswordDialog(Popup):
+    pass
+
+
+class PasswordPopup(BoxLayout):
+    def __init__(self, **kwargs):
+        super(PasswordPopup, self).__init__(**kwargs)
+        self.dialog = PasswordDialog()
+        self.dialog.open()
+
+
+class EmailDialog(Popup):
+    pass
+
+
+class EmailPopup(BoxLayout):
+    def __init__(self, **kwargs):
+        super(EmailPopup, self).__init__(**kwargs)
+        self.dialog = EmailDialog()
+        self.dialog.open()
+
+
+class UsernameDialog(Popup):
+    pass
+
+
+class UsernamePopup(BoxLayout):
+    def __init__(self, **kwargs):
+        super(UsernamePopup, self).__init__(**kwargs)
+        self.dialog = UsernameDialog()
+        self.dialog.open()

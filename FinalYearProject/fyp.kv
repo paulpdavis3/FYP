@@ -1635,7 +1635,7 @@ ScreenManagement:
     id: logOutPopup
     title: ""
     separator_height: 0
-    size_hint: (0.8, 0.4)
+    size_hint: (0.8, 0.3)
     background: 'errorMessage.png'
 
     BoxLayout:
@@ -1643,15 +1643,78 @@ ScreenManagement:
         Label
             font_size: self.width * 0.04
             halign: 'center'
-            text: "This username and password \n don't match anything in our database"
+            text: "Are you sure you want to log out?"
             color: [1, 72 / 255, 72 / 255, 1]
         BoxLayout:
-            size_hint_y: 0.3
             Button:
+                background_normal: "buttonred.png"
+        	    background_down: "buttonreddown.png"
                 text: "Yes"
                 on_release:
                     logOutPopup.dismiss()
                     app.root.current = "login"
             Button:
+                background_normal: "buttonred.png"
+        	    background_down: "buttonreddown.png"
                 text: "No"
                 on_release: logOutPopup.dismiss()
+
+<UsernameAndPasswordDialog>:
+    id: usernameAndPasswordPopup
+    title: ""
+    separator_height: 0
+    size_hint: (0.8, 0.3)
+    background: 'errorMessage.png'
+
+    BoxLayout:
+        orientation: "vertical"
+        Label
+            font_size: self.width * 0.06
+            halign: 'center'
+            text: "This username and password \n don't match anything in our database"
+            color: [1, 72 / 255, 72 / 255, 1]
+
+<PasswordDialog>:
+    id: passwordPopup
+    title: ""
+    separator_height: 0
+    size_hint: (0.8, 0.3)
+    background: 'errorMessage.png'
+
+    BoxLayout:
+        orientation: "vertical"
+        Label
+            font_size: self.width * 0.05
+            halign: 'center'
+            text: "Make sure that your password \n is at least 8 characters long and \n contains 1 uppercase letter and 1 number"
+            color: [1, 72 / 255, 72 / 255, 1]
+
+<EmailDialog>:
+    id: emailPopup
+    title: ""
+    separator_height: 0
+    size_hint: (0.8, 0.3)
+    background: 'errorMessage.png'
+
+    BoxLayout:
+        orientation: "vertical"
+        Label
+            font_size: self.width * 0.06
+            halign: 'center'
+            text: "Sorry! This email is already \nregistered with another account"
+            color: [1, 72 / 255, 72 / 255, 1]
+
+<UsernameDialog>:
+    id: usernamePopup
+    title: ""
+    separator_height: 0
+    size_hint: (0.8, 0.3)
+    background: 'errorMessage.png'
+
+    BoxLayout:
+        orientation: "vertical"
+        Label
+            font_size: self.width * 0.06
+            halign: 'center'
+            text: "Sorry! This username is already \nregistered with another account"
+            color: [1, 72 / 255, 72 / 255, 1]

@@ -314,17 +314,8 @@ class LoginPage(Screen):
 
     def checkLogin(self, uname, pword):
         if self.loginLoop(uname, pword) == -1:
-            popup = Popup(title='Error Message',
-                          title_color=[1, 72 / 255, 72 / 255, 1],
-                          separator_color=[1, 72 / 255, 72 / 255, 1],
-                          content=Label(font_size=self.width * 0.04,
-                                        halign='center',
-                                        text="This username and password \ndon't match anything in our database",
-                                        color=[1, 72 / 255, 72 / 255, 1]),
-                          size_hint=(0.8, 0.4),
-                          background='errorMessage.png'
-                          ).open()
             print('this username and password do not match anything in the database')
+            return popups.UsernameAndPasswordPopup()
         else:
             if self.updateJsonLoop(uname) == 1:
                 print("successfully updated JSON file")
@@ -372,18 +363,10 @@ class RegisterPage(Screen):
         length = len(pword)
 
         if length < 8 or number is False or lowercase is False or capital is False:
-            popup = Popup(title='Error Message',
-                          title_color=[1, 72 / 255, 72 / 255, 1],
-                          separator_color=[1, 72 / 255, 72 / 255, 1],
-                          content=Label(font_size=self.width * 0.04,
-                                        halign='center',
-                                        text='Make sure that your password is at least 8 \ncharacters long and contains \n1 uppercase letter and 1 number',
-                                        color=[1, 72 / 255, 72 / 255, 1]),
-                          size_hint=(0.8, 0.4),
-                          background='errorMessage.png'
-                          ).open()
             print(
                 'Make sure that your password is at least 8 characters long and contains 1 uppercase letter and 1 number')
+            return popups.PasswordPopup()
+
         else:
             self.checkRegister(uname, email, pword, isTeacher)
 
@@ -414,29 +397,11 @@ class RegisterPage(Screen):
 
             for index in results:
                 if results[index]['username'] == uname:
-                    popup = Popup(title='Error Message',
-                                  title_color=[1, 72 / 255, 72 / 255, 1],
-                                  separator_color=[1, 72 / 255, 72 / 255, 1],
-                                  content=Label(font_size=self.width * 0.04,
-                                                halign='center',
-                                                text='Sorry! This username is already \nregistered with another account',
-                                                color=[1, 72 / 255, 72 / 255, 1]),
-                                  size_hint=(0.8, 0.4),
-                                  background='errorMessage.png'
-                                  ).open()
+                    popups.UsernamePopup()
                     print("this username is already taken")
                     return -1
                 elif results[index]['email'] == email:
-                    popup = Popup(title='Error Message',
-                                  title_color=[1, 72 / 255, 72 / 255, 1],
-                                  separator_color=[1, 72 / 255, 72 / 255, 1],
-                                  content=Label(font_size=self.width * 0.04,
-                                                halign='center',
-                                                text='Sorry! This email is already \nregistered with another account',
-                                                color=[1, 72 / 255, 72 / 255, 1]),
-                                  size_hint=(0.8, 0.4),
-                                  background='errorMessage.png'
-                                  ).open()
+                    popups.EmailPopup()
                     print("this email is already taken")
                     return -1
 
