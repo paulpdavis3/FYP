@@ -77,7 +77,7 @@ ScreenManagement:
     TextInput:
         id: usernameLogin
         text: root.username
-        pos_hint: {"center_x": 0.5, 'center_y':0.7}
+        pos_hint: {"center_x": 0.5, 'center_y':0.675}
         size_hint: 0.5, 0.1
         font_name: 'Helvetica'
         font_size: self.width*0.1
@@ -92,7 +92,7 @@ ScreenManagement:
         text: root.password
         password: True
         allow_copy: False
-        pos_hint: {"center_x": 0.5, 'center_y':0.5}
+        pos_hint: {"center_x": 0.5, 'center_y':0.475}
         size_hint: 0.5, 0.1
         font_name: 'Helvetica'
         font_size: self.width * 0.1
@@ -113,7 +113,7 @@ ScreenManagement:
         text: "Don't have an account? Click below"
         pos_hint: {"center_x": 0.5, 'center_y':0.2}
         font_name: 'Helvetica'
-        font_size: self.width*0.05
+        font_size: self.width*0.03
         bold: False
     Button:
         text: "Register"
@@ -134,43 +134,38 @@ ScreenManagement:
     Label:
         text: "Register Page"
         pos_hint: {"center_x": 0.5, 'center_y':0.9}
-        size_hint: 0.1, 0.1
         font_name: 'Helvetica'
         bold: True
-        font_size: self.width
+        font_size: self.width*0.1
     Label:
         text: 'Username'
         pos_hint: {"center_x": 0.5, 'center_y':0.775}
-        font_size: "20dp"
+        font_size: self.width*0.05
         font_name: 'Helvetica'
-        size_hint: 0.5, 0.075
         bold: True
     TextInput:
         id: usernameRegister
         pos_hint: {"center_x": 0.5, 'center_y':0.7}
         size_hint: 0.5, 0.075
         font_name: 'Helvetica'
-        font_size: self.height * 0.5
+        font_size: self.width * 0.1
     Label:
         text: "Email"
         pos_hint: {"center_x": 0.5, 'center_y':0.625}
-        font_size: "20dp"
+        font_size: self.width*0.05
         font_name: 'Helvetica'
-        size_hint: 0.5, 0.075
         bold: True
     TextInput:
         id: emailRegister
         pos_hint: {"center_x": 0.5, 'center_y':0.55}
         size_hint: 0.5, 0.075
         font_name: 'Helvetica'
-        font_size: self.height * 0.5
+        font_size: self.width * 0.1
     Label:
         text: 'Password'
         pos_hint: {"center_x": 0.5, 'center_y':0.475}
-        font_size: "20dp"
+        font_size: self.width*0.05
         font_name: 'Helvetica'
-        size_hint: 0.5, 0.075
-        bold: True
     TextInput:
         id: passwordRegister
         password: True
@@ -178,18 +173,17 @@ ScreenManagement:
         pos_hint: {"center_x": 0.5, 'center_y':0.4}
         size_hint: 0.5, 0.075
         font_name: 'Helvetica'
-        font_size: self.height * 0.5
+        font_size: self.width * 0.1
     CheckBox:
         id: teacherCheckBox
         color: 1, 1, 1, 1
-        pos_hint: {"center_x": 0.3, 'center_y':0.3125}
+        pos_hint: {"center_x": 0.25, 'center_y':0.3125}
         size_hint: 0.05, 0.05
     Label:
         text: "Check box if you are a teacher"
         pos_hint: {"center_x": 0.5, 'center_y':0.3125}
-        bold: True
         font_name: 'Helvetica'
-        font_size: "20dp"
+        font_size: self.width*0.03
     Button:
         text: "Register"
         on_release:
@@ -199,17 +193,14 @@ ScreenManagement:
         size_hint: 0.5, 0.15
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
-        font_size: "20dp"
+        font_size: self.width*0.1
         font_name: 'Helvetica'
-        bold: True
         color: (1, 72/255, 72/255, 1)
     Label:
         text: "Already have an account? Click below"
         pos_hint: {"center_x": 0.5, 'center_y':0.15}
-        font_size: "20dp"
+        font_size: self.width*0.03
         font_name: 'Helvetica'
-        size_hint: 0.5, 0.075
-        bold: True
 
     Button:
         text: "Login"
@@ -220,9 +211,8 @@ ScreenManagement:
         size_hint: 0.5, 0.15
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
-        font_size: "20dp"
+        font_size: self.width*0.1
         font_name: 'Helvetica'
-        bold: True
         color: (1, 72/255, 72/255, 1)
 
 <MainPage>:
@@ -247,12 +237,11 @@ ScreenManagement:
             app.root.transition = SlideTransition(direction="left")
             app.root.current = "play"
         pos_hint: {"center_x": 0.5, 'center_y':0.85}
-        size_hint: 0.7, 0.2
+        size_hint: 0.6, 0.15
         font_name: 'Helvetica'
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
-        font_size: "20dp"
-        bold: True
+        font_size: self.width*0.1
         color: (1, 72/255, 72/255, 1)
     Button:
         id: classroomButton
@@ -261,12 +250,11 @@ ScreenManagement:
             app.root.transition = SlideTransition(direction="left")
             root.goToClassroom()
         pos_hint: {"center_x": 0.5, 'center_y':0.6125}
-        size_hint: 0.7, 0.2
+        size_hint: 0.6, 0.15
         font_name: 'Helvetica'
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
-        font_size: "20dp"
-        bold: True
+        font_size: self.width*0.1
         color: (1, 72/255, 72/255, 1)
     Button:
         id: viewProfileButton
@@ -275,12 +263,11 @@ ScreenManagement:
             app.root.transition = SlideTransition(direction="left")
             root.goToProfile()
         pos_hint: {"center_x": 0.5, 'center_y':0.3825}
-        size_hint: 0.7, 0.2
+        size_hint: 0.6, 0.15
         font_name: 'Helvetica'
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
-        font_size: "20dp"
-        bold: True
+        font_size: self.width*0.1
         color: (1, 72/255, 72/255, 1)
     Button:
         id: ViewProgressButton
@@ -289,12 +276,11 @@ ScreenManagement:
             app.root.transition = SlideTransition(direction="left")
             root.goToProgress()
         pos_hint: {"center_x": 0.5, 'center_y':0.15}
-        size_hint: 0.7, 0.2
+        size_hint: 0.6, 0.15
         font_name: 'Helvetica'
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
-        font_size: "20dp"
-        bold: True
+        font_size: self.width*0.1
         color: (1, 72/255, 72/255, 1)
 
 <StudentProgressPage>:
