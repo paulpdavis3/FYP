@@ -220,10 +220,10 @@ ScreenManagement:
     Button:
         id: logoutButton
         pos_hint: {"left": 1, 'top':1}
-        size_hint: 0.2, 0.125
+        size_hint: 0.225, 0.125
         font_name: 'Helvetica'
         text: "< Login"
-	    font_size: self.width*0.15
+	    font_size: self.width*0.175
         color: (1, 72/255, 72/255, 1)
 	    background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
@@ -237,7 +237,7 @@ ScreenManagement:
             app.root.transition = SlideTransition(direction="left")
             app.root.current = "play"
         pos_hint: {"center_x": 0.5, 'center_y':0.85}
-        size_hint: 0.6, 0.15
+        size_hint: 0.6, 0.2
         font_name: 'Helvetica'
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
@@ -250,7 +250,7 @@ ScreenManagement:
             app.root.transition = SlideTransition(direction="left")
             root.goToClassroom()
         pos_hint: {"center_x": 0.5, 'center_y':0.6125}
-        size_hint: 0.6, 0.15
+        size_hint: 0.6, 0.2
         font_name: 'Helvetica'
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
@@ -263,7 +263,7 @@ ScreenManagement:
             app.root.transition = SlideTransition(direction="left")
             root.goToProfile()
         pos_hint: {"center_x": 0.5, 'center_y':0.3825}
-        size_hint: 0.6, 0.15
+        size_hint: 0.6, 0.2
         font_name: 'Helvetica'
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
@@ -276,7 +276,7 @@ ScreenManagement:
             app.root.transition = SlideTransition(direction="left")
             root.goToProgress()
         pos_hint: {"center_x": 0.5, 'center_y':0.15}
-        size_hint: 0.6, 0.15
+        size_hint: 0.6, 0.2
         font_name: 'Helvetica'
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
@@ -408,16 +408,15 @@ ScreenManagement:
 		on_release:
 		    app.root.transition = SlideTransition(direction="right")
 		    app.root.current = "main"
-		size_hint: 0.2, 0.125
+		size_hint: 0.225, 0.125
 	    pos_hint: {"left": 1, 'top':1}
         text: "< Main"
         font_name:'Helvetica'
-	    font_size: self.width*0.15
+	    font_size: self.width*0.175
         color: (1, 72/255, 72/255, 1)
 	    background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
     Button:
-        size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.825}
         on_release:
             app.root.transition = SlideTransition(direction="left")
@@ -428,12 +427,10 @@ ScreenManagement:
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
         background_disabled_normal: 'Images/buttondisabled.png'
-        font_size: "20dp"
+        font_size: self.width*0.08
         font_name: 'Helvetica'
-        bold: True
         color: (1, 72/255, 72/255, 1)
     Button:
-        size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.6}
         on_release:
             app.root.transition = SlideTransition(direction="left")
@@ -445,11 +442,9 @@ ScreenManagement:
         background_normal: "Images/button.png"
         background_down: "buttondown.png"
         background_disabled_normal: 'Images/buttondisabled.png'
-        font_size: "20dp"
-        bold: True
+        font_size: self.width*0.08
         color: (1, 72/255, 72/255, 1)
     Button:
-        size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.375}
         on_release:
             app.root.transition = SlideTransition(direction="left")
@@ -461,11 +456,9 @@ ScreenManagement:
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
         background_disabled_normal: 'Images/buttondisabled.png'
-        font_size: "20dp"
-        bold: True
+        font_size: self.width*0.08
         color: (1, 72/255, 72/255, 1)
     Button:
-        size_hint: 0.75, 0.2
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_release:
             app.root.transition = SlideTransition(direction="left")
@@ -476,9 +469,8 @@ ScreenManagement:
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
         background_disabled_normal: 'Images/buttondisabled.png'
-        font_size: "20dp"
+        font_size: self.width*0.08
         font_name: 'Helvetica'
-        bold: True
         color: (1, 72/255, 72/255, 1)
 
 <StudentClassroomPage>:
