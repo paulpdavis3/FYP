@@ -96,7 +96,7 @@ ScreenManagement:
         allow_copy: False
         pos_hint: {"center_x": 0.5, 'center_y':0.5}
         size_hint: 0.5, 0.1
-        font_name: 'DejaVuSans'
+        font_name: 'Helvetica'
         font_size: self.height * 0.8
     Button:
         text: "Login"
@@ -107,7 +107,7 @@ ScreenManagement:
         size_hint: 0.6, 0.2
         background_normal: "button.png"
         background_down: "buttondown.png"
-        font_name: 'DejaVuSans'
+        font_name: 'Helvetica'
         font_size: "30dp"
         bold: False
         color: (1, 72/255, 72/255, 1)
@@ -128,7 +128,7 @@ ScreenManagement:
         background_normal: "button.png"
         background_down: "buttondown.png"
         font_size: "30dp"
-        font_name: 'DejaVuSans'
+        font_name: 'Helvetica'
         bold: False
         color: (1, 72/255, 72/255, 1)
 
@@ -240,7 +240,7 @@ ScreenManagement:
         background_down: "logoutdown.png"
         on_release:
             app.root.transition = SlideTransition(direction="right")
-            app.root.current = "login"
+            root.logOut()
     Button:
         id: playButton
         text: "Play"
@@ -1630,3 +1630,28 @@ ScreenManagement:
         font_size: "30dp"
         font_name: 'Helvetica'
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+
+<LogOutDialog>:
+    id: logOutPopup
+    title: ""
+    separator_height: 0
+    size_hint: (0.8, 0.4)
+    background: 'errorMessage.png'
+
+    BoxLayout:
+        orientation: "vertical"
+        Label
+            font_size: self.width * 0.04
+            halign: 'center'
+            text: "This username and password \n don't match anything in our database"
+            color: [1, 72 / 255, 72 / 255, 1]
+        BoxLayout:
+            size_hint_y: 0.3
+            Button:
+                text: "Yes"
+                on_release:
+                    logOutPopup.dismiss()
+                    app.root.current = "login"
+            Button:
+                text: "No"
+                on_release: logOutPopup.dismiss()
