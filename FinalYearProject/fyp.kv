@@ -39,8 +39,9 @@ ScreenManagement:
 	    background_normal: "Images/button.png"
 	    background_down: "Images/buttondown.png"
         text: "Register"
-        font_size: "20dp"
-        bold: True
+        font_size: self.width*0.1
+        font_name: 'Helvetica'
+
         color: (1, 72/255, 72/255, 1)
         on_release:
             app.root.transition = SlideTransition(direction="left")
@@ -55,8 +56,8 @@ ScreenManagement:
             app.root.current = "login"
 	    background_normal: "Images/button.png"
 	    background_down: "Images/buttondown.png"
-        font_size: "20dp"
-        bold: True
+        font_size: self.width*0.1
+        font_name: 'Helvetica'
         color: (1, 72/255, 72/255, 1)
 
 <LoginPage>:
@@ -64,16 +65,14 @@ ScreenManagement:
     Label:
         text: "Login Page"
         pos_hint: {"center_x": 0.5, 'center_y':0.9}
-        size_hint: 0.1, 0.1
         bold: False
         font_name: 'Helvetica'
-        font_size: self.width
+        font_size: self.width*0.1
     Label:
         text: 'Username'
         pos_hint: {"center_x": 0.5, 'center_y':0.775}
-        font_size: self.width/2
+        font_size: self.width*0.05
         font_name: 'Helvetica'
-        size_hint: 0.1, 0.1
         bold: False
     TextInput:
         id: usernameLogin
@@ -81,13 +80,12 @@ ScreenManagement:
         pos_hint: {"center_x": 0.5, 'center_y':0.7}
         size_hint: 0.5, 0.1
         font_name: 'Helvetica'
-        font_size: self.height * 0.5
+        font_size: self.width*0.1
     Label:
         text: 'Password'
         pos_hint: {"center_x": 0.5, 'center_y':0.575}
         font_name: 'Helvetica'
-        font_size: "30dp"
-        size_hint: 0.5, 0.1
+        font_size: self.width*0.05
         bold: False
     TextInput:
         id: passwordLogin
@@ -97,7 +95,7 @@ ScreenManagement:
         pos_hint: {"center_x": 0.5, 'center_y':0.5}
         size_hint: 0.5, 0.1
         font_name: 'Helvetica'
-        font_size: self.height * 0.8
+        font_size: self.width * 0.1
     Button:
         text: "Login"
         on_release:
@@ -108,15 +106,14 @@ ScreenManagement:
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
         font_name: 'Helvetica'
-        font_size: "30dp"
+        font_size: self.width*0.1
         bold: False
         color: (1, 72/255, 72/255, 1)
     Label:
         text: "Don't have an account? Click below"
         pos_hint: {"center_x": 0.5, 'center_y':0.2}
         font_name: 'Helvetica'
-        font_size: "30dp"
-        size_hint: 0.5, 0.1
+        font_size: self.width*0.05
         bold: False
     Button:
         text: "Register"
@@ -127,9 +124,8 @@ ScreenManagement:
         size_hint: 0.6, 0.2
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
-        font_size: "30dp"
+        font_size: self.width*0.1
         font_name: 'Helvetica'
-        bold: False
         color: (1, 72/255, 72/255, 1)
 
 
