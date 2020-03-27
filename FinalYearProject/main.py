@@ -28,7 +28,7 @@ from kivy.core.text import LabelBase
 from kivy.core.audio import SoundLoader
 
 LabelBase.register(name="Helvetica",
-                   fn_regular="HelveticaTextbookLTRoman.ttf")
+                   fn_regular="Fonts/HelveticaTextbookLTRoman.ttf")
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 
