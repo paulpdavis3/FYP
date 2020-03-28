@@ -548,23 +548,23 @@ ScreenManagement:
         background_down: "Images/buttondown.png"
     Label:
         id: teacherClassroomName
-	    pos_hint: {"center_x": 0.5, 'center_y':0.9}
-        font_size: "30dp"
+	    pos_hint: {"center_x": 0.5, 'center_y':0.85}
+        font_size: self.width*0.05
         font_name: 'Helvetica'
     Label:
         id: teacherClassroomCreate
 	    pos_hint: {"center_x": 0.5, 'center_y':0.7}
-        font_size: "30dp"
+        font_size: self.width*0.035
         font_name: 'Helvetica'
     TextInput:
         id: teacherClassroomInput
         pos_hint: {"center_x": 0.5, 'center_y':0.5}
         size_hint: 0.5, 0.1
         font_name: 'Helvetica'
+        font_size: self.width * 0.075
     Button:
         id: teacherDeleteClassroom
         text: "Delete Current Classroom"
-        size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.5, 'center_y': 0.3}
         on_release:
             app.root.transition = SlideTransition(direction="left")
@@ -572,13 +572,13 @@ ScreenManagement:
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
         background_disabled_normal: "Images/buttondisabled.png"
-        bold: True
+        size_hint: 0.6, 0.2
         font_name: 'Helvetica'
+        font_size: self.width*0.07
         color: (1, 72/255, 72/255, 1)
     Button:
         id: teacherCreateClassroom
         text: "Create Classroom"
-        size_hint: 0.45, 0.15
         pos_hint: {'center_x': 0.5, 'center_y': 0.1}
         on_release:
             app.root.transition = SlideTransition(direction="left")
@@ -586,8 +586,9 @@ ScreenManagement:
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
         background_disabled_normal: "Images/buttondisabled.png"
-        bold: True
+        size_hint: 0.6, 0.2
         font_name: 'Helvetica'
+        font_size: self.width*0.07
         color: (1, 72/255, 72/255, 1)
 
 <AdditionPage>:

@@ -806,7 +806,7 @@ class TeacherClassroomPage(Screen):
             self.ids.teacherCreateClassroom.disabled = False
             self.ids.teacherClassroomCreate.text = "Enter the name of your classroom below"
         else:
-            self.ids.teacherClassroomName.text = self.classroom
+            self.ids.teacherClassroomName.text = "Your Classroom: " + self.classroom
             self.ids.teacherDeleteClassroom.disabled = False
             self.ids.teacherCreateClassroom.disabled = True
             self.ids.teacherClassroomCreate.text = "Press the button below to delete your current classroom"
