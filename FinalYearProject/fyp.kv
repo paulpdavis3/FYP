@@ -378,14 +378,43 @@ ScreenManagement:
         background_down: "Images/buttondown.png"
     Label:
         id: username
-        font_size: "30dp"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+        font_size: self.width*0.08
         font_name: 'Helvetica'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+        color: (1, 1, 1, 1)
+    TextInput:
+        id: studentChangeUsername
+        pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+        size_hint: 0.5, 0.1
+        font_name: 'Helvetica'
+        font_size: self.width * 0.075
+        color: (1, 1, 1, 1)
+    Label:
+        font_size: self.width*0.03
+        text: "Enter your new name above and press the button below"
+        font_name: 'Helvetica'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        color: (1, 1, 1, 1)
     Button:
-        on_release:
+        on_release: root.changeUsername(studentChangeUsername.text)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.35}
         size_hint: 0.75, 0.2
         font_name: 'Helvetica'
+        font_size: self.width*0.07
+        text: "Change Username"
+        background_normal: "Images/button.png"
+        background_down: "Images/buttondown.png"
+        color: (1, 72/255, 72/255, 1)
+    Button:
+        on_release: root.deleteUser()
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+        size_hint: 0.75, 0.2
+        font_name: 'Helvetica'
+        font_size: self.width*0.07
+        text: "Delete Account"
+        background_normal: "Images/button.png"
+        background_down: "Images/buttondown.png"
+        color: (1, 72/255, 72/255, 1)
 
 <TeacherProfilePage>:
     name: "teacherprofile"
@@ -401,6 +430,45 @@ ScreenManagement:
         color: (1, 72/255, 72/255, 1)
 	    background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
+    Label:
+        id: username
+        pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+        font_size: self.width*0.08
+        font_name: 'Helvetica'
+        color: (1, 1, 1, 1)
+    TextInput:
+        id: teacherChangeUsername
+        pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+        size_hint: 0.5, 0.1
+        font_name: 'Helvetica'
+        font_size: self.width * 0.075
+        color: (1, 1, 1, 1)
+    Label:
+        font_size: self.width*0.03
+        text: "Enter your new name above and press the button below"
+        font_name: 'Helvetica'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        color: (1, 1, 1, 1)
+    Button:
+        on_release: root.changeUsername(teacherChangeUsername.text)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+        size_hint: 0.75, 0.2
+        font_name: 'Helvetica'
+        font_size: self.width*0.07
+        text: "Change Username"
+        background_normal: "Images/button.png"
+        background_down: "Images/buttondown.png"
+        color: (1, 72/255, 72/255, 1)
+    Button:
+        on_release: root.deleteUser()
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+        size_hint: 0.75, 0.2
+        font_name: 'Helvetica'
+        font_size: self.width*0.07
+        text: "Delete Account"
+        background_normal: "Images/button.png"
+        background_down: "Images/buttondown.png"
+        color: (1, 72/255, 72/255, 1)
 
 <PlayPage>:
     name: "play"

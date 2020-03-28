@@ -651,12 +651,6 @@ class StudentProfilePage(Screen):
         print("student profile page")
         self.ids.username.text = ScreenManagement.store.get('credentials')['username'] + "'s Profile"
 
-
-class TeacherProfilePage(Screen):
-    def on_pre_enter(self, *args):
-        print("teacher profile page")
-        self.ids.username.text = ScreenManagement.store.get('credentials')['username'] + "'s Profile"
-
     def changeUsername(self, new):
 
         old = ScreenManagement.store.get('credentials')['username']
@@ -680,6 +674,92 @@ class TeacherProfilePage(Screen):
             for index in results:
                 if results[index]['username'] == oldUsername:
                     firebase.put('/users/' + index, 'username', newUsername)
+                    return 1
+            return -1
+
+    def deleteUser(self):
+        if self.deleteUserDB() == 1:
+            ScreenManagement.store.put('credentials', username="",
+                                       password="",
+                                       email="",
+                                       teacher="",
+                                       classroom="",
+                                       add="",
+                                       subtract="",
+                                       multiply="",
+                                       divide="")
+            self.manager.current = "login"
+            print("successfully deleted user")
+        else:
+            print("couldn't delete user from db")
+
+    def deleteUserDB(self):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    firebase.delete('/users/', index)
+                    return 1
+            return -1
+
+
+class TeacherProfilePage(Screen):
+    def on_pre_enter(self, *args):
+        print("teacher profile page")
+        self.ids.username.text = ScreenManagement.store.get('credentials')['username'] + "'s Profile"
+
+    def changeUsername(self, new):
+
+        old = ScreenManagement.store.get('credentials')['username']
+
+        if self.changeUsernameLoop(new) == 1:
+            ScreenManagement.store.put('credentials', username=new,
+                                       password=ScreenManagement.store.get('credentials')['password'],
+                                       email=ScreenManagement.store.get('credentials')['email'],
+                                       teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                       classroom=ScreenManagement.store.get('credentials')['classroom'],
+                                       add=ScreenManagement.store.get('credentials')['add'],
+                                       subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                       multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                       divide=ScreenManagement.store.get('credentials')['divide'])
+            print("successfully changed username")
+        else:
+            print("unable to change username")
+
+    def changeUsernameLoop(self, newUsername):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    firebase.put('/users/' + index, 'username', newUsername)
+                    return 1
+            return -1
+
+    def deleteUser(self):
+        if self.deleteUserDB() == 1:
+            ScreenManagement.store.put('credentials', username="",
+                                       password="",
+                                       email="",
+                                       teacher="",
+                                       classroom="",
+                                       add="",
+                                       subtract="",
+                                       multiply="",
+                                       divide="")
+            self.manager.current = "login"
+            print("successfully deleted user")
+        else:
+            print("couldn't delete user from db")
+
+    def deleteUserDB(self):
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    firebase.delete('/users/', index)
                     return 1
             return -1
 
