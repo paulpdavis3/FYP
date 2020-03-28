@@ -705,7 +705,7 @@ class StudentClassroomPage(Screen):
             self.ids.studentJoinClassroom.disabled = False
             self.ids.studentClassroomJoin.text = "Enter the name of the classroom you'd like to join"
         else:
-            self.ids.studentClassroomName.text = self.classroom
+            self.ids.studentClassroomName.text = "Current Classroom: " + self.classroom
             self.ids.studentLeaveClassroom.disabled = False
             self.ids.studentJoinClassroom.disabled = True
             self.ids.studentClassroomJoin.text = "Press the button below to leave your current classroom"
