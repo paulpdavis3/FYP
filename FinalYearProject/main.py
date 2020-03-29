@@ -77,8 +77,8 @@ class MinigamePage(Screen):
         self.roundNum = str(0)
         self.operator = str(0)
         self.expectedAnswer = 0
-        self.correctSound = SoundLoader.load("correct.wav")
-        self.incorrectSound = SoundLoader.load("incorrect.wav")
+        self.correctSound = SoundLoader.load("Sounds/correct.wav")
+        self.incorrectSound = SoundLoader.load("Sounds/incorrect.wav")
 
         self.timer = "00:00"
 
@@ -187,6 +187,9 @@ class MinigamePage(Screen):
             algo.algo(globalVariables.operation, globalVariables.level)
             self.updateText()
 
+    def goBack(self):
+        pass
+
 
 class ResultsPage(Screen):
     xpEarned = 0
@@ -195,7 +198,7 @@ class ResultsPage(Screen):
         super().__init__(**kw)
 
     def on_enter(self, *args):
-        self.ids.resultsInfo.text = "You got " + str(globalVariables.correctAnswers) + " out of 10 questions correct"
+        self.ids.resultsInfo.text = "You got \n" + str(globalVariables.correctAnswers) + " out of 10 \nquestions correct"
         xpEarned = ((int(globalVariables.correctAnswers) * 5) * (
                 30 / ((globalVariables.minutes * 60) + globalVariables.seconds))) - (
                        int(globalVariables.incorrectAnswers * 10))
