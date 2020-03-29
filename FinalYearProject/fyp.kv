@@ -299,67 +299,52 @@ ScreenManagement:
         background_down: "Images/buttondown.png"
 
     Button:
-        size_hint: 0.75, 0.2
-        pos_hint: {'center_x': 0.5, 'center_y': 0.825}
         on_release:
             app.root.transition = SlideTransition(direction="left")
             app.root.current = "additionProgress"
         text: "Addition Progress"
-        pos_hint: {"center_x": 0.5, 'center_y':0.8}
+        pos_hint: {"center_x": 0.5, 'center_y':0.85}
         size_hint: 0.7, 0.2
         font_name: 'Helvetica'
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
-        background_disabled_normal: 'Images/buttondisabled.png'
-        font_size: "20dp"
-        bold: True
+        font_size: self.width*0.08
         color: (1, 72/255, 72/255, 1)
     Button:
-        size_hint: 0.75, 0.2
-        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
         on_release:
             app.root.transition = SlideTransition(direction="left")
             app.root.current = "subtractionProgress"
         text: "Subtraction Progress"
-        pos_hint: {"center_x": 0.5, 'center_y':0.6}
+        pos_hint: {"center_x": 0.5, 'center_y':0.6125}
         size_hint: 0.7, 0.2
         font_name: 'Helvetica'
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
-        background_disabled_normal: 'Images/buttondisabled.png'
-        font_size: "20dp"
-        bold: True
+        font_size: self.width*0.08
         color: (1, 72/255, 72/255, 1)
     Button:
-        size_hint: 0.75, 0.2
-        pos_hint: {'center_x': 0.5, 'center_y': 0.375}
         on_release:
             app.root.transition = SlideTransition(direction="left")
             app.root.current = "multiplicationProgress"
         text: "Multiplication Progress"
-        pos_hint: {"center_x": 0.5, 'center_y':0.4}
+        pos_hint: {"center_x": 0.5, 'center_y':0.3825}
         size_hint: 0.7, 0.2
         font_name: 'Helvetica'
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
-        background_disabled_normal: 'Images/buttondisabled.png'
-        font_size: "20dp"
-        bold: True
+        font_size: self.width*0.08
         color: (1, 72/255, 72/255, 1)
     Button:
-        size_hint: 0.75, 0.2
-        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_release:
             app.root.transition = SlideTransition(direction="left")
             app.root.current = "divisionProgress"
         text: "Division Progress"
-        pos_hint: {"center_x": 0.5, 'center_y':0.2}
+        pos_hint: {"center_x": 0.5, 'center_y':0.15}
         size_hint: 0.7, 0.2
         font_name: 'Helvetica'
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
-        background_disabled_normal: 'Images/buttondisabled.png'
-        font_size: "20dp"
+        font_size: self.width*0.08
         color: (1, 72/255, 72/255, 1)
 
 <StudentProfilePage>:
@@ -1633,7 +1618,7 @@ ScreenManagement:
                 app.root.current = "main"
 		    size_hint: 0.225, 0.125
             pos_hint: {"left": 1, 'top':1}
-            text: "< Progress"
+            text: "< Main"
             font_name:'Helvetica'
 	        font_size: self.width*0.15
             color: (1, 72/255, 72/255, 1)
