@@ -467,7 +467,7 @@ class TeacherProgressPage(Screen):
 
         for studentName in studentList:
             layout.add_widget(Button(on_release=partial(self.studentInfo, studentName),
-                                     text=studentName, font_size="30dp",
+                                     text=studentName, font_size=self.width*0.08,
                                      size_hint=(0.8, None),
                                      font_name='Helvetica',
                                      background_normal="button.png",
