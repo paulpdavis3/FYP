@@ -450,7 +450,7 @@ class TeacherProgressPage(Screen):
     check = 0
 
     def on_pre_enter(self, *args):
-        Clock.schedule_once(self.createScrollview)
+        self.createScrollview(1)
 
     def createScrollview(self, dt):
 
@@ -480,8 +480,11 @@ class TeacherProgressPage(Screen):
 
     def studentInfo(self, *args):
         globalVariables.studentName = args[0]
-        self.view.remove_widget(self.view.children[0])
         self.manager.current = 'studentinfo'
+
+    def on_leave(self, *args):
+        print(self.view.children[0])
+        self.view.remove_widget(self.view.children[0])
 
 
 class StudentInfoPage(Screen):
