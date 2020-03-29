@@ -649,6 +649,9 @@ class StudentProfilePage(Screen):
 
     def on_pre_enter(self, *args):
         print("student profile page")
+        self.updateText()
+
+    def updateText(self):
         self.ids.username.text = ScreenManagement.store.get('credentials')['username'] + "'s Profile"
 
     def changeUsername(self, new):
@@ -666,6 +669,7 @@ class StudentProfilePage(Screen):
                                    subtract=ScreenManagement.store.get('credentials')['subtract'],
                                    multiply=ScreenManagement.store.get('credentials')['multiply'],
                                    divide=ScreenManagement.store.get('credentials')['divide'])
+        self.updateText()
 
     def changeUsernameLoop(self, oldUsername, newUsername):
         while True:
@@ -707,6 +711,9 @@ class StudentProfilePage(Screen):
 class TeacherProfilePage(Screen):
     def on_pre_enter(self, *args):
         print("teacher profile page")
+        self.updateText()
+
+    def updateText(self):
         self.ids.username.text = ScreenManagement.store.get('credentials')['username'] + "'s Profile"
 
     def changeUsername(self, new):
@@ -724,6 +731,7 @@ class TeacherProfilePage(Screen):
                                        multiply=ScreenManagement.store.get('credentials')['multiply'],
                                        divide=ScreenManagement.store.get('credentials')['divide'])
             print("successfully changed username")
+            self.updateText()
         else:
             print("unable to change username")
 
