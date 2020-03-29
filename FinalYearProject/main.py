@@ -450,9 +450,7 @@ class TeacherProgressPage(Screen):
     check = 0
 
     def on_pre_enter(self, *args):
-        if self.check == 0:
-            self.check = 1
-            Clock.schedule_once(self.createScrollview)
+        Clock.schedule_once(self.createScrollview)
 
     def createScrollview(self, dt):
 
@@ -476,13 +474,13 @@ class TeacherProgressPage(Screen):
                                      background_normal="button.png",
                                      background_down="buttondown.png",
                                      color=(1, 72 / 255, 72 / 255, 1)))
-        scrollview = ScrollView(size_hint=(1, None), size=(Window.width, Window.height))
+        scrollview = ScrollView(id="scrollview", size_hint=(1, None), size=(Window.width, Window.height))
         scrollview.add_widget(layout)
         self.view.add_widget(scrollview)
 
     def studentInfo(self, *args):
         globalVariables.studentName = args[0]
-        Clock.unschedule(self.createScrollview)
+        self.view.remove_widget(self.view.children[0])
         self.manager.current = 'studentinfo'
 
 
@@ -500,7 +498,7 @@ class StudentInfoPage(Screen):
 
             for index in results:
                 if results[index]['username'] == globalVariables.studentName:
-                    self.ids.studentInfoTitle.text = globalVariables.studentName + "'s Progress"
+                    self.ids.studentInfoTitle.text = globalVariables.studentName
                     self.ids.addition.text = "Total Addition XP: " + str(int(results[index]['add']))
                     self.ids.subtraction.text = "Total Subtraction XP: " + str(int(results[index]['subtract']))
                     self.ids.multiplication.text = "Total Multiplication XP: " + str(int(results[index]['multiply']))
@@ -514,6 +512,14 @@ class StudentInfoPage(Screen):
 
     def goBack(self):
         self.manager.current = "teacherprogress"
+
+    def removeFromClassroom(self, studentName):
+        results = firebase.get('/users/', None)
+
+        for index in results:
+            if results[index]['username'] == globalVariables.studentName:
+                firebase.put('/users/' + index, 'classroom', 'no classroom')
+                self.manager.current = "teacherprogress"
 
 
 class AdditionProgressPage(Screen):
