@@ -46,6 +46,17 @@ class EmailPopup(BoxLayout):
         self.dialog.open()
 
 
+class InvalidEmailDialog(Popup):
+    pass
+
+
+class InvalidEmailPopup(BoxLayout):
+    def __init__(self, **kwargs):
+        super(InvalidEmailPopup, self).__init__(**kwargs)
+        self.dialog = InvalidEmailDialog()
+        self.dialog.open()
+
+
 class UsernameDialog(Popup):
     pass
 

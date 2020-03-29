@@ -1768,6 +1768,21 @@ ScreenManagement:
             text: "Sorry! This email is already \nregistered with another account"
             color: [1, 72 / 255, 72 / 255, 1]
 
+<InvalidEmailDialog>:
+    id: invalidEmailPopup
+    title: ""
+    separator_height: 0
+    size_hint: (0.8, 0.3)
+    background: 'errorMessage.png'
+
+    BoxLayout:
+        orientation: "vertical"
+        Label
+            font_size: self.width * 0.06
+            halign: 'center'
+            text: "Please make sure you're\n entering a valid email \ne.g YourName@Email.com"
+            color: [1, 72 / 255, 72 / 255, 1]
+
 <UsernameDialog>:
     id: usernamePopup
     title: ""

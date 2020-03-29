@@ -26,6 +26,7 @@ from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
 from kivy.core.text import LabelBase
 from kivy.core.audio import SoundLoader
+import re
 
 LabelBase.register(name="Helvetica",
                    fn_regular="Fonts/HelveticaTextbookLTRoman.ttf")
@@ -370,8 +371,11 @@ class RegisterPage(Screen):
                 'Make sure that your password is at least 8 characters long and contains 1 uppercase letter and 1 number')
             return popups.PasswordPopup()
 
-        else:
+        elif re.search("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email):
             self.checkRegister(uname, email, pword, isTeacher)
+        else:
+            print("invalid email")
+            return popups.InvalidEmailPopup()
 
     def checkRegister(self, uname, email, pword, isTeacher):
         if self.registerLoop(uname, email) == -1:
