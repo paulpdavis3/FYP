@@ -27,6 +27,7 @@ from kivy.uix.scrollview import ScrollView
 from kivy.core.text import LabelBase
 from kivy.core.audio import SoundLoader
 import re
+import datetime
 
 LabelBase.register(name="Helvetica",
                    fn_regular="Fonts/HelveticaTextbookLTRoman.ttf")
@@ -231,8 +232,9 @@ class ResultsPage(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
 
-    def on_enter(self, *args):
-        self.ids.resultsInfo.text = "You got \n" + str(globalVariables.correctAnswers) + " out of 10 \nquestions correct"
+    def on_pre_enter(self, *args):
+        self.ids.resultsInfo.text = "You got \n" + str(
+            globalVariables.correctAnswers) + " out of 10 \nquestions correct"
         xpEarned = ((int(globalVariables.correctAnswers) * 5) * (
                 30 / ((globalVariables.minutes * 60) + globalVariables.seconds))) - (
                        int(globalVariables.incorrectAnswers * 10))
@@ -257,7 +259,7 @@ class ResultsPage(Screen):
                                        subtract=ScreenManagement.store.get('credentials')['subtract'],
                                        multiply=ScreenManagement.store.get('credentials')['multiply'],
                                        divide=ScreenManagement.store.get('credentials')['divide'])
-            if self.updateUserDatabase("add", currentXP) == 1:
+            if self.updateUserDatabase("add", xpEarned, currentXP) == 1:
                 print("update db successfully")
             else:
                 print("couldnt update db")
@@ -271,7 +273,7 @@ class ResultsPage(Screen):
                                        subtract=currentXP,
                                        multiply=ScreenManagement.store.get('credentials')['multiply'],
                                        divide=ScreenManagement.store.get('credentials')['divide'])
-            if self.updateUserDatabase("add", currentXP) == 1:
+            if self.updateUserDatabase("subtract", xpEarned, currentXP) == 1:
                 print("update db successfully")
             else:
                 print("couldnt update db")
@@ -285,7 +287,7 @@ class ResultsPage(Screen):
                                        subtract=ScreenManagement.store.get('credentials')['subtract'],
                                        multiply=currentXP,
                                        divide=ScreenManagement.store.get('credentials')['divide'])
-            if self.updateUserDatabase("add", currentXP) == 1:
+            if self.updateUserDatabase("multiply", xpEarned, currentXP) == 1:
                 print("update db successfully")
             else:
                 print("couldnt update db")
@@ -299,7 +301,7 @@ class ResultsPage(Screen):
                                        subtract=ScreenManagement.store.get('credentials')['subtract'],
                                        multiply=ScreenManagement.store.get('credentials')['multiply'],
                                        divide=currentXP)
-            if self.updateUserDatabase("add", currentXP) == 1:
+            if self.updateUserDatabase("divide", xpEarned, currentXP) == 1:
                 print("update db successfully")
             else:
                 print("couldnt update db")
@@ -322,13 +324,44 @@ class ResultsPage(Screen):
         else:
             self.ids.resultsNextLevel.text = str(int(nextHundred - currentXP)) + "xp until next level"
 
-    def updateUserDatabase(self, operator, xp):
+    def updateUserDatabase(self, operator, xpEarned, currentXP):
+
+        currentDate = datetime.date.today()
+        currentYear, currentWeek, currentDay = currentDate.isocalendar()
+
         while True:
             results = firebase.get('/users/', None)
 
             for index in results:
                 if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
-                    firebase.put('/users/' + index, operator, xp)
+                    firebase.put('/users/' + index, operator, currentXP)
+
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
+                                 'totalXP', int(str(firebase.get(
+                            '/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek) + '/totalXP',
+                            None))) + int(xpEarned))
+
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
+                                 'totalGamesPlayed', int(str(firebase.get(
+                            '/users/' + index + '/progress/' + str(currentYear) + '/' + str(
+                                currentWeek) + '/totalGamesPlayed', None))) + 1)
+
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
+                                 'timePlayed', int(str(firebase.get(
+                            '/users/' + index + '/progress/' + str(currentYear) + '/' + str(
+                                currentWeek) + '/timePlayed', None))) + int(globalVariables.seconds) + int(
+                            globalVariables.minutes * 60))
+
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
+                                 'correctAnswers', int(str(firebase.get(
+                            '/users/' + index + '/progress/' + str(currentYear) + '/' + str(
+                                currentWeek) + '/correctAnswers', None))) + int(globalVariables.correctAnswers))
+
+                    if int(globalVariables.correctAnswers) > int(str(firebase.get(
+                            '/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek) + '/bestScore',
+                            None))):
+                        firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
+                                     'bestScore', int(globalVariables.correctAnswers))
                     return 1
 
             return -1
@@ -453,6 +486,29 @@ class RegisterPage(Screen):
 
 
 class MainPage(Screen):
+
+    def on_pre_enter(self, *args):
+        currentDate = datetime.date.today()
+        currentYear, currentWeek, currentDay = currentDate.isocalendar()
+
+        currentWeek = 13
+
+        results = firebase.get('/users/', None)
+
+        for index in results:
+            if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                try:
+                    firebase.get('/users/' + index + str(currentYear) + str(currentWeek), None)
+                except KeyError:
+                    print('Didnt find the current week in the DB')
+                else:
+                    print('Didnt find the current week in the DB')
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'bestScore', 0)
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'totalGamesPlay', 0)
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'timePlayed', 0)
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'correctAnswers', 0)
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'totalXP', 0)
+
     def goToClassroom(self):
         if ScreenManagement.store.get('credentials')['teacher'] == "no":
             # go to join classroom
@@ -579,7 +635,7 @@ class AdditionProgressPage(Screen):
                                    password=ScreenManagement.store.get('credentials')['password'],
                                    email=ScreenManagement.store.get('credentials')['email'],
                                    teacher=ScreenManagement.store.get('credentials')['teacher'],
-                                   classroom=ScreenManagement.store.get('credentials'['classroom']),
+                                   classroom=ScreenManagement.store.get('credentials')['classroom'],
                                    add=0,
                                    subtract=ScreenManagement.store.get('credentials')['subtract'],
                                    multiply=ScreenManagement.store.get('credentials')['multiply'],
@@ -612,7 +668,7 @@ class SubtractionProgressPage(Screen):
                                    password=ScreenManagement.store.get('credentials')['password'],
                                    email=ScreenManagement.store.get('credentials')['email'],
                                    teacher=ScreenManagement.store.get('credentials')['teacher'],
-                                   classroom=ScreenManagement.store.get('credentials'['classroom']),
+                                   classroom=ScreenManagement.store.get('credentials')['classroom'],
                                    add=ScreenManagement.store.get('credentials')['add'],
                                    subtract=0,
                                    multiply=ScreenManagement.store.get('credentials')['multiply'],
@@ -645,7 +701,7 @@ class MultiplicationProgressPage(Screen):
                                    password=ScreenManagement.store.get('credentials')['password'],
                                    email=ScreenManagement.store.get('credentials')['email'],
                                    teacher=ScreenManagement.store.get('credentials')['teacher'],
-                                   classroom=ScreenManagement.store.get('credentials'['classroom']),
+                                   classroom=ScreenManagement.store.get('credentials')['classroom'],
                                    add=ScreenManagement.store.get('credentials')['add'],
                                    subtract=ScreenManagement.store.get('credentials')['subtract'],
                                    multiply=0,
@@ -678,7 +734,7 @@ class DivisionProgressPage(Screen):
                                    password=ScreenManagement.store.get('credentials')['password'],
                                    email=ScreenManagement.store.get('credentials')['email'],
                                    teacher=ScreenManagement.store.get('credentials')['teacher'],
-                                   classroom=ScreenManagement.store.get('credentials'['classroom']),
+                                   classroom=ScreenManagement.store.get('credentials')['classroom'],
                                    add=ScreenManagement.store.get('credentials')['add'],
                                    subtract=ScreenManagement.store.get('credentials')['subtract'],
                                    multiply=ScreenManagement.store.get('credentials')['multiply'],
