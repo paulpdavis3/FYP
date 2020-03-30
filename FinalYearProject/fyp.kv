@@ -1399,7 +1399,7 @@ ScreenManagement:
         font_size: self.width*0.07
         halign:'center'
         font_name: 'Helvetica'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
         text: ""
     ProgressBar:
         id: progressBar
@@ -1407,22 +1407,22 @@ ScreenManagement:
         max: 100
         value: 0
         size_hint_x: 0.7
-        pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+        pos_hint: {'center_x': 0.5, 'center_y': 0.65}
     Label:
         id: resultsNextLevel
         font_size: self.width*0.06
         font_name: 'Helvetica'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+        pos_hint: {'center_x': 0.5, 'center_y': 0.55}
         text: ""
     Label:
         id: resultsOverallXP
         font_size: self.width*0.06
         font_name: 'Helvetica'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+        pos_hint: {'center_x': 0.5, 'center_y': 0.4}
         text: ""
     Button:
         size_hint: 0.5, 0.2
-        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_release:
             app.root.transition = SlideTransition(direction="right")
             app.root.current = 'play'

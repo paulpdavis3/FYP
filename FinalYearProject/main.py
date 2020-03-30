@@ -316,7 +316,11 @@ class ResultsPage(Screen):
             self.ids.resultsOverallXP.text = "Overall XP for Multiplication: " + str(int(currentXP))
         elif globalVariables.operation == "divide":
             self.ids.resultsOverallXP.text = "Overall XP for Division: " + str(int(currentXP))
-        self.ids.resultsNextLevel.text = str(int(nextHundred - currentXP)) + "xp until next level"
+
+        if currentXP == 1000:
+            self.ids.resultsNextLevel.text = "You've reached the max level"
+        else:
+            self.ids.resultsNextLevel.text = str(int(nextHundred - currentXP)) + "xp until next level"
 
     def updateUserDatabase(self, operator, xp):
         while True:
