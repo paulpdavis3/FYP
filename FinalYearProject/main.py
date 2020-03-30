@@ -145,24 +145,57 @@ class MinigamePage(Screen):
 
         if randomNum == 0:
             self.potentialAnswer1 = str(self.expectedAnswer)
-            self.potentialAnswer2 = str(self.expectedAnswer + random.randrange(-5, 5))
-            self.potentialAnswer3 = str(self.expectedAnswer + random.randrange(-5, 5))
-            self.potentialAnswer4 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer2 = str(self.getPotentialAnswer(self.expectedAnswer))
+            self.potentialAnswer3 = str(self.getPotentialAnswer(self.expectedAnswer))
+            self.potentialAnswer4 = str(self.getPotentialAnswer(self.expectedAnswer))
         elif randomNum == 1:
-            self.potentialAnswer1 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer1 = str(self.getPotentialAnswer(self.expectedAnswer))
             self.potentialAnswer2 = str(self.expectedAnswer)
-            self.potentialAnswer3 = str(self.expectedAnswer + random.randrange(-5, 5))
-            self.potentialAnswer4 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer3 = str(self.getPotentialAnswer(self.expectedAnswer))
+            self.potentialAnswer4 = str(self.getPotentialAnswer(self.expectedAnswer))
         elif randomNum == 2:
-            self.potentialAnswer1 = str(self.expectedAnswer + random.randrange(-5, 5))
-            self.potentialAnswer2 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer1 = str(self.getPotentialAnswer(self.expectedAnswer))
+            self.potentialAnswer2 = str(self.getPotentialAnswer(self.expectedAnswer))
             self.potentialAnswer3 = str(self.expectedAnswer)
-            self.potentialAnswer4 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer4 = str(self.getPotentialAnswer(self.expectedAnswer))
         elif randomNum == 3:
-            self.potentialAnswer1 = str(self.expectedAnswer + random.randrange(-5, 5))
-            self.potentialAnswer2 = str(self.expectedAnswer + random.randrange(-5, 5))
-            self.potentialAnswer3 = str(self.expectedAnswer + random.randrange(-5, 5))
+            self.potentialAnswer1 = str(self.getPotentialAnswer(self.expectedAnswer))
+            self.potentialAnswer2 = str(self.getPotentialAnswer(self.expectedAnswer))
+            self.potentialAnswer3 = str(self.getPotentialAnswer(self.expectedAnswer))
             self.potentialAnswer4 = str(self.expectedAnswer)
+
+    def getPotentialAnswer(self, expectedAnswer):
+        expectedAnswerLength = len(str(expectedAnswer))
+        potentialAnswer = expectedAnswer
+        potentialAnswerCheck = 0
+
+        difficultyMapped = int((((globalVariables.level - 1) * (1 - 9)) / (10 - 1)) + 9)
+
+        if expectedAnswerLength == 1:
+            while potentialAnswerCheck == 0:
+                potentialAnswer = expectedAnswer + random.randrange(-difficultyMapped, difficultyMapped)
+                if potentialAnswer != expectedAnswer and potentialAnswer > 0:
+                    potentialAnswerCheck = 1
+        elif expectedAnswerLength == 2:
+            expectedAnswerSingles = expectedAnswer % 10
+            expectedAnswerTens = int(str(expectedAnswer % 100)[0])
+            while potentialAnswerCheck == 0:
+                potentialAnswer = int(str(expectedAnswerTens + random.randrange(-difficultyMapped, difficultyMapped)) + str(
+                    expectedAnswerSingles))
+                if potentialAnswer != expectedAnswer and potentialAnswer >= 0:
+                    potentialAnswerCheck = 1
+        elif expectedAnswerLength == 3:
+            expectedAnswerSingles = expectedAnswer % 10
+            expectedAnswerTens = int(str(expectedAnswer % 100)[0])
+            expectedAnswerHundreds = str(expectedAnswer)[0]
+            while potentialAnswerCheck == 0:
+                potentialAnswer = int(
+                    str(int(expectedAnswerHundreds) + random.randrange(-difficultyMapped, difficultyMapped)) + str(
+                        expectedAnswerTens) + str(expectedAnswerSingles))
+                if potentialAnswer != expectedAnswer and 0 <= potentialAnswer < 1000:
+                    potentialAnswerCheck = 1
+
+        return potentialAnswer
 
     def checkAnswer(self, answer):
         answer = float(answer)
@@ -189,7 +222,7 @@ class MinigamePage(Screen):
             self.updateText()
 
     def goBack(self):
-        pass
+        popups.LeaveMinigamePopup()
 
 
 class ResultsPage(Screen):

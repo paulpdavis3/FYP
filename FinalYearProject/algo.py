@@ -48,13 +48,13 @@ def algo(op, level):
         numOfVariables = 3
 
         rangeMin = 1
-        rangeMax = difficulty * 2
+        rangeMax = difficulty * 3
 
     elif operation == "multiply":
         numOfVariables = 3
 
         rangeMin = 1
-        rangeMax = difficulty * 2
+        rangeMax = difficulty * 3
 
     # verify if the numbers will work in the equation
     possibleAnswer = False

@@ -66,3 +66,13 @@ class UsernamePopup(BoxLayout):
         super(UsernamePopup, self).__init__(**kwargs)
         self.dialog = UsernameDialog()
         self.dialog.open()
+
+class LeaveMinigameDialog(Popup):
+    pass
+
+
+class LeaveMinigamePopup(BoxLayout):
+    def __init__(self, **kwargs):
+        super(LeaveMinigamePopup, self).__init__(**kwargs)
+        self.dialog = LeaveMinigameDialog()
+        self.dialog.open()

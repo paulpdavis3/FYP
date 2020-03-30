@@ -1797,3 +1797,31 @@ ScreenManagement:
             halign: 'center'
             text: "Sorry! This username is already \nregistered with another account"
             color: [1, 72 / 255, 72 / 255, 1]
+
+<LeaveMinigameDialog>:
+    id: leaveMinigamePopup
+    title: ""
+    separator_height: 0
+    size_hint: (0.8, 0.3)
+    background: 'errorMessage.png'
+
+    BoxLayout:
+        orientation: "vertical"
+        Label
+            font_size: self.width * 0.04
+            halign: 'center'
+            text: "Are you sure you want to exit?"
+            color: [1, 72 / 255, 72 / 255, 1]
+        BoxLayout:
+            Button:
+                background_normal: "Images/buttonred.png"
+        	    background_down: "Images/buttonreddown.png"
+                text: "Yes"
+                on_release:
+                    leaveMinigamePopup.dismiss()
+                    app.root.current = "play"
+            Button:
+                background_normal: "Images/buttonred.png"
+        	    background_down: "Images/buttonreddown.png"
+                text: "No"
+                on_release: leaveMinigamePopup.dismiss()
