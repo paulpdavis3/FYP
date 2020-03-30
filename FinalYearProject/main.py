@@ -1063,25 +1063,42 @@ class AdditionPage(Screen):
     def disabledButtons(self):
         if self.playerXP < 100:
             self.ids.addButton2.disabled = True
+        else:
+            self.ids.addButton2.disabled = False
         if self.playerXP < 200:
             self.ids.addButton3.disabled = True
+        else:
+            self.ids.addButton3.disabled = False
         if self.playerXP < 300:
             self.ids.addButton4.disabled = True
+        else:
+            self.ids.addButton4.disabled = False
         if self.playerXP < 400:
             self.ids.addButton5.disabled = True
+        else:
+            self.ids.addButton5.disabled = False
         if self.playerXP < 500:
             self.ids.addButton6.disabled = True
+        else:
+            self.ids.addButton6.disabled = False
         if self.playerXP < 600:
             self.ids.addButton7.disabled = True
+        else:
+            self.ids.addButton7.disabled = False
         if self.playerXP < 700:
             self.ids.addButton8.disabled = True
+        else:
+            self.ids.addButton8.disabled = False
         if self.playerXP < 800:
             self.ids.addButton9.disabled = True
+        else:
+            self.ids.addButton9.disabled = False
         if self.playerXP < 900:
             self.ids.addButton10.disabled = True
+        else:
+            self.ids.addButton10.disabled = False
 
     def playGame(self, levelNumber):
-        # algo.algo("add", levelNumber)
 
         globalVariables.level = levelNumber
         globalVariables.operation = "add"
@@ -1105,22 +1122,40 @@ class SubtractionPage(Screen):
     def disabledButtons(self):
         if self.playerXP < 100:
             self.ids.subtractButton2.disabled = True
+        else:
+            self.ids.subtractButton2.disabled = False
         if self.playerXP < 200:
             self.ids.subtractButton3.disabled = True
+        else:
+            self.ids.subtractButton3.disabled = False
         if self.playerXP < 300:
             self.ids.subtractButton4.disabled = True
+        else:
+            self.ids.subtractButton4.disabled = False
         if self.playerXP < 400:
             self.ids.subtractButton5.disabled = True
+        else:
+            self.ids.subtractButton5.disabled = False
         if self.playerXP < 500:
             self.ids.subtractButton6.disabled = True
+        else:
+            self.ids.subtractButton6.disabled = False
         if self.playerXP < 600:
             self.ids.subtractButton7.disabled = True
+        else:
+            self.ids.subtractButton7.disabled = False
         if self.playerXP < 700:
             self.ids.subtractButton8.disabled = True
+        else:
+            self.ids.subtractButton8.disabled = False
         if self.playerXP < 800:
             self.ids.subtractButton9.disabled = True
+        else:
+            self.ids.subtractButton9.disabled = False
         if self.playerXP < 900:
             self.ids.subtractButton10.disabled = True
+        else:
+            self.ids.subtractButton10.disabled = False
 
     def playGame(self, levelNumber):
         # algo.algo("subtract", levelNumber)
@@ -1146,22 +1181,40 @@ class MultiplicationPage(Screen):
     def disabledButtons(self):
         if self.playerXP < 100:
             self.ids.multiplyButton2.disabled = True
+        else:
+            self.ids.multiplyButton2.disabled = False
         if self.playerXP < 200:
             self.ids.multiplyButton3.disabled = True
+        else:
+            self.ids.multiplyButton3.disabled = False
         if self.playerXP < 300:
             self.ids.multiplyButton4.disabled = True
+        else:
+            self.ids.multiplyButton4.disabled = False
         if self.playerXP < 400:
             self.ids.multiplyButton5.disabled = True
+        else:
+            self.ids.multiplyButton5.disabled = False
         if self.playerXP < 500:
             self.ids.multiplyButton6.disabled = True
+        else:
+            self.ids.multiplyButton6.disabled = False
         if self.playerXP < 600:
             self.ids.multiplyButton7.disabled = True
+        else:
+            self.ids.multiplyButton7.disabled = False
         if self.playerXP < 700:
             self.ids.multiplyButton8.disabled = True
+        else:
+            self.ids.multiplyButton8.disabled = False
         if self.playerXP < 800:
             self.ids.multiplyButton9.disabled = True
+        else:
+            self.ids.multiplyButton9.disabled = False
         if self.playerXP < 900:
             self.ids.multiplyButton10.disabled = True
+        else:
+            self.ids.multiplyButton10.disabled = False
 
     def playGame(self, levelNumber):
         # algo.algo("multiply", levelNumber)
@@ -1187,22 +1240,40 @@ class DivisionPage(Screen):
     def disabledButtons(self):
         if self.playerXP < 100:
             self.ids.divideButton2.disabled = True
+        else:
+            self.ids.divideButton2.disabled = False
         if self.playerXP < 200:
             self.ids.divideButton3.disabled = True
+        else:
+            self.ids.divideButton3.disabled = False
         if self.playerXP < 300:
             self.ids.divideButton4.disabled = True
+        else:
+            self.ids.divideButton4.disabled = False
         if self.playerXP < 400:
             self.ids.divideButton5.disabled = True
+        else:
+            self.ids.divideButton5.disabled = False
         if self.playerXP < 500:
             self.ids.divideButton6.disabled = True
+        else:
+            self.ids.divideButton6.disabled = False
         if self.playerXP < 600:
             self.ids.divideButton7.disabled = True
+        else:
+            self.ids.divideButton7.disabled = False
         if self.playerXP < 700:
             self.ids.divideButton8.disabled = True
+        else:
+            self.ids.divideButton8.disabled = False
         if self.playerXP < 800:
             self.ids.divideButton9.disabled = True
+        else:
+            self.ids.divideButton9.disabled = False
         if self.playerXP < 900:
             self.ids.divideButton10.disabled = True
+        else:
+            self.ids.divideButton10.disabled = False
 
     def playGame(self, levelNumber):
         # algo.algo("divide", levelNumber)
