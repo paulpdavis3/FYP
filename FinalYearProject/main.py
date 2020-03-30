@@ -491,16 +491,16 @@ class MainPage(Screen):
         currentDate = datetime.date.today()
         currentYear, currentWeek, currentDay = currentDate.isocalendar()
 
-        currentWeek = 13
-
         results = firebase.get('/users/', None)
 
         for index in results:
+            print("check")
             if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
-                try:
-                    firebase.get('/users/' + index + str(currentYear) + str(currentWeek), None)
-                except KeyError:
-                    print('Didnt find the current week in the DB')
+
+                check = firebase.get('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), None)
+
+                if check:
+                    print(check)
                 else:
                     print('Didnt find the current week in the DB')
                     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'bestScore', 0)
@@ -508,6 +508,8 @@ class MainPage(Screen):
                     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'timePlayed', 0)
                     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'correctAnswers', 0)
                     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'totalXP', 0)
+
+                return 1
 
     def goToClassroom(self):
         if ScreenManagement.store.get('credentials')['teacher'] == "no":
