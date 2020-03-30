@@ -396,7 +396,37 @@ class LoginPage(Screen):
             else:
                 print("couldn't update JSON file")
 
+            self.checkWeek()
             self.manager.current = 'main'
+
+    def checkWeek(self):
+        currentDate = datetime.date.today()
+        currentYear, currentWeek, currentDay = currentDate.isocalendar()
+
+        results = firebase.get('/users/', None)
+
+        for index in results:
+            print("check")
+            if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+
+                check = firebase.get('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), None)
+
+                if check:
+                    print(check)
+                else:
+                    print('Didnt find the current week in the DB')
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
+                                 'bestScore', 0)
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
+                                 'totalGamesPlay', 0)
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
+                                 'timePlayed', 0)
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
+                                 'correctAnswers', 0)
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
+                                 'totalXP', 0)
+
+                return 1
 
     def updateJsonLoop(self, username):
         while True:
@@ -487,30 +517,6 @@ class RegisterPage(Screen):
 
 class MainPage(Screen):
 
-    def on_pre_enter(self, *args):
-        currentDate = datetime.date.today()
-        currentYear, currentWeek, currentDay = currentDate.isocalendar()
-
-        results = firebase.get('/users/', None)
-
-        for index in results:
-            print("check")
-            if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
-
-                check = firebase.get('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), None)
-
-                if check:
-                    print(check)
-                else:
-                    print('Didnt find the current week in the DB')
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'bestScore', 0)
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'totalGamesPlay', 0)
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'timePlayed', 0)
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'correctAnswers', 0)
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'totalXP', 0)
-
-                return 1
-
     def goToClassroom(self):
         if ScreenManagement.store.get('credentials')['teacher'] == "no":
             # go to join classroom
@@ -545,8 +551,6 @@ class StudentProgressPage(Screen):
 
 class TeacherProgressPage(Screen):
     view = ObjectProperty(None)
-
-    check = 0
 
     def on_pre_enter(self, *args):
         self.createScrollview(1)
