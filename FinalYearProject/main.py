@@ -546,7 +546,54 @@ class MainPage(Screen):
 
 
 class StudentProgressPage(Screen):
-    pass
+    view = ObjectProperty(None)
+
+    def on_pre_enter(self, *args):
+        self.createScrollview(1)
+
+    def createScrollview(self, dt):
+
+        currentDate = datetime.date.today()
+        currentYear, currentWeek, currentDay = currentDate.isocalendar()
+
+        weekList = []
+
+        results = firebase.get('/users/', None)
+
+        for index in results:
+            if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                progress = firebase.get('/users/' + index + '/progress/' + str(currentYear), None)
+                for x in range(len(progress)):
+                    weekList.append(str([key.split(',') for key in progress.keys()][x])[2:-2])
+
+        layout = GridLayout(cols=1, spacing=10, size_hint_y=None)
+        layout.bind(minimum_height=layout.setter("height"))
+
+        for weekNumber in weekList:
+            layout.add_widget(Button(on_release=partial(self.weekInfo, weekNumber),
+                                     text="Week " + weekNumber, font_size=self.width * 0.08,
+                                     size_hint=(0.8, None),
+                                     font_name='Helvetica',
+                                     background_normal="button.png",
+                                     background_down="buttondown.png",
+                                     color=(1, 72 / 255, 72 / 255, 1)))
+        scrollview = ScrollView(id="scrollview", size_hint=(1, None), size=(Window.width, Window.height))
+        scrollview.add_widget(layout)
+        self.view.add_widget(scrollview)
+
+    def weekInfo(self, *args):
+        globalVariables.weekNumber = args[0]
+        print(globalVariables.weekNumber)
+        self.manager.current = 'weekinfo'
+
+    def on_leave(self, *args):
+        self.view.remove_widget(self.view.children[0])
+
+
+class WeekInfoPage(Screen):
+
+    def on_pre_enter(self, *args):
+        self.ids.weekNum.text = "Week " + globalVariables.weekNumber
 
 
 class TeacherProgressPage(Screen):
@@ -586,7 +633,6 @@ class TeacherProgressPage(Screen):
         self.manager.current = 'studentinfo'
 
     def on_leave(self, *args):
-        print(self.view.children[0])
         self.view.remove_widget(self.view.children[0])
 
 

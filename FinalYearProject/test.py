@@ -1,48 +1,20 @@
-import random
-import math
+import smtplib
 
-difficulty = 5
-
-# NewValue = (((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin
-difficultyMapped = int((((difficulty - 1) * (1 -9)) / (10 - 1)) + 9)
-
-
-expectedAnswer = random.randrange(100, 1000)
-
-expectedAnswerLength = len(str(expectedAnswer))
-
-pAns1 = expectedAnswer
-pAns1Res = 0
-
-if expectedAnswerLength == 1:
-    expectedAnswerSingles = expectedAnswer%10
-    print(expectedAnswerLength,expectedAnswer, expectedAnswerSingles)
+def sendEmail(subeject, msg):
+    try:
+        server = smtplib.SMTP('smtp.gmail.com:587')
+        server.ehlo()
+        server.starttls()
+        server.login('primarymathletes@gmail.com', 'qwopzxnm10')
+        message = 'Subject: {}\n\n{}'.format(subject, msg)
+        server.sendmail('primarymathletes@gmail.com', 'c16703349@mytudublin.ie', message)
+        server.quit()
+        print("Email sent successfully.")
+    except:
+        print("Email failed to send.")
     
-    while pAns1Res == 0:
-        pAns1 = expectedAnswer + random.randrange(-difficultyMapped, difficultyMapped)
-        if pAns1 != expectedAnswer and pAns1 > 0:
-            pAns1Res = 1
-    
-    print(pAns1, expectedAnswer)
-    
-elif expectedAnswerLength == 2:
-    expectedAnswerSingles = expectedAnswer%10
-    expectedAnswerTens = int(str(expectedAnswer%100)[0])
-    print(expectedAnswerLength, expectedAnswer, expectedAnswerTens, expectedAnswerSingles)
-    while pAns1Res == 0:
-        pAns1 = int(str(expectedAnswerTens + random.randrange(-difficultyMapped, difficultyMapped)) + str(expectedAnswerSingles))
-        if pAns1 != expectedAnswer and pAns1 >= 0:
-            pAns1Res = 1
-    
-    print(pAns1, expectedAnswer)
-elif expectedAnswerLength == 3:
-    expectedAnswerSingles = expectedAnswer%10
-    expectedAnswerTens = int(str(expectedAnswer%100)[0])
-    expectedAnswerHundreds = str(expectedAnswer)[0]
-    print(expectedAnswerLength, expectedAnswer, expectedAnswerHundreds, expectedAnswerTens, expectedAnswerSingles)
-    while pAns1Res == 0:
-        pAns1 = int(str(int(expectedAnswerHundreds) + random.randrange(-difficultyMapped, difficultyMapped)) + str(expectedAnswerTens) + str(expectedAnswerSingles))
-        if pAns1 != expectedAnswer and pAns1 >= 0 and pAns1 < 1000:
-            pAns1Res = 1
-    
-    print(pAns1, expectedAnswer)
+
+subject = "Students Report for Week ending 29/03/2020"
+msg = "test message body"
+
+sendEmail(subject, msg)

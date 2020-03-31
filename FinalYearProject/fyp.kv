@@ -23,6 +23,7 @@ ScreenManagement:
     DivisionProgressPage:
     TeacherProgressPage:
     StudentInfoPage:
+    WeekInfoPage:
 
 <TitlePage>:
     name: "title"
@@ -285,67 +286,31 @@ ScreenManagement:
 
 <StudentProgressPage>:
     name: "studentprogress"
-    Button:
-		on_release:
-		    app.root.transition = SlideTransition(direction="right")
-		    app.root.current = "main"
-        size_hint: 0.2, 0.125
-	    pos_hint: {"left": 1, 'top':1}
-	    text: "< Main"
-	    font_size: self.width*0.15
-	    font_name:'Helvetica'
-        color: (1, 72/255, 72/255, 1)
-	    background_normal: "Images/button.png"
-        background_down: "Images/buttondown.png"
 
-    Button:
-        on_release:
-            app.root.transition = SlideTransition(direction="left")
-            app.root.current = "additionProgress"
-        text: "Addition Progress"
-        pos_hint: {"center_x": 0.5, 'center_y':0.85}
-        size_hint: 0.7, 0.2
-        font_name: 'Helvetica'
-        background_normal: "Images/button.png"
-        background_down: "Images/buttondown.png"
-        font_size: self.width*0.08
-        color: (1, 72/255, 72/255, 1)
-    Button:
-        on_release:
-            app.root.transition = SlideTransition(direction="left")
-            app.root.current = "subtractionProgress"
-        text: "Subtraction Progress"
-        pos_hint: {"center_x": 0.5, 'center_y':0.6125}
-        size_hint: 0.7, 0.2
-        font_name: 'Helvetica'
-        background_normal: "Images/button.png"
-        background_down: "Images/buttondown.png"
-        font_size: self.width*0.08
-        color: (1, 72/255, 72/255, 1)
-    Button:
-        on_release:
-            app.root.transition = SlideTransition(direction="left")
-            app.root.current = "multiplicationProgress"
-        text: "Multiplication Progress"
-        pos_hint: {"center_x": 0.5, 'center_y':0.3825}
-        size_hint: 0.7, 0.2
-        font_name: 'Helvetica'
-        background_normal: "Images/button.png"
-        background_down: "Images/buttondown.png"
-        font_size: self.width*0.08
-        color: (1, 72/255, 72/255, 1)
-    Button:
-        on_release:
-            app.root.transition = SlideTransition(direction="left")
-            app.root.current = "divisionProgress"
-        text: "Division Progress"
-        pos_hint: {"center_x": 0.5, 'center_y':0.15}
-        size_hint: 0.7, 0.2
-        font_name: 'Helvetica'
-        background_normal: "Images/button.png"
-        background_down: "Images/buttondown.png"
-        font_size: self.width*0.08
-        color: (1, 72/255, 72/255, 1)
+    view: view
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            size: (.64, .64)
+            size_hint: (1, None)
+
+        Button:
+            on_release:
+                app.root.transition = SlideTransition(direction="right")
+                app.root.current = "main"
+		    size_hint: 0.225, 0.125
+            pos_hint: {"left": 1, 'top':1}
+            text: "< Main"
+            font_name:'Helvetica'
+	        font_size: self.width*0.15
+            color: (1, 72/255, 72/255, 1)
+            background_normal: "Images/button.png"
+            background_down: "Images/buttondown.png"
+
+        ScrollView:
+            id: view
 
 <StudentProfilePage>:
     name: "studentprofile"
@@ -1825,3 +1790,29 @@ ScreenManagement:
         	    background_down: "Images/buttonreddown.png"
                 text: "No"
                 on_release: leaveMinigamePopup.dismiss()
+
+<WeekInfoPage>:
+    name: "weekinfo"
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            width: 2
+            points: (0, self.height*0.85, self.width, self.height*0.85)
+    Button:
+		on_release:
+		    app.root.transition = SlideTransition(direction="right")
+		    root.goBack()
+		size_hint: 0.225, 0.125
+	    pos_hint: {"left": 1, 'top':1}
+        text: "< Progress"
+        font_name:'Helvetica'
+	    font_size: self.width*0.125
+        color: (1, 72/255, 72/255, 1)
+	    background_normal: "Images/button.png"
+        background_down: "Images/buttondown.png"
+    Label:
+        id: weekNum
+        font_size: self.width*0.1
+        font_name: 'Helvetica'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.925}

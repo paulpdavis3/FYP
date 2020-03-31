@@ -13,6 +13,7 @@ def initialize():
     global seconds
     global minutes
     global studentName
+    global weekNumber
 
     level = 0
     operation = "add"
@@ -27,3 +28,4 @@ def initialize():
     seconds = 0
     minutes = 0
     studentName = ""
+    weekNumber = 0
