@@ -1,6 +1,6 @@
 import smtplib
 
-def sendEmail(subeject, msg):
+def sendEmail(subject, msg):
     try:
         server = smtplib.SMTP('smtp.gmail.com:587')
         server.ehlo()
@@ -14,7 +14,7 @@ def sendEmail(subeject, msg):
         print("Email failed to send.")
     
 
-subject = "Students Report for Week ending 29/03/2020"
-msg = "test message body"
+subject = "Students Report"
+msg = "test message"
 
 sendEmail(subject, msg)
