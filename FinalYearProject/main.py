@@ -181,8 +181,9 @@ class MinigamePage(Screen):
             expectedAnswerSingles = expectedAnswer % 10
             expectedAnswerTens = int(str(expectedAnswer % 100)[0])
             while potentialAnswerCheck == 0:
-                potentialAnswer = int(str(expectedAnswerTens + random.randrange(-difficultyMapped, difficultyMapped)) + str(
-                    expectedAnswerSingles))
+                potentialAnswer = int(
+                    str(expectedAnswerTens + random.randrange(-difficultyMapped, difficultyMapped)) + str(
+                        expectedAnswerSingles))
                 if potentialAnswer != expectedAnswer and potentialAnswer >= 0:
                     potentialAnswerCheck = 1
         elif expectedAnswerLength == 3:
@@ -412,7 +413,8 @@ class LoginPage(Screen):
                 check = firebase.get('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), None)
 
                 if check:
-                    print(check)
+                    pass
+                    # print(check)
                 else:
                     print('Didnt find the current week in the DB')
                     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
@@ -583,7 +585,7 @@ class StudentProgressPage(Screen):
 
     def weekInfo(self, *args):
         globalVariables.weekNumber = args[0]
-        print(globalVariables.weekNumber)
+        self.manager.transition.direction = 'left'
         self.manager.current = 'weekinfo'
 
     def on_leave(self, *args):
@@ -594,6 +596,37 @@ class WeekInfoPage(Screen):
 
     def on_pre_enter(self, *args):
         self.ids.weekNum.text = "Week " + globalVariables.weekNumber
+
+        currentDate = datetime.date.today()
+        currentYear, currentWeek, currentDay = currentDate.isocalendar()
+
+        while True:
+            results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                    lastWeek = firebase.get('/users/' + index + '/progress/' + str(currentYear) + '/' + str(
+                        int(globalVariables.weekNumber) - 1), None)
+                    thisWeek = firebase.get(
+                        '/users/' + index + '/progress/' + str(currentYear) + '/' + str(globalVariables.weekNumber),
+                        None)
+
+                    if lastWeek:
+                        print(lastWeek)
+                    else:
+                        print('No Previous Week to Use')
+
+                    # print(thisWeek)
+
+                    print("Best Score " + str(lastWeek['bestScore']) + ' ' + str(thisWeek['bestScore']) + ' ' + str(int(thisWeek['bestScore']) - int(lastWeek['bestScore'])))
+
+                    return 1
+
+    def checkForZeros(self, first, second):
+        return first / second if second else 0
+
+    def goBack(self):
+        self.manager.current = 'studentprogress'
 
 
 class TeacherProgressPage(Screen):
@@ -618,7 +651,7 @@ class TeacherProgressPage(Screen):
 
         for studentName in studentList:
             layout.add_widget(Button(on_release=partial(self.studentInfo, studentName),
-                                     text=studentName, font_size=self.width*0.08,
+                                     text=studentName, font_size=self.width * 0.08,
                                      size_hint=(0.8, None),
                                      font_name='Helvetica',
                                      background_normal="button.png",
