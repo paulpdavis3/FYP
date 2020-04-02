@@ -1798,7 +1798,154 @@ ScreenManagement:
             rgba: 1, 1, 1, 1
         Line:
             width: 2
-            points: (0, self.height*0.85, self.width, self.height*0.85)
+            points: (0, self.height*0.75, self.width, self.height*0.75)
+        Line:
+            width: 2
+            points: (0, self.height*0.575, self.width, self.height*0.575)
+        Line:
+            width: 2
+            points: (0, self.height*0.425, self.width, self.height*0.425)
+        Line:
+            width: 2
+            points: (0, self.height*0.275, self.width, self.height*0.275)
+        Line:
+            width: 2
+            points: (0, self.height*0.125, self.width, self.height*0.125)
+        Line:
+            width: 2
+            points: (self.width*0.35, 0, self.width*0.35, self.height*0.75)
+        Line:
+            width: 2
+            points: (self.width*0.55, 0, self.width*0.55, self.height*0.75)
+        Line:
+            width: 2
+            points: (self.width*0.775, 0, self.width*0.775, self.height*0.75)
+    Button:
+        id: emailButton
+        text: "Send Report to Email"
+        background_normal: "Images/button.png"
+        background_down: "Images/buttondown.png"
+        font_name: 'Helvetica'
+        on_release: root.sendEmail()
+        color: (1, 72/255, 72/255, 1)
+        size_hint: 0.3, 0.15
+        pos_hint: {"center_x": 0.85, 'center_y':0.925}
+    Label:
+        id: lastWeekTitle
+        text: "Last Week"
+        font_size: self.width*0.04
+        pos_hint: {"center_x": 0.45, 'center_y':0.8}
+    Label:
+        id: thisWeekTitle
+        text: "This Week"
+        font_size: self.width*0.04
+        pos_hint: {"center_x": 0.675, 'center_y':0.8}
+    Label:
+        id: changeTitle
+        text: "Change"
+        font_size: self.width*0.04
+        pos_hint: {"center_x": 0.9, 'center_y':0.8}
+    Label:
+        id: bestScoreText
+        text: "Best Score"
+        font_size: self.width*0.04
+        pos_hint: {"center_x": 0.175, 'center_y':0.65}
+    Label:
+        id: bestScoreLastWeek
+        text: "100"
+        font_size: self.width*0.06
+        pos_hint: {"center_x": 0.45, 'center_y':0.65}
+    Label:
+        id: bestScoreThisWeek
+        text: "100"
+        font_size: self.width*0.065
+        pos_hint: {"center_x": 0.675, 'center_y':0.65}
+    Label:
+        id: bestScoreChange
+        text: "100"
+        font_size: self.width*0.06
+        pos_hint: {"center_x": 0.9, 'center_y':0.65}
+    Label:
+        id: correctAnswersText
+        text: "Correct Answers"
+        font_size: self.width*0.04
+        pos_hint: {"center_x": 0.175, 'center_y':0.5}
+    Label:
+        id: correctAnswersLastWeek
+        text: "100"
+        font_size: self.width*0.06
+        pos_hint: {"center_x": 0.45, 'center_y':0.5}
+    Label:
+        id: correctAnswersThisWeek
+        text: "100"
+        font_size: self.width*0.065
+        pos_hint: {"center_x": 0.675, 'center_y':0.5}
+    Label:
+        id: correctAnswersChange
+        text: "100"
+        font_size: self.width*0.06
+        pos_hint: {"center_x": 0.9, 'center_y':0.5}
+    Label:
+        id: timePlayedText
+        text: "Time Played"
+        font_size: self.width*0.04
+        pos_hint: {"center_x": 0.175, 'center_y':0.35}
+    Label:
+        id: timePlayedLastWeek
+        text: "100"
+        font_size: self.width*0.06
+        pos_hint: {"center_x": 0.45, 'center_y':0.35}
+    Label:
+        id: timePlayedThisWeek
+        text: "100"
+        font_size: self.width*0.065
+        pos_hint: {"center_x": 0.675, 'center_y':0.35}
+    Label:
+        id: timePlayedChange
+        text: "100"
+        font_size: self.width*0.06
+        pos_hint: {"center_x": 0.9, 'center_y':0.35}
+    Label:
+        id: totalGamesPlayedText
+        text: "Total Games Played"
+        font_size: self.width*0.035
+        pos_hint: {"center_x": 0.175, 'center_y':0.2}
+    Label:
+        id: totalGamesPlayedLastWeek
+        text: "100"
+        font_size: self.width*0.06
+        pos_hint: {"center_x": 0.45, 'center_y':0.2}
+    Label:
+        id: totalGamesPlayedThisWeek
+        text: "100"
+        font_size: self.width*0.065
+        pos_hint: {"center_x": 0.675, 'center_y':0.2}
+    Label:
+        id: totalGamesPlayedChange
+        text: "100"
+        font_size: self.width*0.06
+        pos_hint: {"center_x": 0.9, 'center_y':0.2}
+    Label:
+        id: totalXPText
+        text: "Total XP"
+        font_size: self.width*0.04
+        pos_hint: {"center_x": 0.175, 'center_y':0.05}
+    Label:
+        id: totalXPLastWeek
+        text: "100"
+        font_size: self.width*0.06
+        pos_hint: {"center_x": 0.45, 'center_y':0.05}
+    Label:
+        id: totalXPThisWeek
+        text: "100"
+        font_size: self.width*0.065
+        pos_hint: {"center_x": 0.675, 'center_y':0.05}
+    Label:
+        id: totalXPChange
+        text: "100"
+        font_size: self.width*0.06
+        pos_hint: {"center_x": 0.9, 'center_y':0.05}
+
     Button:
 		on_release:
 		    app.root.transition = SlideTransition(direction="right")
@@ -1813,6 +1960,6 @@ ScreenManagement:
         background_down: "Images/buttondown.png"
     Label:
         id: weekNum
-        font_size: self.width*0.1
+        font_size: self.width*0.08
         font_name: 'Helvetica'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.925}
+        pos_hint: {'center_x': 0.5, 'center_y': 0.95}

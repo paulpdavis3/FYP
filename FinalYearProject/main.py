@@ -28,6 +28,7 @@ from kivy.core.text import LabelBase
 from kivy.core.audio import SoundLoader
 import re
 import datetime
+import emailConfig
 
 LabelBase.register(name="Helvetica",
                    fn_regular="Fonts/HelveticaTextbookLTRoman.ttf")
@@ -618,12 +619,27 @@ class WeekInfoPage(Screen):
 
                     # print(thisWeek)
 
-                    print("Best Score " + str(lastWeek['bestScore']) + ' ' + str(thisWeek['bestScore']) + ' ' + str(int(thisWeek['bestScore']) - int(lastWeek['bestScore'])))
+                    print("Best Score: Last Week " + str(lastWeek['bestScore']) + ' This Week ' + str(thisWeek['bestScore']) + ' Difference ' + str(int(thisWeek['bestScore']) - int(lastWeek['bestScore'])))
+
+                    print("Correct Answers: Last Week " + str(lastWeek['correctAnswers']) + ' This Week ' + str(thisWeek['correctAnswers']) + ' Difference ' + str(int(self.checkForZeros(int(lastWeek['correctAnswers']), int(thisWeek['correctAnswers'])) * 100)) + '%')
+
+                    print("Time Played: Last Week " + str(lastWeek['timePlayed']) + ' This Week ' + str(thisWeek['timePlayed']) + ' Difference ' + str(int(self.checkForZeros(int(lastWeek['timePlayed']), int(thisWeek['timePlayed'])) * 100)) + '%')
+
+                    print("Total Games Played: Last Week " + str(lastWeek['totalGamesPlay']) + ' This Week ' + str(thisWeek['totalGamesPlay']) + ' Difference ' + str(int(self.checkForZeros(int(lastWeek['totalGamesPlay']), int(thisWeek['totalGamesPlay'])) * 100)) + '%')
+
+                    print("Total XP: Last Week " + str(lastWeek['totalXP']) + ' This Week ' + str(thisWeek['totalXP']) + ' Difference ' + str(int(self.checkForZeros(int(lastWeek['totalXP']), int(thisWeek['totalXP'])) * 100)) + '%')
 
                     return 1
 
     def checkForZeros(self, first, second):
         return first / second if second else 0
+
+    def sendEmail(self):
+        results = firebase.get('/users/', None)
+
+        for index in results:
+            if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
+                pass
 
     def goBack(self):
         self.manager.current = 'studentprogress'
