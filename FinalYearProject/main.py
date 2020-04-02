@@ -29,6 +29,7 @@ from kivy.core.audio import SoundLoader
 import re
 import datetime
 import emailConfig
+import smtplib
 
 LabelBase.register(name="Helvetica",
                    fn_regular="Fonts/HelveticaTextbookLTRoman.ttf")
@@ -622,25 +623,31 @@ class WeekInfoPage(Screen):
                         self.ids.correctAnswersLastWeek.text = str(lastWeek['correctAnswers'])
                         self.ids.correctAnswersThisWeek.text = str(thisWeek['correctAnswers'])
 
-                        self.ids.correctAnswersChange.text = str(int(self.checkForZeros(int(lastWeek['correctAnswers']), int(thisWeek['correctAnswers'])) * 100)) + '%'
+                        self.ids.correctAnswersChange.text = str(int(self.checkForZeros(int(lastWeek['correctAnswers']),
+                                                                                        int(thisWeek[
+                                                                                                'correctAnswers'])) * 100)) + '%'
 
                         self.ids.timePlayedLastWeek.text = str(lastWeek['timePlayed'])
                         self.ids.timePlayedThisWeek.text = str(thisWeek['timePlayed'])
 
-                        self.ids.timePlayedChange.text = str(int(self.checkForZeros(int(lastWeek['timePlayed']), int(thisWeek['timePlayed'])) * 100)) + '%'
+                        self.ids.timePlayedChange.text = str(int(
+                            self.checkForZeros(int(lastWeek['timePlayed']), int(thisWeek['timePlayed'])) * 100)) + '%'
 
                         self.ids.totalGamesPlayedLastWeek.text = str(lastWeek['totalGamesPlay'])
                         self.ids.totalGamesPlayedThisWeek.text = str(thisWeek['totalGamesPlay'])
 
-                        self.ids.totalGamesPlayedChange.text = str(int(self.checkForZeros(int(lastWeek['totalGamesPlay']), int(thisWeek['totalGamesPlay'])) * 100)) + '%'
+                        self.ids.totalGamesPlayedChange.text = str(int(
+                            self.checkForZeros(int(lastWeek['totalGamesPlay']),
+                                               int(thisWeek['totalGamesPlay'])) * 100)) + '%'
 
                         self.ids.totalXPLastWeek.text = str(lastWeek['totalXP'])
                         self.ids.totalXPThisWeek.text = str(thisWeek['totalXP'])
 
-                        self.ids.totalXPChange.text = str(int(self.checkForZeros(int(lastWeek['totalXP']), int(thisWeek['totalXP'])) * 100)) + '%'
+                        self.ids.totalXPChange.text = str(
+                            int(self.checkForZeros(int(lastWeek['totalXP']), int(thisWeek['totalXP'])) * 100)) + '%'
 
                     else:
-                        self.ids.bestScoreLastWeek.text = str(lastWeek['bestScore'])
+                        self.ids.bestScoreLastWeek.text = 'N/A'
                         self.ids.bestScoreThisWeek.text = str(thisWeek['bestScore'])
 
                         self.ids.bestScoreChange.text = '-'
@@ -670,7 +677,11 @@ class WeekInfoPage(Screen):
     def checkForZeros(self, first, second):
         return first / second if second else 0
 
-    def setUpEmail(self):
+    def setupEmail(self):
+
+        currentDate = datetime.date.today()
+        currentYear, currentWeek, currentDay = currentDate.isocalendar()
+
         self.ids.emailButton.disabled = True
 
         results = firebase.get('/users/', None)
@@ -679,7 +690,36 @@ class WeekInfoPage(Screen):
             if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
                 email, password = emailConfig.getConfig()
 
+                thisWeek = firebase.get(
+                    '/users/' + index + '/progress/' + str(currentYear) + '/' + str(globalVariables.weekNumber),
+                    None)
+
+                self.sendEmail(results[index]['username'], email, password, results[index]['email'], thisWeek)
+
                 return 1
+
+    def sendEmail(self, username, email, password, userEmail, thisWeek):
+
+        subject = "Week " + globalVariables.weekNumber + " Report for " + username
+
+        msg = "The following is a report for the week " + str(globalVariables.weekNumber) + ' for ' + username + ':\n\nBest Score: ' + \
+              str(thisWeek['bestScore']) + '\n\nCorrect Answers: ' + str(thisWeek['correctAnswers']) + '\n\nTime Played: ' + \
+              str(thisWeek['timePlayed']) + '\n\nTotal Games Played: ' + str(thisWeek['totalGamesPlay']) + '\n\nTotal XP: ' + \
+              str(thisWeek['totalXP']) + '\n\nTHIS IS AN AUTOMATED MESSAGE\n\nPRIMARY MATHLETES'
+
+        try:
+            server = smtplib.SMTP('smtp.gmail.com:587')
+            server.ehlo()
+            server.starttls()
+            server.login(email, password)
+            message = 'Subject: {}\n\n{}'.format(subject, msg)
+            server.sendmail(email, userEmail, message)
+            server.quit()
+            print("Email sent successfully.")
+            # Show pop up success
+        except KeyError:
+            print("Email failed to send.")
+            # Show pop up failed
 
     def goBack(self):
         self.manager.current = 'studentprogress'
