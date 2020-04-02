@@ -1,0 +1,2 @@
+def getConfig():
+    return

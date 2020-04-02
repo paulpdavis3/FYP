@@ -1825,10 +1825,12 @@ ScreenManagement:
         text: "Send Report to Email"
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
+        background_disabled_normal: "Images/buttondisabled.png"
         font_name: 'Helvetica'
-        on_release: root.sendEmail()
+        on_release: root.setupEmail()
         color: (1, 72/255, 72/255, 1)
         size_hint: 0.3, 0.15
+        font_size: self.width*0.08
         pos_hint: {"center_x": 0.85, 'center_y':0.925}
     Label:
         id: lastWeekTitle
@@ -1950,8 +1952,8 @@ ScreenManagement:
 		on_release:
 		    app.root.transition = SlideTransition(direction="right")
 		    root.goBack()
-		size_hint: 0.225, 0.125
-	    pos_hint: {"left": 1, 'top':1}
+		size_hint: 0.25, 0.15
+	    pos_hint: {"left": 1, 'center_y':0.925}
         text: "< Progress"
         font_name:'Helvetica'
 	    font_size: self.width*0.125
@@ -1962,4 +1964,4 @@ ScreenManagement:
         id: weekNum
         font_size: self.width*0.08
         font_name: 'Helvetica'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+        pos_hint: {'center_x': 0.5, 'center_y': 0.925}
