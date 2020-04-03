@@ -189,9 +189,9 @@ class MinigamePage(Screen):
                 if potentialAnswer != expectedAnswer and potentialAnswer >= 0:
                     potentialAnswerCheck = 1
         elif expectedAnswerLength == 3:
-            expectedAnswerSingles = expectedAnswer % 10
+            expectedAnswerSingles = int(expectedAnswer % 10)
             expectedAnswerTens = int(str(expectedAnswer % 100)[0])
-            expectedAnswerHundreds = str(expectedAnswer)[0]
+            expectedAnswerHundreds = int(str(expectedAnswer)[0])
             while potentialAnswerCheck == 0:
                 potentialAnswer = int(
                     str(int(expectedAnswerHundreds) + random.randrange(-difficultyMapped, difficultyMapped)) + str(
@@ -344,10 +344,7 @@ class ResultsPage(Screen):
                             '/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek) + '/totalXP',
                             None))) + int(xpEarned))
 
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
-                                 'totalGamesPlayed', int(str(firebase.get(
-                            '/users/' + index + '/progress/' + str(currentYear) + '/' + str(
-                                currentWeek) + '/totalGamesPlayed', None))) + 1)
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'totalGamesPlayed', int(firebase.get('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek) + '/totalGamesPlayed', None)) + 1)
 
                     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
                                  'timePlayed', int(str(firebase.get(
@@ -422,7 +419,7 @@ class LoginPage(Screen):
                     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
                                  'bestScore', 0)
                     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
-                                 'totalGamesPlay', 0)
+                                 'totalGamesPlayed', 0)
                     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
                                  'timePlayed', 0)
                     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
@@ -633,12 +630,12 @@ class WeekInfoPage(Screen):
                         self.ids.timePlayedChange.text = str(int(
                             self.checkForZeros(int(lastWeek['timePlayed']), int(thisWeek['timePlayed'])) * 100)) + '%'
 
-                        self.ids.totalGamesPlayedLastWeek.text = str(lastWeek['totalGamesPlay'])
-                        self.ids.totalGamesPlayedThisWeek.text = str(thisWeek['totalGamesPlay'])
+                        self.ids.totalGamesPlayedLastWeek.text = str(lastWeek['totalGamesPlayed'])
+                        self.ids.totalGamesPlayedThisWeek.text = str(thisWeek['totalGamesPlayed'])
 
                         self.ids.totalGamesPlayedChange.text = str(int(
-                            self.checkForZeros(int(lastWeek['totalGamesPlay']),
-                                               int(thisWeek['totalGamesPlay'])) * 100)) + '%'
+                            self.checkForZeros(int(lastWeek['totalGamesPlayed']),
+                                               int(thisWeek['totalGamesPlayed'])) * 100)) + '%'
 
                         self.ids.totalXPLastWeek.text = str(lastWeek['totalXP'])
                         self.ids.totalXPThisWeek.text = str(thisWeek['totalXP'])
@@ -663,7 +660,7 @@ class WeekInfoPage(Screen):
                         self.ids.timePlayedChange.text = '-'
 
                         self.ids.totalGamesPlayedLastWeek.text = 'N/A'
-                        self.ids.totalGamesPlayedThisWeek.text = str(thisWeek['totalGamesPlay'])
+                        self.ids.totalGamesPlayedThisWeek.text = str(thisWeek['totalGamesPlayed'])
 
                         self.ids.totalGamesPlayedChange.text = '-'
 
@@ -704,7 +701,7 @@ class WeekInfoPage(Screen):
 
         msg = "The following is a report for the week " + str(globalVariables.weekNumber) + ' for ' + username + ':\n\nBest Score: ' + \
               str(thisWeek['bestScore']) + '\n\nCorrect Answers: ' + str(thisWeek['correctAnswers']) + '\n\nTime Played: ' + \
-              str(thisWeek['timePlayed']) + '\n\nTotal Games Played: ' + str(thisWeek['totalGamesPlay']) + '\n\nTotal XP: ' + \
+              str(thisWeek['timePlayed']) + '\n\nTotal Games Played: ' + str(thisWeek['totalGamesPlayed']) + '\n\nTotal XP: ' + \
               str(thisWeek['totalXP']) + '\n\nTHIS IS AN AUTOMATED MESSAGE\n\nPRIMARY MATHLETES'
 
         try:
