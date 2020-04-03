@@ -344,7 +344,10 @@ class ResultsPage(Screen):
                             '/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek) + '/totalXP',
                             None))) + int(xpEarned))
 
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), 'totalGamesPlayed', int(firebase.get('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek) + '/totalGamesPlayed', None)) + 1)
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
+                                 'totalGamesPlayed', int(firebase.get(
+                            '/users/' + index + '/progress/' + str(currentYear) + '/' + str(
+                                currentWeek) + '/totalGamesPlayed', None)) + 1)
 
                     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
                                  'timePlayed', int(str(firebase.get(
@@ -406,7 +409,6 @@ class LoginPage(Screen):
         results = firebase.get('/users/', None)
 
         for index in results:
-            print("check")
             if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
 
                 check = firebase.get('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek), None)
@@ -620,28 +622,28 @@ class WeekInfoPage(Screen):
                         self.ids.correctAnswersLastWeek.text = str(lastWeek['correctAnswers'])
                         self.ids.correctAnswersThisWeek.text = str(thisWeek['correctAnswers'])
 
-                        self.ids.correctAnswersChange.text = str(int(self.checkForZeros(int(lastWeek['correctAnswers']),
-                                                                                        int(thisWeek[
-                                                                                                'correctAnswers'])) * 100)) + '%'
+                        self.ids.correctAnswersChange.text = str(round(
+                            float(self.checkForZeros(int(thisWeek['correctAnswers']) - int(lastWeek['correctAnswers']),
+                                                     int(lastWeek['correctAnswers'])) * 100), 1)) + '%'
 
                         self.ids.timePlayedLastWeek.text = str(lastWeek['timePlayed'])
                         self.ids.timePlayedThisWeek.text = str(thisWeek['timePlayed'])
 
-                        self.ids.timePlayedChange.text = str(int(
-                            self.checkForZeros(int(lastWeek['timePlayed']), int(thisWeek['timePlayed'])) * 100)) + '%'
+                        self.ids.timePlayedChange.text = str(round(float(
+                            self.checkForZeros(int(thisWeek['timePlayed']) - int(lastWeek['timePlayed']), int(lastWeek['timePlayed'])) * 100), 1)) + '%'
 
                         self.ids.totalGamesPlayedLastWeek.text = str(lastWeek['totalGamesPlayed'])
                         self.ids.totalGamesPlayedThisWeek.text = str(thisWeek['totalGamesPlayed'])
 
-                        self.ids.totalGamesPlayedChange.text = str(int(
-                            self.checkForZeros(int(lastWeek['totalGamesPlayed']),
-                                               int(thisWeek['totalGamesPlayed'])) * 100)) + '%'
+                        self.ids.totalGamesPlayedChange.text = str(round(float(
+                            self.checkForZeros(int(thisWeek['totalGamesPlayed']) - int(lastWeek['totalGamesPlayed']),
+                                               int(lastWeek['totalGamesPlayed'])) * 100), 1)) + '%'
 
                         self.ids.totalXPLastWeek.text = str(lastWeek['totalXP'])
                         self.ids.totalXPThisWeek.text = str(thisWeek['totalXP'])
 
                         self.ids.totalXPChange.text = str(
-                            int(self.checkForZeros(int(lastWeek['totalXP']), int(thisWeek['totalXP'])) * 100)) + '%'
+                            round(float(self.checkForZeros(int(thisWeek['totalXP']) - int(lastWeek['totalXP']), int(lastWeek['totalXP'])) * 100), 1)) + '%'
 
                     else:
                         self.ids.bestScoreLastWeek.text = 'N/A'
@@ -699,9 +701,12 @@ class WeekInfoPage(Screen):
 
         subject = "Week " + globalVariables.weekNumber + " Report for " + username
 
-        msg = "The following is a report for the week " + str(globalVariables.weekNumber) + ' for ' + username + ':\n\nBest Score: ' + \
-              str(thisWeek['bestScore']) + '\n\nCorrect Answers: ' + str(thisWeek['correctAnswers']) + '\n\nTime Played: ' + \
-              str(thisWeek['timePlayed']) + '\n\nTotal Games Played: ' + str(thisWeek['totalGamesPlayed']) + '\n\nTotal XP: ' + \
+        msg = "The following is a report for the week " + str(
+            globalVariables.weekNumber) + ' for ' + username + ':\n\nBest Score: ' + \
+              str(thisWeek['bestScore']) + '\n\nCorrect Answers: ' + str(
+            thisWeek['correctAnswers']) + '\n\nTime Played: ' + \
+              str(thisWeek['timePlayed']) + '\n\nTotal Games Played: ' + str(
+            thisWeek['totalGamesPlayed']) + '\n\nTotal XP: ' + \
               str(thisWeek['totalXP']) + '\n\nTHIS IS AN AUTOMATED MESSAGE\n\nPRIMARY MATHLETES'
 
         try:
