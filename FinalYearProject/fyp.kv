@@ -1688,6 +1688,43 @@ ScreenManagement:
                 text: "No"
                 on_release: logOutPopup.dismiss()
 
+<CorrectDialog>:
+    id: correctPopup
+    title: ""
+    separator_height: 0
+    size_hint: (0.6, 0.25)
+    background: 'errorMessage.png'
+
+    BoxLayout:
+        orientation: "horizontal"
+        Image:
+            id: correctImage
+            source: "Images/smileyFace.png"
+        Label:
+            id: correctText
+            text: "Correct Answer!"
+            font_size: self.width * 0.15
+            color: [1, 72 / 255, 72 / 255, 1]
+
+<IncorrectDialog>:
+    id: incorrectPopup
+    title: ""
+    separator_height: 0
+    size_hint: (0.6, 0.25)
+    background: 'errorMessage.png'
+
+    BoxLayout:
+        orientation: "horizontal"
+        Image:
+            id: incorrectImage
+            source: "Images/sadFace.png"
+        Label:
+            id: incorrectText
+            text: "Wrong Answer"
+            font_size: self.width * 0.15
+            color: [1, 72 / 255, 72 / 255, 1]
+
+
 <UsernameAndPasswordDialog>:
     id: usernameAndPasswordPopup
     title: ""

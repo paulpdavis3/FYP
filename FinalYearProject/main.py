@@ -208,10 +208,12 @@ class MinigamePage(Screen):
             self.correctSound.play()
             print("correct answer")
             globalVariables.correctAnswers += 1
+            popups.CorrectPopup()
         else:
             self.incorrectSound.play()
             print("incorrect answer")
             globalVariables.incorrectAnswers += 1
+            popups.IncorrectPopup()
 
         globalVariables.roundNumber += 1
 

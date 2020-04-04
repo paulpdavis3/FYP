@@ -67,6 +67,29 @@ class UsernamePopup(BoxLayout):
         self.dialog = UsernameDialog()
         self.dialog.open()
 
+
+class CorrectDialog(Popup):
+    pass
+
+
+class CorrectPopup(BoxLayout):
+    def __init__(self, **kwargs):
+        super(CorrectPopup, self).__init__(**kwargs)
+        self.dialog = CorrectDialog()
+        self.dialog.open()
+
+
+class IncorrectDialog(Popup):
+    pass
+
+
+class IncorrectPopup(BoxLayout):
+    def __init__(self, **kwargs):
+        super(IncorrectPopup, self).__init__(**kwargs)
+        self.dialog = IncorrectDialog()
+        self.dialog.open()
+
+
 class LeaveMinigameDialog(Popup):
     pass
 
