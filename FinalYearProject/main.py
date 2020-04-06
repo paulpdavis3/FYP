@@ -1,23 +1,13 @@
 from kivy.app import App
 from kivy.properties import StringProperty, ObjectProperty, partial
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.lang.builder import Builder
 from firebase import firebase
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.popup import Popup
-from kivy.uix.checkbox import CheckBox
 from kivy.core.window import Window
 from kivy.storage.jsonstore import JsonStore
 from os.path import join
-from kivy.uix.progressbar import ProgressBar
-from kivy.graphics import Line
 from kivy.clock import Clock
-from kivy.uix.label import Label
-from kivy.lang.builder import Builder
-from kivy.graphics import Color, Ellipse, Rectangle
 import algo
 import popups
-import time
 import random
 import globalVariables
 import math
@@ -30,6 +20,7 @@ import re
 import datetime
 import emailConfig
 import smtplib
+
 
 LabelBase.register(name="Helvetica",
                    fn_regular="Fonts/HelveticaTextbookLTRoman.ttf")

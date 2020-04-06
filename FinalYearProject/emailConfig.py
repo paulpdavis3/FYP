@@ -1,2 +1,2 @@
 def getConfig():
-    return 'primarymathletes@gmail.com', 'qwopzxnm10'
+    return 'primarymathletes@gmail.com', 'PrimaryMathletes1'
