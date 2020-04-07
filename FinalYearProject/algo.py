@@ -32,7 +32,6 @@ def algo(op, level):
         difficulty = 10
 
     if operation == "add":
-        # decide how many variables will be used in the equation
         numOfVariables = 3
 
         rangeMin = difficulty * 9
@@ -42,7 +41,7 @@ def algo(op, level):
         numOfVariables = 3
 
         rangeMin = difficulty * 5
-        rangeMax = difficulty * 55
+        rangeMax = difficulty * 50
 
     elif operation == "divide":
         numOfVariables = 3

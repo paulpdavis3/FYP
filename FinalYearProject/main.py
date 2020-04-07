@@ -27,7 +27,6 @@ LabelBase.register(name="Helvetica",
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
 
-
 # Create a new db for just classrooms to avoid checking all users to save time
 
 # https://www.youtube.com/watch?v=Q3HdZMtBQUw
