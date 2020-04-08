@@ -92,10 +92,16 @@ class MinigamePage(Screen):
             globalVariables.seconds = 0
             globalVariables.minutes += 1
 
-        if globalVariables.seconds > 9:
-            self.timer = "0" + str(globalVariables.minutes) + ":" + str(round(globalVariables.seconds))
+        if globalVariables.minutes < 10:
+            if globalVariables.seconds > 9:
+                self.timer = "0" + str(globalVariables.minutes) + ":" + str(round(globalVariables.seconds))
+            else:
+                self.timer = "0" + str(globalVariables.minutes) + ":0" + str(round(globalVariables.seconds))
         else:
-            self.timer = "0" + str(globalVariables.minutes) + ":0" + str(round(globalVariables.seconds))
+            if globalVariables.seconds > 9:
+                self.timer = str(globalVariables.minutes) + ":" + str(round(globalVariables.seconds))
+            else:
+                self.timer = str(globalVariables.minutes) + ":0" + str(round(globalVariables.seconds))
 
         globalVariables.seconds += .1
 
@@ -185,7 +191,7 @@ class MinigamePage(Screen):
             while potentialAnswerCheck == 0:
                 potentialAnswer = int(
                     str(int(expectedAnswerHundreds) + random.randrange(-difficultyMapped, difficultyMapped)) + str(
-                        expectedAnswerTens) + str(expectedAnswerSingles))
+                        expectedAnswerTens) + str(int(expectedAnswerSingles) + random.randrange(-difficultyMapped, difficultyMapped)))
                 if potentialAnswer != expectedAnswer and 0 <= potentialAnswer < 1000:
                     potentialAnswerCheck = 1
 
@@ -213,6 +219,8 @@ class MinigamePage(Screen):
         if globalVariables.roundNumber > 10:
             self.stopTimer()
             self.manager.current = 'results'
+            self.ids.incorrectPopup.dismiss()
+            self.ids.correctPopup.dismiss()
         else:
             algo.algo(globalVariables.operation, globalVariables.level)
             self.updateText()
@@ -559,6 +567,7 @@ class StudentProgressPage(Screen):
             if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
                 progress = firebase.get('/users/' + index + '/progress/' + str(currentYear), None)
                 for x in range(len(progress)):
+                    print(str([key.split(',') for key in progress.keys()][x])[2:-2])
                     weekList.append(str([key.split(',') for key in progress.keys()][x])[2:-2])
 
         layout = GridLayout(cols=1, spacing=10, size_hint_y=None)
@@ -636,7 +645,6 @@ class WeekInfoPage(Screen):
 
                         self.ids.totalXPChange.text = str(
                             round(float(self.checkForZeros(int(thisWeek['totalXP']) - int(lastWeek['totalXP']), int(lastWeek['totalXP'])) * 100), 1)) + '%'
-
                     else:
                         self.ids.bestScoreLastWeek.text = 'N/A'
                         self.ids.bestScoreThisWeek.text = str(thisWeek['bestScore'])
@@ -664,10 +672,6 @@ class WeekInfoPage(Screen):
                         self.ids.totalXPChange.text = '-'
 
                     return 1
-
-    def checkForZeros(self, first, second):
-        return first / second if second else 0
-
     def setupEmail(self):
 
         currentDate = datetime.date.today()
@@ -714,6 +718,10 @@ class WeekInfoPage(Screen):
         except KeyError:
             print("Email failed to send.")
             # Show pop up failed
+
+
+    def checkForZeros(self, first, second):
+        return first / second if second else 0
 
     def goBack(self):
         self.manager.current = 'studentprogress'
