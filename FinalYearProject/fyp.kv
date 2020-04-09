@@ -585,7 +585,7 @@ ScreenManagement:
         pos_hint: {'center_x': 0.5, 'center_y': 0.3}
         on_release:
             app.root.transition = SlideTransition(direction="left")
-            root.deleteClassroom(teacherClassroomName.text)
+            root.deleteClassroom(root.classroom)
         background_normal: "Images/button.png"
         background_down: "Images/buttondown.png"
         background_disabled_normal: "Images/buttondisabled.png"

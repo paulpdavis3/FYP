@@ -191,7 +191,7 @@ class MinigamePage(Screen):
             while potentialAnswerCheck == 0:
                 potentialAnswer = int(
                     str(int(expectedAnswerHundreds) + random.randrange(-difficultyMapped, difficultyMapped)) + str(
-                        expectedAnswerTens) + str(int(expectedAnswerSingles) + random.randrange(-difficultyMapped, difficultyMapped)))
+                        expectedAnswerTens) + str(int(expectedAnswerSingles)))
                 if potentialAnswer != expectedAnswer and 0 <= potentialAnswer < 1000:
                     potentialAnswerCheck = 1
 
@@ -204,12 +204,15 @@ class MinigamePage(Screen):
             self.correctSound.play()
             print("correct answer")
             globalVariables.correctAnswers += 1
-            popups.CorrectPopup()
+            if globalVariables.roundNumber != 10:
+                popups.CorrectPopup()
         else:
             self.incorrectSound.play()
             print("incorrect answer")
             globalVariables.incorrectAnswers += 1
-            popups.IncorrectPopup()
+            if globalVariables.roundNumber != 10:
+
+                popups.IncorrectPopup()
 
         globalVariables.roundNumber += 1
 
@@ -219,8 +222,6 @@ class MinigamePage(Screen):
         if globalVariables.roundNumber > 10:
             self.stopTimer()
             self.manager.current = 'results'
-            self.ids.incorrectPopup.dismiss()
-            self.ids.correctPopup.dismiss()
         else:
             algo.algo(globalVariables.operation, globalVariables.level)
             self.updateText()
@@ -950,22 +951,27 @@ class StudentProfilePage(Screen):
 
         old = ScreenManagement.store.get('credentials')['username']
 
-        self.changeUsernameLoop(old, new)
-
-        ScreenManagement.store.put('credentials', username=new,
-                                   password=ScreenManagement.store.get('credentials')['password'],
-                                   email=ScreenManagement.store.get('credentials')['email'],
-                                   teacher=ScreenManagement.store.get('credentials')['teacher'],
-                                   classroom=ScreenManagement.store.get('credentials')['classroom'],
-                                   add=ScreenManagement.store.get('credentials')['add'],
-                                   subtract=ScreenManagement.store.get('credentials')['subtract'],
-                                   multiply=ScreenManagement.store.get('credentials')['multiply'],
-                                   divide=ScreenManagement.store.get('credentials')['divide'])
-        self.updateText()
+        if self.changeUsernameLoop(old, new) == -1:
+            print("Error changing users username")
+        else:
+            ScreenManagement.store.put('credentials', username=new,
+                                       password=ScreenManagement.store.get('credentials')['password'],
+                                       email=ScreenManagement.store.get('credentials')['email'],
+                                       teacher=ScreenManagement.store.get('credentials')['teacher'],
+                                       classroom=ScreenManagement.store.get('credentials')['classroom'],
+                                       add=ScreenManagement.store.get('credentials')['add'],
+                                       subtract=ScreenManagement.store.get('credentials')['subtract'],
+                                       multiply=ScreenManagement.store.get('credentials')['multiply'],
+                                       divide=ScreenManagement.store.get('credentials')['divide'])
+            self.updateText()
 
     def changeUsernameLoop(self, oldUsername, newUsername):
         while True:
             results = firebase.get('/users/', None)
+
+            for index in results:
+                if results[index]['username'] == newUsername:
+                    return -1
 
             for index in results:
                 if results[index]['username'] == oldUsername:
