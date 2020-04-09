@@ -419,16 +419,10 @@ class LoginPage(Screen):
                     # print(check)
                 else:
                     print('Didnt find the current week in the DB')
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
-                                 'bestScore', 0)
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
-                                 'totalGamesPlayed', 0)
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
-                                 'timePlayed', 0)
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
-                                 'correctAnswers', 0)
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
-                                 'totalXP', 0)
+
+                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/', str(currentWeek),
+                                 {'bestScore': 0, 'totalGamesPlayed': 0, 'timePlayed': 0, 'correctAnswers': 0, 'totalXP': 0})
+
 
                 return 1
 
