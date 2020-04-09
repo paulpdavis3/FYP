@@ -21,11 +21,11 @@ import datetime
 import emailConfig
 import smtplib
 
-
 LabelBase.register(name="Helvetica",
                    fn_regular="Fonts/HelveticaTextbookLTRoman.ttf")
 
 firebase = firebase.FirebaseApplication('https://c16324311fyp.firebaseio.com/')
+
 
 # Create a new db for just classrooms to avoid checking all users to save time
 
@@ -211,7 +211,6 @@ class MinigamePage(Screen):
             print("incorrect answer")
             globalVariables.incorrectAnswers += 1
             if globalVariables.roundNumber != 10:
-
                 popups.IncorrectPopup()
 
         globalVariables.roundNumber += 1
@@ -339,33 +338,44 @@ class ResultsPage(Screen):
             for index in results:
                 if results[index]['username'] == ScreenManagement.store.get('credentials')['username']:
                     firebase.put('/users/' + index, operator, currentXP)
+                    print(results[index]['progress'][str(currentYear)][str(currentWeek)]['bestScore'])
+                    if int(globalVariables.correctAnswers) > int(results[index]['progress'][str(currentYear)][str(currentWeek)]['bestScore']):
+                        firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/', str(currentWeek), {
+                            'totalXP': int(
+                                results[index]['progress'][str(currentYear)][str(currentWeek)]['totalXP']) + int(
+                                xpEarned),
+                            'totalGamesPlayed': int(
+                                results[index]['progress'][str(currentYear)][str(currentWeek)]['totalGamesPlayed']) + 1,
+                            'timePlayed': int(
+                                results[index]['progress'][str(currentYear)][str(currentWeek)]['timePlayed']) + int(
+                                globalVariables.seconds) + int(globalVariables.minutes * 60),
+                            'correctAnswers': int(
+                                results[index]['progress'][str(currentYear)][str(currentWeek)]['correctAnswers']) + int(
+                                globalVariables.correctAnswers),
+                            'bestScore': int(globalVariables.correctAnswers)
+                        })
+                    else:
+                        firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/', str(currentWeek), {
+                            'totalXP': int(
+                                results[index]['progress'][str(currentYear)][str(currentWeek)]['totalXP']) + int(
+                                xpEarned),
+                            'totalGamesPlayed': int(
+                                results[index]['progress'][str(currentYear)][str(currentWeek)]['totalGamesPlayed']) + 1,
+                            'timePlayed': int(
+                                results[index]['progress'][str(currentYear)][str(currentWeek)]['timePlayed']) + int(
+                                globalVariables.seconds) + int(globalVariables.minutes * 60),
+                            'correctAnswers': int(
+                                results[index]['progress'][str(currentYear)][str(currentWeek)]['correctAnswers']) + int(
+                                globalVariables.correctAnswers),
+                            'bestScore': int(results[index]['progress'][str(currentYear)][str(currentWeek)]['bestScore'])
+                        })
 
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
-                                 'totalXP', int(str(firebase.get(
-                            '/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek) + '/totalXP',
-                            None))) + int(xpEarned))
-
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
-                                 'totalGamesPlayed', int(firebase.get(
-                            '/users/' + index + '/progress/' + str(currentYear) + '/' + str(
-                                currentWeek) + '/totalGamesPlayed', None)) + 1)
-
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
-                                 'timePlayed', int(str(firebase.get(
-                            '/users/' + index + '/progress/' + str(currentYear) + '/' + str(
-                                currentWeek) + '/timePlayed', None))) + int(globalVariables.seconds) + int(
-                            globalVariables.minutes * 60))
-
-                    firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
-                                 'correctAnswers', int(str(firebase.get(
-                            '/users/' + index + '/progress/' + str(currentYear) + '/' + str(
-                                currentWeek) + '/correctAnswers', None))) + int(globalVariables.correctAnswers))
-
-                    if int(globalVariables.correctAnswers) > int(str(firebase.get(
-                            '/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek) + '/bestScore',
-                            None))):
-                        firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
-                                     'bestScore', int(globalVariables.correctAnswers))
+                    # print(results[index]['progress'][str(currentYear)][str(currentWeek)]['bestScore'])
+                    # if int(globalVariables.correctAnswers) > int(str(firebase.get(
+                    #         '/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek) + '/bestScore',
+                    #         None))):
+                    #     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/' + str(currentWeek),
+                    #                  'bestScore', int(globalVariables.correctAnswers))
                     return 1
 
             return -1
@@ -421,8 +431,8 @@ class LoginPage(Screen):
                     print('Didnt find the current week in the DB')
 
                     firebase.put('/users/' + index + '/progress/' + str(currentYear) + '/', str(currentWeek),
-                                 {'bestScore': 0, 'totalGamesPlayed': 0, 'timePlayed': 0, 'correctAnswers': 0, 'totalXP': 0})
-
+                                 {'bestScore': 0, 'totalGamesPlayed': 0, 'timePlayed': 0, 'correctAnswers': 0,
+                                  'totalXP': 0})
 
                 return 1
 
@@ -626,7 +636,8 @@ class WeekInfoPage(Screen):
                         self.ids.timePlayedThisWeek.text = str(thisWeek['timePlayed'])
 
                         self.ids.timePlayedChange.text = str(round(float(
-                            self.checkForZeros(int(thisWeek['timePlayed']) - int(lastWeek['timePlayed']), int(lastWeek['timePlayed'])) * 100), 1)) + '%'
+                            self.checkForZeros(int(thisWeek['timePlayed']) - int(lastWeek['timePlayed']),
+                                               int(lastWeek['timePlayed'])) * 100), 1)) + '%'
 
                         self.ids.totalGamesPlayedLastWeek.text = str(lastWeek['totalGamesPlayed'])
                         self.ids.totalGamesPlayedThisWeek.text = str(thisWeek['totalGamesPlayed'])
@@ -639,7 +650,8 @@ class WeekInfoPage(Screen):
                         self.ids.totalXPThisWeek.text = str(thisWeek['totalXP'])
 
                         self.ids.totalXPChange.text = str(
-                            round(float(self.checkForZeros(int(thisWeek['totalXP']) - int(lastWeek['totalXP']), int(lastWeek['totalXP'])) * 100), 1)) + '%'
+                            round(float(self.checkForZeros(int(thisWeek['totalXP']) - int(lastWeek['totalXP']),
+                                                           int(lastWeek['totalXP'])) * 100), 1)) + '%'
                     else:
                         self.ids.bestScoreLastWeek.text = 'N/A'
                         self.ids.bestScoreThisWeek.text = str(thisWeek['bestScore'])
@@ -667,6 +679,7 @@ class WeekInfoPage(Screen):
                         self.ids.totalXPChange.text = '-'
 
                     return 1
+
     def setupEmail(self):
 
         currentDate = datetime.date.today()
@@ -713,7 +726,6 @@ class WeekInfoPage(Screen):
         except KeyError:
             print("Email failed to send.")
             # Show pop up failed
-
 
     def checkForZeros(self, first, second):
         return first / second if second else 0
