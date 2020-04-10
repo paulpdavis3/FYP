@@ -417,7 +417,6 @@ class LoginPage(Screen):
         currentDate = datetime.date.today()
         currentYear, currentWeek, currentDay = currentDate.isocalendar()
 
-        currentWeek = currentWeek -2
         results = firebase.get('/users/', None)
 
         for index in results:
