@@ -1,0 +1,12 @@
+- Register account: demo, primarymathletes@gmail.com, Password 
+(dont put the number 1 in to demonstrate error checking)
+- hit login (mention that the info is saved from the register page)
+- go to play and show that all of the minigames are on level 1.
+- Play addition minigame
+- explain results screen (progress bar to next level unlock, overall xp for addition)
+- return to main menu
+- go into classroom and say that we will look at this more later on.
+- go into view profile and change name to demo123
+- 
+- Login as demoteacher
+- 
