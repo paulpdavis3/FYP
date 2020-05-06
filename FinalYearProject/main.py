@@ -332,6 +332,8 @@ class ResultsPage(Screen):
         currentDate = datetime.date.today()
         currentYear, currentWeek, currentDay = currentDate.isocalendar()
 
+        currentWeek = currentWeek - 1
+
         while True:
             results = firebase.get('/users/', None)
 

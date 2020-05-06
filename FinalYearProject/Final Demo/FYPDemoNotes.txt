@@ -1,3 +1,9 @@
+--- DEMONSTRATION OF APP ---
+
+** Before demo starts ensure that you entered the weekly progress screen as user
+and progress screen as teacher as well.
+also dont  **
+
 - Register account: demo, primarymathletes@gmail.com, Password 
 (dont put the number 1 in to demonstrate error checking)
 - hit login (mention that the info is saved from the register page)
@@ -5,8 +11,27 @@
 - Play addition minigame
 - explain results screen (progress bar to next level unlock, overall xp for addition)
 - return to main menu
-- go into classroom and say that we will look at this more later on.
+- hover over classroom and say that we will look at this more later on.
 - go into view profile and change name to demo123
-- 
-- Login as demoteacher
-- 
+- change user to paulpdavis3, Password1
+- show off play pages to show he has advanced
+- go into view progress to show that a number of weeks have been played
+- click on number 13
+- send report email and check it in browser
+- click on classroom and explain you have set up a classroom before 
+and that we are going to join it: teachersclassroom
+- then login as teacher, Teacher1
+- go to student progress and might need to click slightly above the first name
+- scroll to mark and show that you can see basic information as well as remove
+users.
+- speak about how in future updates that teachers will be able to see the students
+progress in the same way that students are able to as well.
+- mention that teachers are also able to interact with the app in the same way
+students can so they are able to become familiar with the system before showing
+it to students.
+
+
+--- COMPLEX CODE SNIPPETS---
+
+- results page with all db calls that looks monsterous
+- getPotentialAnswer code (maybe explain with a diagram)
